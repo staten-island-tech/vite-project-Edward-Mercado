@@ -3,10 +3,23 @@ import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div class="game-window">
+function switchWebThemes(theme) {
+  const themes = ["red", "orange", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
 
-  </div>
-`
+  themes.forEach((theme) => {
+    document.body.classList.remove('theme-' + theme);
+  });
 
-setupCounter(document.querySelector('#counter'))
+  console.log('theme-' + theme);
+
+  document.body.classList.add('theme-' + theme);
+}
+
+const themeButtons = document.querySelectorAll(".toggleMode");
+
+themeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const selectedTheme = button.getAttribute("data-theme");
+    switchWebThemes(selectedTheme);
+  })
+})

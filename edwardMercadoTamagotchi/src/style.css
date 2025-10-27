@@ -1,17 +1,56 @@
 :root {
-  --placeholder: rgb(150, 150, 150)
+  --background-color: rgb(7, 1, 19);
+  --game-border-color: rgb(17, 5, 56);
+  --header-text-color: rgb(240, 251, 255);
+  --regular-text-color: rgb(255, 255, 255);
 }
-.light-mode {
-  --background-color: rgb(176, 216, 234);
-  --game-border-color: rgb(133, 204, 218);
-  --header-text-color: rgb(9, 39, 74);
+
+.theme-red {
+  --background-color: rgb(255, 57, 57);
+  --game-border-color: rgb(165, 35, 35);
+  --header-text-color: rgb(105, 18, 18);
+  --regular-text-color: rgb(30, 0, 0);
+}
+
+.theme-orange {
+  --background-color: rgb(255, 153, 52);
+  --game-border-color: rgb(215, 115, 0);
+  --header-text-color: rgb(107, 48, 2);
+  --regular-text-color: rgb(30, 12, 0);
+}
+
+.theme-green {
+  --background-color: rgb(120, 255, 57);
+  --game-border-color: rgb(35, 165, 57);
+  --header-text-color: rgb(18, 105, 32);
+  --regular-text-color: rgb(0, 30, 8);
+}
+
+.theme-blue {
+  --background-color: rgb(57, 196, 255);
+  --game-border-color: rgb(35, 117, 165);
+  --header-text-color: rgb(18, 66, 105);
+  --regular-text-color: rgb(0, 15, 30);
+}
+
+.theme-purple {
+  --background-color: rgb(122, 19, 160);
+  --game-border-color: rgb(65, 13, 95);
+  --header-text-color: rgb(240, 195, 255);
+  --regular-text-color: rgb(237, 216, 255);
+}
+
+.theme-light {
+  --background-color: rgb(207, 214, 217);
+  --game-border-color: rgb(181, 186, 187);
+  --header-text-color: rgb(30, 32, 35);
   --regular-text-color: rgb(0, 0, 0);
 }
 
-.dark-mode {
-  --background-color: rgb(38, 55, 63);
-  --game-border-color: rgb(16, 22, 34);
-  --header-text-color: rgb(201, 242, 249);
+.theme-dark {
+  --background-color: rgb(7, 1, 19);
+  --game-border-color: rgb(17, 5, 56);
+  --header-text-color: rgb(240, 251, 255);
   --regular-text-color: rgb(255, 255, 255);
 }
 
@@ -22,4 +61,18 @@ body {
   min-width: 320px;
   min-height: 100vh;
   flex-flow: column nowrap;
+  background-color: var(--background-color);
+}
+
+.game-title {
+  color: var(--header-text-color);
+}
+
+.toggleMode {
+  background-color: var(--game-border-color);
+  border: 0px solid;
+  border-radius: 8px;
+  color: var(--regular-text-color);
+  margin: 8px;
+  padding: 8px;
 }
