@@ -1,14 +1,18 @@
 :root {
-  --background-color: rgb(38, 55, 63);
-  --game-border-color: rgb(16, 22, 34);
-  --header-text-color: rgb(201, 242, 249);
-  --regular-text-color: rgb(255, 255, 255);
+  --placeholder: rgb(150, 150, 150)
 }
 .light-mode {
   --background-color: rgb(176, 216, 234);
   --game-border-color: rgb(133, 204, 218);
   --header-text-color: rgb(9, 39, 74);
   --regular-text-color: rgb(0, 0, 0);
+}
+
+.dark-mode {
+  --background-color: rgb(38, 55, 63);
+  --game-border-color: rgb(16, 22, 34);
+  --header-text-color: rgb(201, 242, 249);
+  --regular-text-color: rgb(255, 255, 255);
 }
 
 body {
