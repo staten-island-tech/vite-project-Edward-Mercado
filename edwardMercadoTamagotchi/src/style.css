@@ -1,8 +1,10 @@
 :root {
-  --background-color: rgb(7, 1, 19);
-  --game-border-color: rgb(17, 5, 56);
-  --header-text-color: rgb(240, 251, 255);
-  --regular-text-color: rgb(255, 255, 255);
+  --background-color: rgb(57, 196, 255);
+  --game-border-color: rgb(35, 117, 165);
+  --header-text-color: rgb(18, 66, 105);
+  --regular-text-color: rgb(0, 15, 30);
+
+  --additional-text-color-1: rgb(204, 237, 255);
 }
 
 .theme-red {
@@ -10,6 +12,8 @@
   --game-border-color: rgb(165, 35, 35);
   --header-text-color: rgb(105, 18, 18);
   --regular-text-color: rgb(30, 0, 0);
+
+  --additional-text-color-1: rgb(255, 204, 204);
 }
 
 .theme-orange {
@@ -17,13 +21,17 @@
   --game-border-color: rgb(215, 115, 0);
   --header-text-color: rgb(107, 48, 2);
   --regular-text-color: rgb(30, 12, 0);
+
+  --additional-text-color-1: rgb(255, 215, 180);
 }
 
 .theme-green {
   --background-color: rgb(120, 255, 57);
-  --game-border-color: rgb(35, 165, 57);
+  --game-border-color: rgb(27, 180, 88);
   --header-text-color: rgb(18, 105, 32);
   --regular-text-color: rgb(0, 30, 8);
+
+  --additional-text-color-1: rgb(219, 255, 177);
 }
 
 .theme-blue {
@@ -31,6 +39,8 @@
   --game-border-color: rgb(35, 117, 165);
   --header-text-color: rgb(18, 66, 105);
   --regular-text-color: rgb(0, 15, 30);
+
+  --additional-text-color-1: rgb(204, 237, 255);
 }
 
 .theme-purple {
@@ -38,6 +48,8 @@
   --game-border-color: rgb(65, 13, 95);
   --header-text-color: rgb(240, 195, 255);
   --regular-text-color: rgb(237, 216, 255);
+
+  --additional-text-color-1: rgb(241, 204, 255);
 }
 
 .theme-light {
@@ -45,6 +57,8 @@
   --game-border-color: rgb(181, 186, 187);
   --header-text-color: rgb(30, 32, 35);
   --regular-text-color: rgb(0, 0, 0);
+
+  --additional-text-color-1: rgb(15, 40, 54);
 }
 
 .theme-dark {
@@ -52,16 +66,36 @@
   --game-border-color: rgb(17, 5, 56);
   --header-text-color: rgb(240, 251, 255);
   --regular-text-color: rgb(255, 255, 255);
+
+  --additional-text-color-1: rgb(151, 212, 244);
 }
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
   flex-flow: column nowrap;
   background-color: var(--background-color);
+}
+
+.theme-button__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 95%;
+  border-radius: 12px;
+  flex-flow: row wrap;
+  padding: 10px;
+}
+
+.theme-button__title {
+  width: 100%;
+  text-align: center;
+  color: var(--additional-text-color-1);
 }
 
 .game-title {
@@ -75,4 +109,6 @@ body {
   color: var(--regular-text-color);
   margin: 8px;
   padding: 8px;
+  width: 12%;
+  height: 80%;
 }
