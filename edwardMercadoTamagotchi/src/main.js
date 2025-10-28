@@ -13,6 +13,7 @@ function switchWebThemes(theme) {
   console.log('theme-' + theme);
 
   document.body.classList.add('theme-' + theme);
+  localStorage.setItem('theme', theme);
 }
 
 const themeButtons = document.querySelectorAll(".toggleMode");
@@ -23,3 +24,6 @@ themeButtons.forEach((button) => {
     switchWebThemes(selectedTheme);
   })
 })
+
+const savedTheme = localStorage.getItem('theme') || 'light';
+switchWebThemes(savedTheme);

@@ -1,26 +1,27 @@
 :root {
-  --background-color: rgb(57, 196, 255);
-  --game-border-color: rgb(35, 117, 165);
-  --header-text-color: rgb(18, 66, 105);
-  --regular-text-color: rgb(0, 15, 30);
-
-  --additional-text-color-1: rgb(204, 237, 255);
+  --placer-holder-color: rgb(200, 200, 200);
 }
 
 .theme-red {
-  --background-color: rgb(255, 57, 57);
+  --background-color: rgb(247, 90, 90);
   --game-border-color: rgb(165, 35, 35);
   --header-text-color: rgb(105, 18, 18);
   --regular-text-color: rgb(30, 0, 0);
+
+  --button-color-1: rgb(177, 15, 15);
+  --button-color-1-hover: rgb(160, 15, 15);
 
   --additional-text-color-1: rgb(255, 204, 204);
 }
 
 .theme-orange {
-  --background-color: rgb(255, 153, 52);
+  --background-color: rgb(255, 200, 145);
   --game-border-color: rgb(215, 115, 0);
   --header-text-color: rgb(107, 48, 2);
   --regular-text-color: rgb(30, 12, 0);
+
+  --button-color-1: rgb(177, 107, 15);
+  --button-color-1-hover: rgb(167, 74, 7);
 
   --additional-text-color-1: rgb(255, 215, 180);
 }
@@ -31,6 +32,9 @@
   --header-text-color: rgb(18, 105, 32);
   --regular-text-color: rgb(0, 30, 8);
 
+  --button-color-1: rgb(22, 147, 20);
+  --button-color-1-hover: rgb(26, 141, 10);
+
   --additional-text-color-1: rgb(219, 255, 177);
 }
 
@@ -39,6 +43,9 @@
   --game-border-color: rgb(35, 117, 165);
   --header-text-color: rgb(18, 66, 105);
   --regular-text-color: rgb(0, 15, 30);
+
+  --button-color-1: rgb(15, 96, 177);
+  --button-color-1-hover: rgb(16, 89, 135);
 
   --additional-text-color-1: rgb(204, 237, 255);
 }
@@ -49,6 +56,9 @@
   --header-text-color: rgb(240, 195, 255);
   --regular-text-color: rgb(237, 216, 255);
 
+  --button-color-1: rgb(83, 15, 177);
+  --button-color-1-hover: rgb(94, 16, 145);
+
   --additional-text-color-1: rgb(241, 204, 255);
 }
 
@@ -58,16 +68,22 @@
   --header-text-color: rgb(30, 32, 35);
   --regular-text-color: rgb(0, 0, 0);
 
+  --button-color-1: rgb(125, 138, 146);
+  --button-color-1-hover: rgb(75, 83, 85);
+
   --additional-text-color-1: rgb(15, 40, 54);
 }
 
 .theme-dark {
   --background-color: rgb(7, 1, 19);
-  --game-border-color: rgb(17, 5, 56);
+  --game-border-color: rgb(62, 61, 77);
   --header-text-color: rgb(240, 251, 255);
   --regular-text-color: rgb(255, 255, 255);
 
-  --additional-text-color-1: rgb(151, 212, 244);
+  --button-color-1: rgb(60, 61, 69);
+  --button-color-1-hover: rgb(39, 38, 41);
+
+  --additional-text-color-1: rgb(228, 246, 255);
 }
 
 body {
@@ -86,10 +102,11 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
-  width: 95%;
+  width: 80%;
   border-radius: 12px;
   flex-flow: row wrap;
   padding: 10px;
+  border: var(--game-border-color) 5px solid;
 }
 
 .theme-button__title {
@@ -103,7 +120,7 @@ body {
 }
 
 .toggleMode {
-  background-color: var(--game-border-color);
+  background-color: var(--button-color-1);
   border: 0px solid;
   border-radius: 8px;
   color: var(--regular-text-color);
@@ -111,4 +128,28 @@ body {
   padding: 8px;
   width: 12%;
   height: 80%;
+  transition: transform .1s ease-in-out;
+}
+
+.toggleMode:hover {
+  cursor: pointer;
+  transform: translateY(-5%);
+  box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
+  background-color: var(--button-color-1-hover);
+}
+
+.toggleMode:active {
+  animation: clickToggle 0.2s ease;
+}
+
+@keyframes clickToggle {
+  0% {
+    transform: scale(1.0);
+  }
+  70% {
+    transform: scale(1.06)
+  }
+  100% {
+    transform: scale(1.0)
+  }
 }
