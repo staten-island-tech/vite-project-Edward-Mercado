@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+.dm-serif-text-regular-italic {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
 :root {
   --placer-holder-color: rgb(200, 200, 200);
 }
@@ -86,6 +94,14 @@
   --additional-text-color-1: rgb(228, 246, 255);
 }
 
+body,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -117,6 +133,10 @@ body {
 
 .game-title {
   color: var(--header-text-color);
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 8em;
 }
 
 .toggleMode {
