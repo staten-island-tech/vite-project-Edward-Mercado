@@ -1,9 +1,8 @@
-use the classlist to toggle between modes
-use some function that activates the classlists and adds and removes and some stuff
-that will reload the page for the stuff
+abuse display: none a lot
+(windows popping up and disappearing)
 
-load the window for the pet
-pet stays there
-click buttons to feed
-have meters on the side that are of some fullness
-make the pet angry if you dont feed it
+(display none window to display all the pet options)
+when you pick a pet it asks for its name
+
+then when you get rid of the window it refreshes for the new pet
+feed it and whatever
