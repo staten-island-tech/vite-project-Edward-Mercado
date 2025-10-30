@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
-
-.dm-serif-text-regular-italic {
-  font-family: "DM Serif Text", serif;
-  font-weight: 400;
-  font-style: italic;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
 :root {
   --placer-holder-color: rgb(200, 200, 200);
 }
 
 .theme-red {
-  --background-color: rgb(247, 90, 90);
+  --background-color: rgb(253, 146, 146);
+  --background-color-2: rgb(238, 140, 140);
   --game-border-color: rgb(165, 35, 35);
   --header-text-color: rgb(105, 18, 18);
   --regular-text-color: rgb(30, 0, 0);
@@ -24,18 +21,20 @@
 
 .theme-orange {
   --background-color: rgb(255, 200, 145);
+  --background-color-2: rgb(238, 150, 91);
   --game-border-color: rgb(215, 115, 0);
   --header-text-color: rgb(107, 48, 2);
   --regular-text-color: rgb(30, 12, 0);
 
-  --button-color-1: rgb(177, 107, 15);
+  --button-color-1: rgb(222, 126, 0);
   --button-color-1-hover: rgb(167, 74, 7);
 
   --additional-text-color-1: rgb(255, 215, 180);
 }
 
 .theme-green {
-  --background-color: rgb(120, 255, 57);
+  --background-color: rgb(181, 247, 151);
+  --background-color-2: rgb(162, 218, 123);
   --game-border-color: rgb(27, 180, 88);
   --header-text-color: rgb(18, 105, 32);
   --regular-text-color: rgb(0, 30, 8);
@@ -47,7 +46,8 @@
 }
 
 .theme-blue {
-  --background-color: rgb(57, 196, 255);
+  --background-color: rgb(147, 216, 246);
+  --background-color-2: rgb(133, 190, 214);
   --game-border-color: rgb(35, 117, 165);
   --header-text-color: rgb(18, 66, 105);
   --regular-text-color: rgb(0, 15, 30);
@@ -59,7 +59,8 @@
 }
 
 .theme-purple {
-  --background-color: rgb(122, 19, 160);
+  --background-color: rgb(156, 65, 189);
+  --background-color-2: rgb(115, 17, 139);
   --game-border-color: rgb(65, 13, 95);
   --header-text-color: rgb(240, 195, 255);
   --regular-text-color: rgb(237, 216, 255);
@@ -71,25 +72,35 @@
 }
 
 .theme-light {
-  --background-color: rgb(207, 214, 217);
-  --game-border-color: rgb(181, 186, 187);
+  --background-color: rgb(228, 238, 243);
+  --background-color-2: rgb(169, 193, 209);
+  --game-border-color: rgb(87, 118, 124);
   --header-text-color: rgb(30, 32, 35);
   --regular-text-color: rgb(0, 0, 0);
 
   --button-color-1: rgb(125, 138, 146);
   --button-color-1-hover: rgb(75, 83, 85);
 
+  --button-color-2: rgb(203, 238, 238);
+  --button-color-2-hover: rgb(211, 224, 233);
+
   --additional-text-color-1: rgb(15, 40, 54);
 }
 
 .theme-dark {
-  --background-color: rgb(7, 1, 19);
+  --background-color: rgb(26, 8, 63);
+  --background-color-2: rgb(0, 0, 0);
   --game-border-color: rgb(62, 61, 77);
   --header-text-color: rgb(240, 251, 255);
   --regular-text-color: rgb(255, 255, 255);
 
   --button-color-1: rgb(60, 61, 69);
   --button-color-1-hover: rgb(39, 38, 41);
+
+  --button-color-2: rgb(70, 5, 56);
+  --button-color-2-hover: rgb(51, 4, 41);
+
+  --border-color-2: rgb(100, 92, 123);
 
   --additional-text-color-1: rgb(228, 246, 255);
 }
@@ -110,7 +121,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   flex-flow: column nowrap;
-  background-color: var(--background-color);
+  background-image: linear-gradient(to bottom, var(--background-color), var(--background-color-2));
 }
 
 .theme-button__container {
@@ -129,14 +140,18 @@ body {
   width: 100%;
   text-align: center;
   color: var(--additional-text-color-1);
+  font-family: "Momo Trust Display", sans-serif;
+  font-size: 4em;
 }
 
 .game-title {
   color: var(--header-text-color);
-  font-family: "DM Serif Text", serif;
-  font-weight: 400;
+  font-family: "Bitcount Grid Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 600;
   font-style: normal;
   font-size: 8em;
+  text-align: center;
 }
 
 .toggleMode {
@@ -149,6 +164,9 @@ body {
   width: 12%;
   height: 80%;
   transition: transform .1s ease-in-out;
+  font-weight: 600;
+  font-size: 2em;
+  font-family: "Momo Trust Display", sans-serif;
 }
 
 .toggleMode:hover {
@@ -159,6 +177,71 @@ body {
 }
 
 .toggleMode:active {
+  animation: clickToggle 0.2s ease;
+}
+
+.game-pet-selection {
+  width: 80vw;
+  height: 20vh;
+  border: var(--game-border-color) 8px solid;
+  background-color: rgba(0, 0, 23, 0.1);
+  border-radius: 12px;
+  margin: 1%;
+}
+
+.game-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  background-color: rgba(0, 0, 23, 0.1);
+  border: var(--game-border-color) 8px solid;
+  border-radius: 16px;
+  padding: 3%;
+  margin-bottom: 1%;
+  width: 80vw;
+}
+
+.game-window {
+  border: var(--game-border-color) 8px solid;
+  border-radius: 12px;
+  width: 78%;
+  min-width: 40vw;
+  height: 80vh;
+  margin: 1%;
+  display: flex;
+}
+
+.care-button-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  margin: 1%;
+}
+
+.care-button {
+  width: 80%;
+  height: 20%;
+  margin: 1%;
+  background-color: var(--button-color-2);
+  border: var(--game-border-color) 5px solid;
+  border-radius: 15px;
+  font-family: "Bitcount Grid Single", sans-serif;
+  font-size: 4em;
+  font-weight: 700;
+  color: var(--regular-text-color);
+  transition: transform .1s ease-in-out;
+}
+
+.care-button:hover {
+  background-color: var(--button-color-2-hover);
+  cursor: pointer;
+  transform: translateY(-5%);
+  box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
+}
+
+.care-button:active {
   animation: clickToggle 0.2s ease;
 }
 
