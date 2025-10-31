@@ -1,4 +1,5 @@
 import './style.css'
+import './class_logic.js'
 
 function switchWebThemes(theme) {
   const themes = ["red", "orange", "p-yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
