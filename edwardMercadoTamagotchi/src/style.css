@@ -13,8 +13,11 @@
   --header-text-color: rgb(105, 18, 18);
   --regular-text-color: rgb(30, 0, 0);
 
-  --button-color-1: rgb(177, 15, 15);
-  --button-color-1-hover: rgb(160, 15, 15);
+  --button-color-1: rgb(213, 41, 41);
+  --button-color-1-hover: rgb(181, 31, 31);
+
+  --button-color-2: rgb(239, 152, 143);
+  --button-color-2-hover: rgb(255, 107, 88);
 
   --additional-text-color-1: rgb(255, 204, 204);
 }
@@ -29,7 +32,31 @@
   --button-color-1: rgb(222, 126, 0);
   --button-color-1-hover: rgb(167, 74, 7);
 
+  --button-color-2: rgb(239, 188, 143);
+  --button-color-2-hover: rgb(255, 172, 88);
+
   --additional-text-color-1: rgb(255, 215, 180);
+}
+
+.theme-p-yellow { /* this theme was requested by izzy, but I don't like yellow */
+  --background-color: rgb(255, 233, 145);
+  --background-color-2: rgb(238, 231, 91);
+  --game-border-color: rgb(224, 179, 0);
+  --header-text-color: rgb(231, 174, 3);
+  --regular-text-color: rgb(30, 25, 0);
+
+  --button-color-1: rgb(255, 233, 145);
+  --button-color-1-hover: rgb(239, 184, 19);
+
+  --button-color-2: rgb(239, 220, 143);
+  --button-color-2-hover: rgb(255, 233, 88);
+
+  --additional-text-color-1: rgb(38, 27, 0);
+}
+
+#wider-button {
+  width: 80vw;
+  margin-bottom: 2%;
 }
 
 .theme-green {
@@ -37,25 +64,31 @@
   --background-color-2: rgb(162, 218, 123);
   --game-border-color: rgb(27, 180, 88);
   --header-text-color: rgb(18, 105, 32);
-  --regular-text-color: rgb(0, 30, 8);
+  --regular-text-color: rgb(239, 255, 243);
 
-  --button-color-1: rgb(22, 147, 20);
-  --button-color-1-hover: rgb(26, 141, 10);
+  --button-color-1: rgb(11, 148, 9);
+  --button-color-1-hover: rgb(16, 99, 5);
 
-  --additional-text-color-1: rgb(219, 255, 177);
+  --button-color-2: rgb(42, 95, 19);
+  --button-color-2-hover: rgb(8, 41, 3);
+
+  --additional-text-color-1: rgb(0, 105, 42);
 }
 
 .theme-blue {
   --background-color: rgb(147, 216, 246);
   --background-color-2: rgb(133, 190, 214);
-  --game-border-color: rgb(35, 117, 165);
+  --game-border-color: rgb(10, 61, 90);
   --header-text-color: rgb(18, 66, 105);
-  --regular-text-color: rgb(0, 15, 30);
+  --regular-text-color: rgb(225, 240, 255);
 
   --button-color-1: rgb(15, 96, 177);
   --button-color-1-hover: rgb(16, 89, 135);
 
-  --additional-text-color-1: rgb(204, 237, 255);
+  --button-color-2: rgb(28, 79, 152);
+  --button-color-2-hover: rgb(14, 34, 106);
+
+  --additional-text-color-1: rgb(0, 84, 129);
 }
 
 .theme-purple {
@@ -68,6 +101,9 @@
   --button-color-1: rgb(83, 15, 177);
   --button-color-1-hover: rgb(94, 16, 145);
 
+  --button-color-2: rgb(209, 150, 245);
+  --button-color-2-hover: rgb(158, 67, 223);
+
   --additional-text-color-1: rgb(241, 204, 255);
 }
 
@@ -78,11 +114,11 @@
   --header-text-color: rgb(30, 32, 35);
   --regular-text-color: rgb(0, 0, 0);
 
-  --button-color-1: rgb(125, 138, 146);
-  --button-color-1-hover: rgb(75, 83, 85);
+  --button-color-1: rgb(239, 246, 251);
+  --button-color-1-hover: rgb(183, 206, 212);
 
   --button-color-2: rgb(203, 238, 238);
-  --button-color-2-hover: rgb(211, 224, 233);
+  --button-color-2-hover: rgb(205, 226, 240);
 
   --additional-text-color-1: rgb(15, 40, 54);
 }
@@ -128,15 +164,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 23, 0.1);
   width: 80%;
-  border-radius: 12px;
+  border-radius: 16px;
   flex-flow: row wrap;
   padding: 10px;
-  border: var(--game-border-color) 5px solid;
+  border: var(--game-border-color) 8px solid;
 }
 
-.theme-button__title {
+.game-subtitle {
   width: 100%;
   text-align: center;
   color: var(--additional-text-color-1);
@@ -152,6 +188,7 @@ body {
   font-style: normal;
   font-size: 8em;
   text-align: center;
+  animation: rotateTitle 1s ease-in-out infinite alternate;
 }
 
 .toggleMode {
@@ -162,6 +199,7 @@ body {
   margin: 8px;
   padding: 8px;
   width: 12%;
+  min-width: 100px;
   height: 80%;
   transition: transform .1s ease-in-out;
   font-weight: 600;
@@ -182,23 +220,32 @@ body {
 
 .game-pet-selection {
   width: 80vw;
-  height: 20vh;
+  height: 40vh;
   border: var(--game-border-color) 8px solid;
   background-color: rgba(0, 0, 23, 0.1);
   border-radius: 12px;
   margin: 1%;
+  padding: 1%;
+}
+
+.game-window-wrap {
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: rgba(0, 0, 23, 0.1);
+  border: var(--game-border-color) 8px solid;
+  border-radius: 16px;
+  padding: 1%;
+  margin-bottom: 1%;
+  width: 80vw;
 }
 
 .game-container {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
-  background-color: rgba(0, 0, 23, 0.1);
-  border: var(--game-border-color) 8px solid;
+  justify-content: space-between;
   border-radius: 16px;
   padding: 3%;
   margin-bottom: 1%;
-  width: 80vw;
 }
 
 .game-window {
@@ -214,19 +261,20 @@ body {
 .care-button-container {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 20%;
   margin: 1%;
+  margin-left: 3%;
 }
 
 .care-button {
-  width: 80%;
+  width: 100%;
   height: 20%;
   margin: 1%;
   background-color: var(--button-color-2);
   border: var(--game-border-color) 5px solid;
-  border-radius: 15px;
+  border-radius: 32px;
   font-family: "Bitcount Grid Single", sans-serif;
   font-size: 4em;
   font-weight: 700;
@@ -245,12 +293,21 @@ body {
   animation: clickToggle 0.2s ease;
 }
 
+@keyframes rotateTitle {
+  0% {
+    transform: rotate(0.25deg);
+  }
+  100% {
+    transform: rotate(-0.25deg);
+  }
+}
+
 @keyframes clickToggle {
   0% {
-    transform: scale(1.0);
+    transform: scale(1.0)
   }
   70% {
-    transform: scale(1.06)
+    transform: scale(1.02)
   }
   100% {
     transform: scale(1.0)

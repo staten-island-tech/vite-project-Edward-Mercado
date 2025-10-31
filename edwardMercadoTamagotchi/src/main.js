@@ -1,10 +1,7 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
 function switchWebThemes(theme) {
-  const themes = ["red", "orange", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
+  const themes = ["red", "orange", "p-yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
 
   themes.forEach((theme) => {
     document.body.classList.remove('theme-' + theme);
