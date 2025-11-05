@@ -1,4 +1,4 @@
-class Bus {
+export default class Bus {
     constructor(name, species) {
         this.name = name;
         this.species = species;
@@ -8,6 +8,7 @@ class Bus {
         this.happiness = 100;
         this.physical_health = 100;
         this.alive = true;
+        this.selected = false;
 
         if(this.species.includes("s") && !this.species.includes("79")) { // all si buses except for the s79 bc its the best
             this.speed -= (Math.floor(Math.random()*25));

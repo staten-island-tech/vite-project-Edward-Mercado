@@ -1,5 +1,5 @@
 import './style.css'
-import './class_logic.js'
+import Bus from './class_logic.js'
 
 function switchWebThemes(theme) {
   const themes = ["red", "orange", "p-yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
@@ -13,18 +13,6 @@ function switchWebThemes(theme) {
   document.body.classList.add('theme-' + theme);
   localStorage.setItem('theme', theme);
 }
-
-const themeButtons = document.querySelectorAll(".toggleMode");
-
-themeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const selectedTheme = button.getAttribute("data-theme");
-    switchWebThemes(selectedTheme);
-  })
-})
-
-const savedTheme = localStorage.getItem('theme') || 'light';
-switchWebThemes(savedTheme);
 
 function assignButtonEvents(bus) {
   let feedButton = document.querySelector("#feed-button");
@@ -48,3 +36,36 @@ function assignButtonEvents(bus) {
     shop()
   })
 }
+
+const themeButtons = document.querySelectorAll(".toggleMode");
+
+themeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const selectedTheme = button.getAttribute("data-theme");
+    switchWebThemes(selectedTheme);
+  })
+})
+
+function openWindow() {
+  const savedTheme = localStorage.getItem('theme') || 'light'; // returns light theme if we don't have one
+  switchWebThemes(savedTheme);
+
+  const localStorageBuses = localStorage.getItem('buses');
+  if (localStorageBuses) {
+    const buses = JSON.parse(localStorageBuses);
+    buses.forEach((bus) => {
+      if (bus.selected) {
+        let selectedBus = bus;
+        assignButtonEvents(selectedBus);
+      }
+    })
+  }
+  else {
+    bus = new Bus("hi", `s${Math.floor(Math.random() * 100)}`);
+    const buses = [bus];
+    localStorage.setItem('buses', JSON.stringify(buses));
+  }
+}
+
+openWindow();
+console.log(buses);

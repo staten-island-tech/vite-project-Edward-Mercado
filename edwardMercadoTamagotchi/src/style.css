@@ -154,7 +154,7 @@ body {
   padding: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 800px;
   min-height: 100vh;
   flex-flow: column nowrap;
   background-image: linear-gradient(to bottom, var(--background-color), var(--background-color-2));
@@ -279,6 +279,7 @@ body {
 
 .care-button {
   width: 100%;
+  min-width: 3.5em;
   height: 18%;
   margin: 1%;
   background-color: var(--button-color-2);
