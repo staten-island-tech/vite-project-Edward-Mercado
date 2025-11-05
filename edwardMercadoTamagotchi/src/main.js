@@ -25,3 +25,26 @@ themeButtons.forEach((button) => {
 
 const savedTheme = localStorage.getItem('theme') || 'light';
 switchWebThemes(savedTheme);
+
+function assignButtonEvents(bus) {
+  let feedButton = document.querySelector("#feed-button");
+  feedButton.addEventListener("click", () => {
+    bus.feed();
+  })
+  let petPlayButton = document.querySelector("#petplay-button");
+  petPlayButton.addEventListener("click", () => {
+    bus.petPlay()
+  })
+  let trainButton = document.querySelector("#train-button");
+  trainButton.addEventListener("click", () => {
+    bus.train()
+  })
+  let hitButton = document.querySelector("#hit-button");
+  hitButton.addEventListener("click", () => {
+    bus.hit()
+  })
+  let shopButton = document.querySelector("#shop-button");
+  shopButton.addEventListener("click", () => {
+    shop()
+  })
+}
