@@ -35,14 +35,6 @@ function assignButtonEvents(bus) {
   })
 }
 
-const themeButtons = document.querySelectorAll(".toggleMode");
-
-themeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const selectedTheme = button.getAttribute("data-theme");
-    switchWebThemes(selectedTheme);
-  })
-})
 
 function openWindow() {
   const savedTheme = localStorage.getItem('theme') || 'light'; // returns light theme if we don't have one
@@ -70,6 +62,15 @@ function openWindow() {
 
   return (buses);
 }
+
+const themeButtons = document.querySelectorAll(".toggleMode");
+
+themeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const selectedTheme = button.getAttribute("data-theme");
+    switchWebThemes(selectedTheme);
+  })
+})
 
 const buses = openWindow(); // opens the window and gets the user's save data
 
