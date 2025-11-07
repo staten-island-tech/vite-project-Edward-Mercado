@@ -281,7 +281,7 @@ body {
   color: var(--regular-text-color);
   transition: transform .1s ease-in-out; 
   padding: 1%;
-  margin-top: -1%;
+  margin-top: -3%;
 }
 
 .game-save-button:hover {
