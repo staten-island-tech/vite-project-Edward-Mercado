@@ -35,7 +35,6 @@ function assignButtonEvents(bus) {
   })
 }
 
-
 function openWindow() {
   const savedTheme = localStorage.getItem('theme') || 'light'; // returns light theme if we don't have one
   switchWebThemes(savedTheme);
@@ -63,6 +62,10 @@ function openWindow() {
   return (buses);
 }
 
+function saveGame() {
+  localStorage.setItem('buses', JSON.stringify(buses));
+}
+
 const themeButtons = document.querySelectorAll(".toggleMode");
 
 themeButtons.forEach((button) => {
@@ -70,6 +73,11 @@ themeButtons.forEach((button) => {
     const selectedTheme = button.getAttribute("data-theme");
     switchWebThemes(selectedTheme);
   })
+})
+
+const saveGameButton = document.querySelector(".game-save-button");
+saveGameButton.addEventListener("click", () => {
+  saveGame();
 })
 
 const buses = openWindow(); // opens the window and gets the user's save data

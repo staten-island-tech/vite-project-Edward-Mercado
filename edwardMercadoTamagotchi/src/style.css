@@ -267,6 +267,34 @@ body {
   display: flex;
 }
 
+.game-save-button {
+  width: 100%;
+  min-width: 3.5em;
+  height: 10%;
+  margin: 1%;
+  background-color: var(--button-color-2);
+  border: var(--game-border-color) 5px solid;
+  border-radius: 32px;
+  font-family: "Bitcount Grid Single", sans-serif;
+  font-size: 3em;
+  font-weight: 600;
+  color: var(--regular-text-color);
+  transition: transform .1s ease-in-out; 
+  padding: 1%;
+  margin-top: -1%;
+}
+
+.game-save-button:hover {
+  background-color: var(--button-color-2-hover);
+  cursor: pointer;
+  transform: translateY(-5%);
+  box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
+}
+
+.game-save-button:active {
+  animation: clickToggle 0.2s ease;
+}
+
 .care-button-container {
   display: flex;
   flex-flow: column nowrap;
