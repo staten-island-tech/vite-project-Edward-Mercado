@@ -1,5 +1,5 @@
 import './style.css'
-import Bus from './class_logic.js'
+import { Bus } from './class_logic.js'
 
 function switchWebThemes(theme) {
   const themes = ["red", "orange", "p-yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
@@ -7,8 +7,6 @@ function switchWebThemes(theme) {
   themes.forEach((theme) => {
     document.body.classList.remove('theme-' + theme);
   });
-
-  console.log('theme-' + theme);
 
   document.body.classList.add('theme-' + theme);
   localStorage.setItem('theme', theme);
@@ -50,22 +48,29 @@ function openWindow() {
   const savedTheme = localStorage.getItem('theme') || 'light'; // returns light theme if we don't have one
   switchWebThemes(savedTheme);
 
+  let buses = [];
+  
   const localStorageBuses = localStorage.getItem('buses');
-  if (localStorageBuses) {
-    const buses = JSON.parse(localStorageBuses);
+
+  if (localStorageBuses != "[]") {
+    buses = JSON.parse(localStorageBuses);
     buses.forEach((bus) => {
       if (bus.selected) {
         let selectedBus = bus;
         assignButtonEvents(selectedBus);
       }
     })
+    return (buses);
   }
   else {
-    bus = new Bus("hi", `s${Math.floor(Math.random() * 100)}`);
-    const buses = [bus];
+    const bus = new Bus("hi", `s${Math.floor(Math.random() * 100)}`);
+    buses = [bus];
     localStorage.setItem('buses', JSON.stringify(buses));
   }
+
+  return (buses);
 }
 
-openWindow();
+const buses = openWindow(); // opens the window and gets the user's save data
+
 console.log(buses);

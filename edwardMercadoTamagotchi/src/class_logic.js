@@ -1,4 +1,4 @@
-export default class Bus {
+export class Bus {
     constructor(name, species) {
         this.name = name;
         this.species = species;
@@ -50,10 +50,3 @@ class Food {
         this.imageURL = imageURL;
     }
 }
-
-const newPet = new Bus("Fitzgerald", "s57");
-const newFood = new Food("bus snacks", 25, "https://example.com/bus_snacks.png");
-
-newPet.feed(newFood);
-
-console.log(newPet);
