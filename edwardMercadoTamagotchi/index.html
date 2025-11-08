@@ -34,19 +34,19 @@
           
         </div>
         <div class="care-button-container">
-          <button class="care-button" id="feed-button">
+          <button class="care-button" id="feed-button" data-menuTarget="#game-feed-menu">
             FEED
           </button>
-          <button class="care-button" id="petplay-button">
+          <button class="care-button" id="petplay-button" data-menuTarget="#game-petPlay-menu">
             PLAY
           </button>
-          <button class="care-button" id="shop-button">
+          <button class="care-button" id="shop-button" data-menuTarget="#game-train-menu">
             TRAIN
           </button>
-          <button class="care-button" id="hit-button">
+          <button class="care-button" id="hit-button" data-menuTarget="#game-hit-menu">
             HIT
           </button>
-          <button class="care-button" id="shop-button">
+          <button class="care-button" id="shop-button" data-menuTarget="#game-shop-menu">
             SHOP
           </button>
         </div>
@@ -54,6 +54,49 @@
       <button class="game-save-button"> SAVE THE GAME </button>
     </div>
     <button class="toggleMode" data-theme="p-yellow" id="wider-button"> p-yellow (upon izzy's request) </button>
+
+    <div class="menu-shadow"></div>
+
+    <div class="game-care-menu" id="game-feed-menu">
+      <div class="div">
+        <h2 class="game-care-subtitle"> FEEDING MENU </h2>
+        <div class="horizontal-line"></div>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#game-feed-menu"> CLOSE MENU </button>
+    </div>
+
+    <div class="game-care-menu" id="game-petPlay-menu">
+      <div class="div">
+        <h2 class="game-care-subtitle"> PLAY WITH YOUR PET </h2>
+        <div class="horizontal-line"></div>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#game-petPlay-menu"> CLOSE MENU </button>
+    </div>
+
+    <div class="game-care-menu" id="game-train-menu">
+      <div class="div">
+        <h2 class="game-care-subtitle"> TRAINING </h2>
+        <div class="horizontal-line"></div>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#game-train-menu"> CLOSE MENU </button>
+    </div>
+
+    <div class="game-care-menu" id="game-hit-menu">
+      <div class="div">
+        <h2 class="game-care-subtitle"> HIT YOUR PET </h2>
+        <div class="horizontal-line"></div>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#game-hit-menu"> CLOSE MENU </button>
+    </div>
+
+    <div class="game-care-menu" id="game-shop-menu">
+      <div class="div">
+        <h2 class="game-care-subtitle"> SHOPPING </h2>
+        <div class="horizontal-line"></div>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#game-shop-menu"> CLOSE MENU </button>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

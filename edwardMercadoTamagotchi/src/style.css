@@ -331,6 +331,66 @@ body {
   animation: clickToggle 0.2s ease;
 }
 
+.menu-shadow {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 23, 0.3);
+}
+
+.game-care-menu {
+  display: none;
+  flex-flow: column nowrap;
+  padding: 3%;
+  justify-content: space-between;
+
+  font-family: "Bitcount Grid Single", sans-serif;
+  font-size: 3em;
+  font-weight: 600;
+
+  width: 90%;
+  height: 90%;
+  position: fixed;
+  left: 5%;
+  top: 5%;
+  background-color: var(--background-color);
+  border: var(--border-color) 12px solid;
+  border-radius: 30px;
+}
+
+.game-care-subtitle {
+  text-align: center;
+  color: var(--additional-text-color-1);
+  font-family: "Momo Trust Display", sans-serif;
+  font-size: 4em;
+}
+
+.close-menu-button {
+  font-family: "Bitcount Grid Single", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+
+  border: var(--game-border-color) 5px solid;
+  color: var(--regular-text-color);
+  border-radius: 32px;
+
+  transition: transform ease-in-out .1s;
+
+  background-color: var(--button-color-1);
+}
+
+.close-menu-button:hover {
+  background-color: var(--button-color-1-hover);
+}
+
+.close-menu-button:active {
+  animation: clickToggle 0.2s ease;
+}
+
 @keyframes rotateTitle {
   0% {
     transform: rotate(0.25deg);

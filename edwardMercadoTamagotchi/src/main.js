@@ -1,5 +1,6 @@
 import './style.css'
 import { Bus } from './class_logic.js'
+import { Food } from './class_logic.js'
 
 function switchWebThemes(theme) {
   const themes = ["red", "orange", "p-yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
@@ -66,6 +67,30 @@ function saveGame() {
   localStorage.setItem('buses', JSON.stringify(buses));
 }
 
+function openMenu(menuID) {
+  const menu = document.querySelector(menuID);
+  menu.style.display = "flex";
+
+  const shadow = document.querySelector(".menu-shadow");
+  shadow.style.display = "block";
+}
+
+function closeMenu(menuID) {
+  const menu = document.querySelector(menuID);
+  menu.style.display = "none";
+
+  const shadow = document.querySelector(".menu-shadow");
+  shadow.style.display = "none";
+}
+
+
+
+
+
+
+
+
+
 const themeButtons = document.querySelectorAll(".toggleMode");
 
 themeButtons.forEach((button) => {
@@ -80,6 +105,19 @@ saveGameButton.addEventListener("click", () => {
   saveGame();
 })
 
-const buses = openWindow(); // opens the window and gets the user's save data
+const careButtons = document.querySelectorAll(".care-button");
+careButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    openMenu(button.getAttribute("data-menuTarget"));
+  })
+})
 
-console.log(buses);
+const closeMenuButtons = document.querySelectorAll(".close-menu-button");
+console.log(closeMenuButtons);
+closeMenuButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    closeMenu(button.getAttribute("data-menuTarget"));
+  })
+})
+
+const buses = openWindow(); // opens the window and gets the user's save data

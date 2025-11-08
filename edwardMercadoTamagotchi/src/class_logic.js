@@ -43,7 +43,14 @@ export class Bus {
     }
 }
 
-class Food {
+class BusChild extends Bus { // save the syntax if necessary later
+    constructor(name, species, example) {
+        super(name, species);
+        this.example = example;
+    }
+}
+
+export class Food {
     constructor(name, nutrition, imageURL) {
         this.name = name;
         this.nutrition = nutrition;
