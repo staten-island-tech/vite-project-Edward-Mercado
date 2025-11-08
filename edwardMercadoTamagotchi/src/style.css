@@ -379,7 +379,7 @@ body {
 
 .close-menu-button {
   font-family: "Bitcount Grid Single", sans-serif;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 
   border: var(--game-border-color) 5px solid;
@@ -387,6 +387,7 @@ body {
   border-radius: 32px;
 
   transition: transform ease-in-out .1s;
+  padding: 1%;
 
   background-color: var(--button-color-1);
 }
@@ -399,12 +400,47 @@ body {
   animation: clickToggle 0.2s ease;
 }
 
+#game-save-alert {
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  width: 50%;
+  height: 10%;
+  position: fixed;
+  left: 5%;
+  top: 85%;
+  background-color: var(--background-color);
+  border: var(--game-border-color) 3px solid;
+  border-radius: 30px;
+
+  animation: rotateSaveAlert 2s ease-in-out infinite alternate;
+}
+
+.game-save-alert-subtitle {
+  text-align: center;
+  color: var(--additional-text-color-2);
+  font-family: "Momo Trust Display", sans-serif;
+  font-size: 2em;
+}
+
 @keyframes rotateTitle {
   0% {
     transform: rotate(0.25deg);
   }
   100% {
     transform: rotate(-0.25deg);
+  }
+}
+
+@keyframes rotateSaveAlert {
+  0% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(-1deg);
   }
 }
 

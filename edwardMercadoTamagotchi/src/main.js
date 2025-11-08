@@ -65,6 +65,8 @@ function openWindow() {
 
 function saveGame() {
   localStorage.setItem('buses', JSON.stringify(buses));
+  const gameSaveAlert = document.querySelector("#game-save-alert");
+  gameSaveAlert.style.display = "flex";
 }
 
 function openMenu(menuID) {
