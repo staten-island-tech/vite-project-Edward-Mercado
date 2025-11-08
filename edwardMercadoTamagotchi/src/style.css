@@ -20,6 +20,7 @@
   --button-color-2-hover: rgb(255, 107, 88);
 
   --additional-text-color-1: rgb(255, 204, 204);
+  --additional-text-color-2: rgb(75, 18, 18);
 }
 
 .theme-orange {
@@ -36,6 +37,7 @@
   --button-color-2-hover: rgb(255, 172, 88);
 
   --additional-text-color-1: rgb(255, 215, 180);
+  --additional-text-color-2: rgb(172, 69, 0);
 }
 
 .theme-p-yellow { /* this theme was requested by izzy, but I don't like yellow */
@@ -52,6 +54,7 @@
   --button-color-2-hover: rgb(255, 233, 88);
 
   --additional-text-color-1: rgb(38, 27, 0);
+  --additional-text-color-2: rgb(75, 69, 18);
 }
 
 #wider-button {
@@ -73,6 +76,7 @@
   --button-color-2-hover: rgb(8, 41, 3);
 
   --additional-text-color-1: rgb(0, 105, 42);
+  --additional-text-color-2: rgb(49, 106, 29);
 }
 
 .theme-blue {
@@ -89,6 +93,7 @@
   --button-color-2-hover: rgb(14, 34, 106);
 
   --additional-text-color-1: rgb(0, 84, 129);
+  --additional-text-color-2: rgb(0, 54, 97);
 }
 
 .theme-purple {
@@ -105,6 +110,7 @@
   --button-color-2-hover: rgb(158, 67, 223);
 
   --additional-text-color-1: rgb(241, 204, 255);
+  --additional-text-color-2: rgb(28, 7, 46);
 }
 
 .theme-light {
@@ -121,6 +127,7 @@
   --button-color-2-hover: rgb(205, 226, 240);
 
   --additional-text-color-1: rgb(15, 40, 54);
+  --additional-text-color-2: rgb(24, 24, 25);
 }
 
 .theme-dark {
@@ -139,6 +146,7 @@
   --border-color-2: rgb(100, 92, 123);
 
   --additional-text-color-1: rgb(228, 246, 255);
+  --additional-text-color-2: rgb(254, 253, 255);
 }
 
 body,
@@ -358,13 +366,13 @@ body {
   left: 5%;
   top: 5%;
   background-color: var(--background-color);
-  border: var(--border-color) 12px solid;
+  border: var(--game-border-color) 12px solid;
   border-radius: 30px;
 }
 
 .game-care-subtitle {
   text-align: center;
-  color: var(--additional-text-color-1);
+  color: var(--additional-text-color-2);
   font-family: "Momo Trust Display", sans-serif;
   font-size: 4em;
 }
