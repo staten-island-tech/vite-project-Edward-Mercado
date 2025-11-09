@@ -72,6 +72,15 @@ function saveGame() {
 function openMenu(menuID) {
   const menu = document.querySelector(menuID);
   menu.style.display = "flex";
+  menu.classList.add("game-care-menu-open");
+
+  menu.addEventListener(
+    "animationend", // waits for the animation to finish
+    () => {
+      menu.classList.remove("game-care-menu-open"); // removes the class that creates the animation
+    },
+    { once: true } // prevents maximum call stack size exceeded error
+  );
 
   const shadow = document.querySelector(".menu-shadow");
   shadow.style.display = "block";
@@ -79,19 +88,19 @@ function openMenu(menuID) {
 
 function closeMenu(menuID) {
   const menu = document.querySelector(menuID);
-  menu.style.display = "none";
+  menu.classList.add("game-care-menu-close");
+  menu.addEventListener(
+    "animationend",
+    () => {
+      menu.style.display = "none";
+      menu.classList.remove("game-care-menu-close");
+    },
+    { once: true }
+  );
 
   const shadow = document.querySelector(".menu-shadow");
   shadow.style.display = "none";
-}
-
-
-
-
-
-
-
-
+  }
 
 const themeButtons = document.querySelectorAll(".toggleMode");
 
