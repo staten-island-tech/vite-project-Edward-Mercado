@@ -236,7 +236,7 @@ body {
 }
 
 .game-pet-selection {
-  width: 80vw;
+  width: 80%;
   height: 40vh;
   border: var(--game-border-color) 8px solid;
   background-color: rgba(0, 0, 23, 0.1);
@@ -253,7 +253,7 @@ body {
   border-radius: 16px;
   padding: 1%;
   margin-bottom: 1%;
-  width: 80vw;
+  width: 80%;
 }
 
 .game-container {
@@ -347,7 +347,7 @@ body {
   width: 100vw;
   height: 100vh;
 
-  background-color: rgba(0, 0, 23, 0.3);
+  background-color: rgba(0, 0, 24, 0.43);
 }
 
 .game-care-menu {
