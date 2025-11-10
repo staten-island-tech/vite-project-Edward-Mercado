@@ -42,7 +42,7 @@ function openWindow() {
 
   let buses = [];
   
-  const localStorageBuses = localStorage.getItem('buses');
+  const localStorageBuses = localStorage.getItem('buses') || "[]";
 
   if (localStorageBuses != "[]") {
     buses = JSON.parse(localStorageBuses);
