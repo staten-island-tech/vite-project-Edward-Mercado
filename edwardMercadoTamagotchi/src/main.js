@@ -191,3 +191,25 @@ nameForm.addEventListener("submit", (event) => {
 })
 
 const buses = openWindow(); // opens the window and gets the user's save data
+
+buses.forEach((bus) => {
+
+})
+
+/*
+        <div class="owned-bus-display">
+          <div>
+            <h3 class="owned-bus-display__name"> FRANKLIN </h3>
+            <h3 class="owned-bus-display__species"> s57 </h3>
+          </div>
+
+          <div class="owned-bus-display__button-container">
+            <button class="owned-bus-display__button">
+            SELECT THIS BUS
+          </button> 
+          <button class="owned-bus-display__button">
+            DELETE THIS BUS
+          </button>
+          </div>
+        </div>
+*/
