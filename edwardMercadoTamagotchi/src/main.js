@@ -117,10 +117,9 @@ function adoptMenu(species) {
   menu.classList.add("game-care-menu-open");
 
   const adoptionDataTarget = document.querySelector(".adoption-data-target");
-  
-  adoptionDataTarget.insertAdjacentHTML("afterbegin", 
-    `<h1 class="game-title"> ${ species } </h1>`
-  )
+  adoptionDataTarget.innerHTML = "";
+  adoptionDataTarget.insertAdjacentHTML("afterbegin", `<h2 class="adoption-data-attribute"> BUS SPECIES: ${species} </h2>`)
+
 
   menu.addEventListener(
     "animationend", // waits for the animation to finish

@@ -480,6 +480,65 @@ body {
   animation: clickToggle 0.2s ease;
 }
 
+.name-input {
+  border: var(--game-border-color) 6px solid;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.name-input__text {
+  border: var(--game-border-color) 6px solid;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 13px;
+  font-family: "Momo Trust Display" sans-serif;
+  background-color: var(--background-color);
+  color: var(--additional-text-color-1);
+  font-weight: 800;
+  font-style: none;
+  width: 80%;
+  background-color: rgba(0, 0, 23, 0.1);
+}
+.name-input__text::placeholder {
+  color:  var(--additional-text-color-2);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.name-input__button {
+  background-color: var(--button-color-1);
+  border: 0px solid;
+  border-radius: 8px;
+  color: var(--regular-text-color);
+  margin: 8px;
+  padding: 8px;
+  width: 12%;
+  min-width: 100px;
+  height: 80%;
+  transition: transform .1s ease-in-out;
+  font-weight: 600;
+  font-size: 2em;
+  font-family: "Momo Trust Display", sans-serif;
+}
+.name-input__button:hover {
+  cursor: pointer;
+  transform: translateY(-5%);
+  box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
+  background-color: var(--button-color-1-hover);
+}
+
+.name-input__button:active {
+  animation: clickToggle 0.2s ease;
+}
+
+.adoption-data-attribute {
+  font-family: "Momo Trust Display", sans-serif;
+  padding: 20px;
+  font-size: 2.7em;
+  color:  var(--additional-text-color-2);
+}
+
+
 @keyframes rotateTitle {
   0% {
     transform: rotate(0.25deg);
