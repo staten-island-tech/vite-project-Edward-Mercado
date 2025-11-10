@@ -188,6 +188,17 @@ body {
   font-size: 4em;
 }
 
+.game-pet_selection-subtitle {
+  width: 100%;
+  text-align: center;
+  color: var(--additional-text-color-1);
+  font-family: "Momo Trust Display", sans-serif;
+  font-size: 2.7em;
+  font-weight: 570;
+  font-style: italic;
+  text-align: left;
+}
+
 .game-title {
   color: var(--header-text-color);
   font-family: "Bitcount Grid Single", system-ui;
@@ -237,7 +248,6 @@ body {
 
 .game-pet-selection {
   width: 80%;
-  height: 40vh;
   border: var(--game-border-color) 8px solid;
   background-color: rgba(0, 0, 23, 0.1);
   border-radius: 12px;
@@ -435,6 +445,39 @@ body {
   color: var(--additional-text-color-2);
   font-family: "Momo Trust Display", sans-serif;
   font-size: 2em;
+}
+
+.bus-adopt__container {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+
+.bus-selection__button {
+  background-color: var(--button-color-1);
+  border: 0px solid;
+  border-radius: 8px;
+  color: var(--regular-text-color);
+  margin: 8px;
+  padding: 8px;
+  width: 150px;
+  min-width: 100px;
+  height: 80%;
+  transition: transform .1s ease-in-out;
+  font-weight: 600;
+  font-size: 2em;
+  font-family: "Momo Trust Display", sans-serif;
+}
+
+.bus-selection__button:hover {
+  cursor: pointer;
+  transform: translateY(-5%);
+  box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
+  background-color: var(--button-color-1-hover);
+}
+
+.bus-selection__button:active {
+  animation: clickToggle 0.2s ease;
 }
 
 @keyframes rotateTitle {

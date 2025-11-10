@@ -2,6 +2,15 @@ import './style.css'
 import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
 
+const busData = [
+  "s44", "s57", "s59", "s62", "s79", "b1"
+]
+
+function randomInt(max) {
+  let output = Math.floor(Math.random() * max);
+  return output;
+}
+
 function switchWebThemes(theme) {
   const themes = ["red", "orange", "p-yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
 
@@ -43,7 +52,7 @@ function openWindow() {
   let buses = [];
   
   const localStorageBuses = localStorage.getItem('buses') || "[]";
-
+  
   if (localStorageBuses != "[]") {
     buses = JSON.parse(localStorageBuses);
     buses.forEach((bus) => {
@@ -55,7 +64,7 @@ function openWindow() {
     return (buses);
   }
   else {
-    const bus = new Bus("hi", `s${Math.floor(Math.random() * 100)}`);
+    const bus = new Bus("hi", `${ busData[randomInt(busData.length)] }`);
     buses = [bus];
     localStorage.setItem('buses', JSON.stringify(buses));
   }
@@ -100,7 +109,30 @@ function closeMenu(menuID) {
 
   const shadow = document.querySelector(".menu-shadow");
   shadow.style.display = "none";
-  }
+}
+
+function adoptMenu(species) {
+  const menu = document.querySelector('#adoption-menu');
+  menu.style.display = "flex";
+  menu.classList.add("game-care-menu-open");
+
+  const adoptionDataTarget = document.querySelector(".adoption-data-target");
+  adoptionDataTarget.innerHTML = '';
+  adoptionDataTarget.insertAdjacentHTML("afterbegin", 
+    `<h1 class="game-title"> ${ species } </h1>`
+  )
+
+  menu.addEventListener(
+    "animationend", // waits for the animation to finish
+    () => {
+      menu.classList.remove("game-care-menu-open"); // removes the class that creates the animation
+    },
+    { once: true } // prevents maximum call stack size exceeded error
+  );
+
+  const shadow = document.querySelector(".menu-shadow");
+  shadow.style.display = "block";
+}
 
 const themeButtons = document.querySelectorAll(".toggleMode");
 
@@ -124,10 +156,24 @@ careButtons.forEach((button) => {
 })
 
 const closeMenuButtons = document.querySelectorAll(".close-menu-button");
-console.log(closeMenuButtons);
+
 closeMenuButtons.forEach((button) => {
   button.addEventListener("click", () => {
     closeMenu(button.getAttribute("data-menuTarget"));
+  })
+})
+
+const busAdoptContainer = document.querySelector(".bus-adopt__container");
+
+busData.reverse().forEach((bus) => {
+  busAdoptContainer.insertAdjacentHTML('afterbegin', 
+    `<button class="bus-selection__button"> ${ bus } </button>`)
+});
+
+const busSelectionButtons = document.querySelectorAll(".bus-selection__button");
+busSelectionButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    adoptMenu(button.textContent)
   })
 })
 

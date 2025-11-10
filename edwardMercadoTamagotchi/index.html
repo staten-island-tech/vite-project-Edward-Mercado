@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1 class="game-title bitcount-grid-single"> RAISE A BUS </h1>
-    
+
     <div class="theme-button__container">
       <h2 class="game-subtitle"> THEME SELECTION </h2>
       <div class="horizontal-line"></div>
@@ -23,6 +23,13 @@
 
     <div class="game-pet-selection">
       <h2 class="game-subtitle">SELECT/ADOPT BUS</h2>
+      <div class="horizontal-line"></div>
+      <h3 class="game-pet_selection-subtitle">YOUR BUSES</h3>
+      <div class="horizontal-line"></div>
+      <h3 class="game-pet_selection-subtitle">ADOPT NEW BUSES</h3>
+      <div class="bus-adopt__container">
+        
+      </div>
       <div class="horizontal-line"></div>
     </div>
 
@@ -58,7 +65,7 @@
     <div class="menu-shadow"></div>
 
     <div class="game-care-menu" id="game-feed-menu">
-      <div class="div">
+      <div>
         <h2 class="game-care-subtitle"> FEEDING MENU </h2>
         <div class="horizontal-line"></div>
       </div>
@@ -66,15 +73,15 @@
     </div>
 
     <div class="game-care-menu" id="game-petPlay-menu">
-      <div class="div">
-        <h2 class="game-care-subtitle"> PLAY WITH YOUR PET </h2>
+      <div>
+        <h2 class="game-care-subtitle"> PLAY WITH YOUR BUS </h2>
         <div class="horizontal-line"></div>
       </div>
       <button class="close-menu-button" data-menuTarget="#game-petPlay-menu"> CLOSE MENU </button>
     </div>
 
     <div class="game-care-menu" id="game-train-menu">
-      <div class="div">
+      <div>
         <h2 class="game-care-subtitle"> TRAINING </h2>
         <div class="horizontal-line"></div>
       </div>
@@ -82,15 +89,15 @@
     </div>
 
     <div class="game-care-menu" id="game-hit-menu">
-      <div class="div">
-        <h2 class="game-care-subtitle"> HIT YOUR PET </h2>
+      <div>
+        <h2 class="game-care-subtitle"> HIT YOUR BUS </h2>
         <div class="horizontal-line"></div>
       </div>
       <button class="close-menu-button" data-menuTarget="#game-hit-menu"> CLOSE MENU </button>
     </div>
 
     <div class="game-care-menu" id="game-shop-menu">
-      <div class="div">
+      <div>
         <h2 class="game-care-subtitle"> SHOPPING </h2>
         <div class="horizontal-line"></div>
       </div>
@@ -98,10 +105,21 @@
     </div>
 
     <div id="game-save-alert">
-      <div class="div">
+      <div>
         <h3 class="game-save-alert-subtitle"> YOUR GAME HAS BEEN SAVED! </h3>
       </div>
       <button class="close-menu-button" data-menuTarget="#game-save-alert"> C L O S E --- M E N U </button>
+    </div>
+
+    <div class="game-care-menu" id="adoption-menu">
+      <div>
+        <h2 class="game-care-subtitle"> ADOPT A NEW BUS </h2>
+        <div class="horizontal-line"></div>
+        <div class="adoption-data-target">
+          
+        </div>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#adoption-menu"> CLOSE MENU </button>
     </div>
 
     <script type="module" src="/src/main.js"></script>
