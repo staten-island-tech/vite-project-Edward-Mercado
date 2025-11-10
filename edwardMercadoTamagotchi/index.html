@@ -25,6 +25,10 @@
       <h2 class="game-subtitle">SELECT/ADOPT BUS</h2>
       <div class="horizontal-line"></div>
       <h3 class="game-pet_selection-subtitle">YOUR BUSES</h3>
+      <div class="current-buses__container">
+        
+      </div>
+
       <div class="horizontal-line"></div>
       <h3 class="game-pet_selection-subtitle">ADOPT NEW BUSES</h3>
       <div class="bus-adopt__container">
@@ -118,8 +122,9 @@
         <div class="adoption-data-target">
         </div>
           <form class="name-input" id="nameInput">
+            <input type="hidden" id="species-input" value="hey">
             <input class="name-input__text" type="text" id="name-input" name="name-input" placeholder="Name your bus...">
-            <input class="name-input__button" type="submit" value="SEARCH"/>
+            <input class="name-input__button" type="submit" value="ADOPT!"/>
           </form>
       </div>
       <button class="close-menu-button" data-menuTarget="#adoption-menu"> RETURN HOME </button>

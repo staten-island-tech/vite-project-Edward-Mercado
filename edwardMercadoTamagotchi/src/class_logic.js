@@ -1,5 +1,5 @@
 export class Bus {
-    constructor(name, species) {
+    constructor(name, species) { // will construct for the first time
         this.name = name;
         this.species = species;
 
@@ -10,12 +10,23 @@ export class Bus {
         this.alive = true;
         this.selected = false;
 
+        this.class = Bus;
+
         if(this.species.includes("s") && !this.species.includes("79")) { // all si buses except for the s79 bc its the best
             this.speed -= (Math.floor(Math.random()*25));
         }
         else {
             this.speed += (Math.floor(Math.random()*10));
         }
+    }
+
+    reconstructor(inputBus) { // will reconstruct from localStorage data
+        this.name = inputBus.name;
+        this.species = inputBus.species;
+        this.food_health = inputBus.food_health;
+        this.speed = inputBus.speed;
+        this.alive = inputBus.alive;
+        this.selected = inputBus.selected;
     }
 
     feed(food) {

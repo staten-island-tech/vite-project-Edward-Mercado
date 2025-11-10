@@ -120,7 +120,6 @@ function adoptMenu(species) {
   adoptionDataTarget.innerHTML = "";
   adoptionDataTarget.insertAdjacentHTML("afterbegin", `<h2 class="adoption-data-attribute"> BUS SPECIES: ${species} </h2>`)
 
-
   menu.addEventListener(
     "animationend", // waits for the animation to finish
     () => {
@@ -131,6 +130,9 @@ function adoptMenu(species) {
 
   const shadow = document.querySelector(".menu-shadow");
   shadow.style.display = "block";
+
+  const speciesInput = document.querySelector("#species-input");
+  speciesInput.value = species;
 }
 
 const themeButtons = document.querySelectorAll(".toggleMode");
@@ -172,8 +174,20 @@ busData.reverse().forEach((bus) => {
 const busSelectionButtons = document.querySelectorAll(".bus-selection__button");
 busSelectionButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    adoptMenu(button.textContent)
+    adoptMenu(button.textContent);
   })
+})
+
+const nameForm = document.querySelector(".name-input");
+nameForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const nameInput = document.getElementById("name-input").value;
+  const busSpecies = document.getElementById("species-input").value.replaceAll(" ", "");
+
+  let adoptedBus = new Bus(nameInput, busSpecies);
+  buses.push(adoptedBus);
+  console.log(buses);
+  closeMenu("#adoption-menu");
 })
 
 const buses = openWindow(); // opens the window and gets the user's save data
