@@ -117,7 +117,7 @@ function adoptMenu(species) {
   menu.classList.add("game-care-menu-open");
 
   const adoptionDataTarget = document.querySelector(".adoption-data-target");
-  adoptionDataTarget.innerHTML = '';
+  
   adoptionDataTarget.insertAdjacentHTML("afterbegin", 
     `<h1 class="game-title"> ${ species } </h1>`
   )
