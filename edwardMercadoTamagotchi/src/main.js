@@ -22,29 +22,6 @@ function switchWebThemes(theme) {
   localStorage.setItem('theme', theme);
 }
 
-function assignButtonEvents(bus) {
-  let feedButton = document.querySelector("#feed-button");
-  feedButton.addEventListener("click", () => {
-    bus.feed();
-  })
-  let petPlayButton = document.querySelector("#petplay-button");
-  petPlayButton.addEventListener("click", () => {
-    bus.petPlay()
-  })
-  let trainButton = document.querySelector("#train-button");
-  trainButton.addEventListener("click", () => {
-    bus.train()
-  })
-  let hitButton = document.querySelector("#hit-button");
-  hitButton.addEventListener("click", () => {
-    bus.hit()
-  })
-  let shopButton = document.querySelector("#shop-button");
-  shopButton.addEventListener("click", () => {
-    shop()
-  })
-}
-
 function openWindow() {
   const savedTheme = localStorage.getItem('theme') || 'light'; // returns light theme if we don't have one
   switchWebThemes(savedTheme);
@@ -54,18 +31,19 @@ function openWindow() {
   const localStorageBuses = localStorage.getItem('buses') || "[]";
   
   if (localStorageBuses != "[]") {
-    buses = JSON.parse(localStorageBuses);
-    buses.forEach((bus) => {
-      if (bus.selected) {
-        let selectedBus = bus;
-        assignButtonEvents(selectedBus);
-      }
+    let object_buses = JSON.parse(localStorageBuses);
+    buses = [];
+    object_buses.forEach((bus) => {
+
+      let busClass_bus = new Bus(bus.name, bus.species);
+      let fixedBus = busClass_bus.reconstructor(bus);
+      buses.push(fixedBus);
     })
+
     return (buses);
   }
   else {
-    const bus = new Bus("hi", `${ busData[randomInt(busData.length)] }`);
-    buses = [bus];
+    buses = [];
     localStorage.setItem('buses', JSON.stringify(buses));
   }
 
@@ -74,8 +52,6 @@ function openWindow() {
 
 function saveGame() {
   localStorage.setItem('buses', JSON.stringify(buses));
-  const gameSaveAlert = document.querySelector("#game-save-alert");
-  gameSaveAlert.style.display = "flex";
 }
 
 function openMenu(menuID) {
@@ -109,30 +85,165 @@ function closeMenu(menuID) {
 
   const shadow = document.querySelector(".menu-shadow");
   shadow.style.display = "none";
+
+  const deleteBusButton = document.querySelector(".delete-bus-menu__confirmation")
+  
+  deleteBusButton.removeEventListener("click", () => deleteBusMenu(deleteBusButton.getAttribute("data-index")));
+}
+
+function newAdoptionScreen(adoptedBus) { // after you adopt something, shows what you just did
+  const newAdoptionMenuTitle = document.getElementById("new-adoption-menu-title");
+  let nOrNot = ""
+  if (adoptedBus.species[0] === "s") {
+    nOrNot = "N"
+  }
+  newAdoptionMenuTitle.textContent = `YOU JUST ADOPTED A${nOrNot} ${adoptedBus.species}!`
+
+  const adoptionMenuDisplay = document.querySelector(".adoption-menu-display");
+  adoptionMenuDisplay.innerHTML = ''
+  adoptionMenuDisplay.insertAdjacentHTML("afterbegin", `<div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> NAME: ${ adoptedBus.name } </h2>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> FULLNESS: ${ adoptedBus.fullness }</h2>
+            <div class="stat_bar"></div>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> HEALTH: ${ adoptedBus.physical_health }</h2>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> SPEED: ${ adoptedBus.speed }</h2>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> HAPPINESS: ${ adoptedBus.happiness }</h2>
+          </div>
+        </div>`)
+  
+  openMenu("#new-adoption-menu");
 }
 
 function adoptMenu(species) {
-  const menu = document.querySelector('#adoption-menu');
-  menu.style.display = "flex";
-  menu.classList.add("game-care-menu-open");
+  openMenu("#adoption-menu");
 
   const adoptionDataTarget = document.querySelector(".adoption-data-target");
   adoptionDataTarget.innerHTML = "";
-  adoptionDataTarget.insertAdjacentHTML("afterbegin", `<h2 class="adoption-data-attribute"> BUS SPECIES: ${species} </h2>`)
+  adoptionDataTarget.insertAdjacentHTML("afterbegin", `<h2 class="adoption-data-attribute"> BUS SPECIES: ${species} </h2>`);
 
-  menu.addEventListener(
-    "animationend", // waits for the animation to finish
-    () => {
-      menu.classList.remove("game-care-menu-open"); // removes the class that creates the animation
-    },
-    { once: true } // prevents maximum call stack size exceeded error
-  );
+  const formPlace = document.querySelector("#adopt-form-location");
+  formPlace.innerHTML = ''
+  formPlace.insertAdjacentHTML('beforeend', `
+    <form class="name-input" id="nameInput">
+      <input type="hidden" id="species-input" value="${ species }">
+      <h2 class="game-subtitle"> GIVE IT A NAME! </h2>
+      <div class="horizontal-line"></div>
+      <div class="name-input__container">
+      <input class="name-input__text" type="text" maxlength="14" id="name-input" name="name-input" placeholder="Name your bus...">
+      <input class="name-input__button" type="submit" value="ADOPT!"/>
+      </div>
+    </form>
+    `);
+  
+  const nameForm = document.querySelector(".name-input");
+  nameForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let nameInput = document.getElementById("name-input").value;
 
-  const shadow = document.querySelector(".menu-shadow");
-  shadow.style.display = "block";
+  if (!nameInput) {
+    nameInput = "Unnamed Bus"
+  }
+  const busSpecies = document.getElementById("species-input").value.replaceAll(" ", "");
+
+  let adoptedBus = new Bus(nameInput, busSpecies);
+  buses.push(adoptedBus);
+  injectBuses(buses);
+  const adoptionMenu = document.getElementById("adoption-menu");
+  adoptionMenu.addEventListener("animationend", newAdoptionScreen(adoptedBus));
+  closeMenu("#adoption-menu");
+  adoptionMenu.removeEventListener("animationend", newAdoptionScreen(adoptedBus));
+})
 
   const speciesInput = document.querySelector("#species-input");
   speciesInput.value = species;
+
+  injectBuses(buses);
+}
+
+function deleteBus(confirmDeleteButton, busIndex) {
+  closeMenu("#delete-bus-menu");
+  buses.splice(busIndex, 1);
+  injectBuses(buses);
+  confirmDeleteButton.removeEventListener("click", () => deleteBus(confirmDeleteButton, busIndex), { once: true });
+}
+
+function deleteBusMenu(busIndex) {
+  openMenu("#delete-bus-menu");
+  let targetBus = buses[busIndex];
+  const confirmDeleteButton = document.querySelector(".delete-bus-menu__confirmation");
+  confirmDeleteButton.addEventListener("click", () => deleteBus(confirmDeleteButton, busIndex), { once: true });
+
+  const deleteBusDisplay = document.querySelector(".delete-bus-menu__data-container");
+  deleteBusDisplay.innerHTML = ''
+  deleteBusDisplay.insertAdjacentHTML("afterbegin", 
+    `<div class="adoption-menu__attribute">
+          <h2 class="adoption-menu-subtitle"> NAME: ${targetBus.name} </h2>
+        </div>
+        <div class="adoption-menu__attribute">
+          <h2 class="adoption-menu-subtitle"> FULLNESS: ${targetBus.fullness} </h2>
+        </div>
+        <div class="adoption-menu__attribute">
+          <h2 class="adoption-menu-subtitle"> HEALTH: ${targetBus.physical_health} </h2>
+        </div>
+        <div class="adoption-menu__attribute">
+          <h2 class="adoption-menu-subtitle"> SPEED: ${targetBus.speed} </h2>
+        </div>
+        <div class="adoption-menu__attribute">
+          <h2 class="adoption-menu-subtitle"> HAPPINESS: ${targetBus.happiness} </h2>
+        </div>`
+  )
+}
+
+function injectBuses(buses) {
+  const currentBusesContainer = document.querySelector(".current-buses__container");
+  currentBusesContainer.innerHTML = '';
+
+  buses.forEach((bus) => {
+    currentBusesContainer.insertAdjacentHTML("beforeend", `
+      <div class="owned-bus-display">
+          <div>
+            <h3 class="owned-bus-display__name"> ${ bus.name } </h3>
+            <h3 class="owned-bus-display__species"> ${ bus.species } </h3>
+          </div>
+
+          <div class="owned-bus-display__button-container">
+          <button class="owned-bus-display__button" id="select-bus-button" data-index=${buses.indexOf(bus)}>
+            SELECT THIS BUS
+          </button> 
+          <button class="owned-bus-display__button" id="delete-bus-button" data-index=${buses.indexOf(bus)}>
+            DELETE THIS BUS
+          </button>
+          </div>
+        </div>
+      `)
+  })
+
+  const deleteBusButtons = document.querySelectorAll("#delete-bus-button");
+  deleteBusButtons.forEach((button) => {
+    button.addEventListener("click", () => deleteBusMenu(button.getAttribute("data-index")))
+  })
+
+  const selectBusButtons = document.querySelectorAll("#select-bus-button");
+  selectBusButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buses.forEach((bus) => {
+        bus.selected = false
+      })
+      let targetBus = buses[button.getAttribute("data-index")]
+      targetBus.selected = true;
+      globalThis.selectedBus = targetBus;
+    })
+  })
+
+  saveGame();
 }
 
 const themeButtons = document.querySelectorAll(".toggleMode");
@@ -178,38 +289,23 @@ busSelectionButtons.forEach((button) => {
   })
 })
 
-const nameForm = document.querySelector(".name-input");
-nameForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const nameInput = document.getElementById("name-input").value;
-  const busSpecies = document.getElementById("species-input").value.replaceAll(" ", "");
+const hideDataButtons = document.querySelectorAll(".game-pet-selection__button");
 
-  let adoptedBus = new Bus(nameInput, busSpecies);
-  buses.push(adoptedBus);
-  console.log(buses);
-  closeMenu("#adoption-menu");
+hideDataButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const targetContainer = document.querySelector(button.getAttribute("data-target"));
+    console.log(button.getAttribute("data-target"));
+    if (button.textContent === "HIDE") {
+      button.textContent = "SHOW";
+      targetContainer.style.display = "none";
+    }
+    else {
+      button.textContent = "HIDE";
+      targetContainer.style.display = "block";
+    }
+  })
 })
 
 const buses = openWindow(); // opens the window and gets the user's save data
 
-buses.forEach((bus) => {
-
-})
-
-/*
-        <div class="owned-bus-display">
-          <div>
-            <h3 class="owned-bus-display__name"> FRANKLIN </h3>
-            <h3 class="owned-bus-display__species"> s57 </h3>
-          </div>
-
-          <div class="owned-bus-display__button-container">
-            <button class="owned-bus-display__button">
-            SELECT THIS BUS
-          </button> 
-          <button class="owned-bus-display__button">
-            DELETE THIS BUS
-          </button>
-          </div>
-        </div>
-*/
+injectBuses(buses);

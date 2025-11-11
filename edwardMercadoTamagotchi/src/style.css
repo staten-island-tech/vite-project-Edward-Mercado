@@ -22,6 +22,8 @@
   --additional-text-color-1: rgb(110, 15, 15);
   --additional-text-color-2: rgb(75, 18, 18);
   --additional-text-color-3: rgb(37, 6, 6);
+
+  --glass-color: rgba(29, 2, 2, 0.203);
 }
 
 .theme-orange {
@@ -40,6 +42,7 @@
   --additional-text-color-1: rgb(165, 63, 0);
   --additional-text-color-2: rgb(172, 69, 0);
   --additional-text-color-3: rgb(51, 21, 1);
+  --glass-color: rgba(215, 150, 70, 0.203);
 }
 
 .theme-p-yellow { /* this theme was requested by izzy, but I don't like yellow */
@@ -58,6 +61,7 @@
   --additional-text-color-1: rgb(38, 27, 0);
   --additional-text-color-2: rgb(75, 69, 18);
   --additional-text-color-3: rgb(37, 30, 6);
+  --glass-color: rgba(164, 90, 0, 0.203);
 }
 
 #wider-button {
@@ -68,7 +72,7 @@
 .theme-green {
   --background-color: rgb(181, 247, 151);
   --background-color-2: rgb(162, 218, 123);
-  --game-border-color: rgb(27, 180, 88);
+  --game-border-color: rgb(6, 78, 34);
   --header-text-color: rgb(18, 105, 32);
   --regular-text-color: rgb(239, 255, 243);
 
@@ -81,6 +85,8 @@
   --additional-text-color-1: rgb(0, 105, 42);
   --additional-text-color-2: rgb(49, 106, 29);
   --additional-text-color-3: rgb(195, 250, 216);
+
+  --glass-color: rgba(12, 55, 2, 0.203);
 }
 
 .theme-blue {
@@ -99,6 +105,8 @@
   --additional-text-color-1: rgb(0, 84, 129);
   --additional-text-color-2: rgb(0, 54, 97);
   --additional-text-color-3: rgb(195, 240, 250);
+
+  --glass-color: rgba(2, 22, 42, 0.203);
 }
 
 .theme-purple {
@@ -109,14 +117,16 @@
   --regular-text-color: rgb(237, 216, 255);
 
   --button-color-1: rgb(83, 15, 177);
-  --button-color-1-hover: rgb(94, 16, 145);
+  --button-color-1-hover: rgb(56, 8, 114);
 
-  --button-color-2: rgb(209, 150, 245);
-  --button-color-2-hover: rgb(158, 67, 223);
+  --button-color-2: rgb(163, 82, 214);
+  --button-color-2-hover: rgb(103, 23, 160);
 
   --additional-text-color-1: rgb(241, 204, 255);
   --additional-text-color-2: rgb(28, 7, 46);
   --additional-text-color-3: rgb(238, 229, 245);
+
+  --glass-color: rgba(21, 2, 29, 0.203);
 }
 
 .theme-light {
@@ -135,6 +145,8 @@
   --additional-text-color-1: rgb(15, 40, 54);
   --additional-text-color-2: rgb(24, 24, 25);
   --additional-text-color-3: rgb(8, 40, 49);
+
+  --glass-color: rgba(93, 106, 110, 0.203);
 }
 
 .theme-dark {
@@ -155,6 +167,8 @@
   --additional-text-color-1: rgb(228, 246, 255);
   --additional-text-color-2: rgb(254, 253, 255);
   --additional-text-color-3: rgb(233, 246, 252);
+
+  --glass-color: rgba(32, 31, 32, 0.203);
 }
 
 body,
@@ -180,7 +194,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 23, 0.1);
+  background-color: var(--glass-color);
   width: 80%;
   border-radius: 16px;
   flex-flow: row wrap;
@@ -257,7 +271,7 @@ body {
 .game-pet-selection {
   width: 80%;
   border: var(--game-border-color) 8px solid;
-  background-color: rgba(0, 0, 23, 0.1);
+  background-color: var(--glass-color);
   border-radius: 12px;
   margin: 1%;
   padding: 1%;
@@ -266,7 +280,7 @@ body {
 .game-window-wrap {
   display: flex;
   flex-flow: column nowrap;
-  background-color: rgba(0, 0, 23, 0.1);
+  background-color: var(--glass-color);
   border: var(--game-border-color) 8px solid;
   border-radius: 16px;
   padding: 1%;
@@ -429,6 +443,41 @@ body {
   animation: clickToggle 0.2s ease;
 }
 
+.delete-bus-menu__confirmation {
+  font-family: "Bitcount Grid Single", sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+
+  border: var(--game-border-color) 5px solid;
+  color: var(--regular-text-color);
+  border-radius: 32px;
+
+  transition: transform ease-in-out .1s;
+  padding: 1%;
+  width: 100%;
+
+
+  background-color: var(--button-color-2);
+}
+
+.delete-bus-menu__confirmation:hover {
+  background-color: var(--button-color-2-hover);
+  cursor: pointer;
+  transform: translateY(-7%);
+  box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
+}
+
+.delete-bus-menu__confirmation:active {
+  animation: clickToggle 0.2s ease;
+}
+
+.delete-bus-menu__subtitle {
+  font-size: 1.4em;
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 800;
+  color: var(--additional-text-color-2)
+}
+
 #game-save-alert {
   display: none;
   flex-flow: column nowrap;
@@ -492,6 +541,18 @@ body {
   border: var(--game-border-color) 6px solid;
   border-radius: 12px;
   padding: 30px;
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
+  background-color: var(--glass-color);
+}
+
+.name-input__container {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row nowrap;
+  margin-top: 2%;
+  width: 100%;
 }
 
 .name-input__text {
@@ -502,15 +563,25 @@ body {
   font-family: "Momo Trust Display" sans-serif;
   background-color: var(--background-color);
   color: var(--additional-text-color-1);
-  font-weight: 800;
+  font-weight: 900;
   font-style: none;
-  width: 80%;
-  background-color: rgba(0, 0, 23, 0.1);
+  width: 50%;
+  
+  background-color: var(--glass-color);
+  margin: auto;
+  background-color: var(--background-color-2);
 }
 .name-input__text::placeholder {
   color:  var(--additional-text-color-2);
-  font-weight: 600;
+  font-weight: 800;
   font-style: italic;
+}
+.name-input__text:focus {
+  transition: transform .23s ease-in-out;
+  transform: scale(1.04);
+  background-color: var(--background-color);
+  outline: none;
+  
 }
 
 .name-input__button {
@@ -543,12 +614,13 @@ body {
   font-family: "Momo Trust Display", sans-serif;
   padding: 20px;
   font-size: 2.7em;
+  font-style: italic;
   color:  var(--additional-text-color-2);
 }
 
 .current-buses__container {
-  display: flex;
-  align-items: row wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .owned-bus-display {
@@ -558,8 +630,10 @@ body {
   justify-content: space-between;
   border: var(--game-border-color) 6px solid;
   border-radius: 12px;
-  padding: 30px;
+  padding: 1%;
   width: 100%;
+  margin: 1%;
+  margin-left: 0;
 }
 
 .owned-bus-display__name {
@@ -577,9 +651,10 @@ body {
 }
 
 .owned-bus-display__species {
-  font-size: 2.6em;
+  font-size: 2.2em;
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 600;
+  font-style: italic;
   color: var(--additional-text-color-2);
 }
 
@@ -609,6 +684,60 @@ body {
   animation: clickToggle 0.2s ease;
 }
 
+.game-pet-selection__button {
+  background-color: var(--button-color-1);
+  border: 0px solid;
+  border-radius: 8px;
+  color: var(--regular-text-color);
+  margin: 8px;
+  padding: 8px;
+  width: 20%;
+  height: 50%;
+  transition: transform .1s ease-in-out;
+  font-weight: 600;
+  font-size: 1.5em;
+  font-family: "Momo Trust Display", sans-serif;
+}
+
+.game-pet-selection__button:hover {
+  cursor: pointer;
+  transform: translateY(-5%);
+  box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
+  background-color: var(--button-color-1-hover);
+}
+
+.game-pet-selection__button:active {
+  animation: clickToggle 0.2s ease;
+}
+
+.game-pet-selection__container {
+  display: flex; 
+  flex-direction: row; 
+  align-items: center;
+}
+
+#adopt-form-location {
+  margin: 1%;
+}
+
+.adoption-menu-display {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 3%;
+}
+
+.adoption-menu__attribute {
+  width: 100%;
+}
+
+.adoption-menu-subtitle {
+  text-align: left;
+  color: var(--additional-text-color-2);
+  font-family: "Momo Trust Display", sans-serif;
+  font-size: 2.6em;
+  font-style: italic;
+  font-weight: 600;
+}
 
 @keyframes rotateTitle {
   0% {

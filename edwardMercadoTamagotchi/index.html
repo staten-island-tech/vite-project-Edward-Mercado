@@ -24,17 +24,22 @@
     <div class="game-pet-selection">
       <h2 class="game-subtitle">SELECT/ADOPT BUS</h2>
       <div class="horizontal-line"></div>
-      <h3 class="game-pet_selection-subtitle">YOUR BUSES</h3>
+      <div class="game-pet-selection__container">
+        <h3 class="game-pet_selection-subtitle">YOUR BUSES</h3>
+        <button class="game-pet-selection__button" data-target=".current-buses__container">HIDE</button>
+      </div>
+
       <div class="current-buses__container">
         
       </div>
-
       <div class="horizontal-line"></div>
-      <h3 class="game-pet_selection-subtitle">ADOPT NEW BUSES</h3>
-      <div class="bus-adopt__container">
-        
+      <div class="game-pet-selection__container">
+        <h3 class="game-pet_selection-subtitle">ADOPT NEW BUSES</h3>
+        <button class="game-pet-selection__button" data-target=".bus-adopt__container">HIDE</button>
       </div>
-      <div class="horizontal-line"></div>
+      <div class="bus-adopt__container">
+
+      </div>
     </div>
 
     <div class="game-window-wrap">
@@ -119,15 +124,36 @@
       <div>
         <h2 class="game-care-subtitle"> ADOPT A NEW BUS </h2>
         <div class="horizontal-line"></div>
-        <div class="adoption-data-target">
+        <div class="adoption-data-target"></div>
+        <div id="adopt-form-location">
+          
         </div>
-          <form class="name-input" id="nameInput">
-            <input type="hidden" id="species-input" value="hey">
-            <input class="name-input__text" type="text" id="name-input" name="name-input" placeholder="Name your bus...">
-            <input class="name-input__button" type="submit" value="ADOPT!"/>
-          </form>
       </div>
       <button class="close-menu-button" data-menuTarget="#adoption-menu"> RETURN HOME </button>
+    </div>
+
+    <div class="game-care-menu" id="new-adoption-menu">
+      <div>
+        <h2 class="game-care-subtitle" id="new-adoption-menu-title"> YOU JUST ADOPTED A (placeholder) </h2>
+        <div class="horizontal-line"></div>
+        <div class="adoption-menu-display">
+        
+        </div>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#new-adoption-menu"> COOL! (PROCEED) </button>
+    </div>
+
+    <div class="game-care-menu" id="delete-bus-menu">
+      <div>
+        <h2 class="game-care-subtitle"> DELETE BUS CONFIRMATION </h2>
+        <div class="horizontal-line"></div>
+      </div>
+      <h2 class="delete-bus-menu__subtitle"> Are you sure you want to delete this bus? </h2>
+      <div class="delete-bus-menu__data-container">
+        
+      </div>
+      <button class="delete-bus-menu__confirmation"> CONFIRM DELETE </button>
+      <button class="close-menu-button" data-menuTarget="#delete-bus-menu" id="close-menu-delete-bus"> CLOSE MENU </button>
     </div>
 
     <script type="module" src="/src/main.js"></script>
