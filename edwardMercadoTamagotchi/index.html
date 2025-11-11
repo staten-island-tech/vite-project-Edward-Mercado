@@ -10,15 +10,20 @@
     <h1 class="game-title bitcount-grid-single"> RAISE A BUS </h1>
 
     <div class="theme-button__container">
-      <h2 class="game-subtitle"> THEME SELECTION </h2>
+      <div class="theme-button__title-container">
+        <h2 class="game-subtitle" id="theme-title"> THEME SELECTION </h2>
+      <button class="game-pet-selection__button" data-target=".theme-button__theme-list">HIDE</button>
+      </div>
       <div class="horizontal-line"></div>
-      <button class="toggleMode" data-theme="red"> Red </button>
-      <button class="toggleMode" data-theme="orange"> Orange </button>
-      <button class="toggleMode" data-theme="green"> Green </button>
-      <button class="toggleMode" data-theme="blue"> Blue </button>
-      <button class="toggleMode" data-theme="purple"> Purple </button>
-      <button class="toggleMode" data-theme="light"> Light </button>
-      <button class="toggleMode" data-theme="dark"> Dark </button>
+      <div class="theme-button__theme-list">
+        <button class="toggleMode" data-theme="red"> Red </button>
+        <button class="toggleMode" data-theme="orange"> Orange </button>
+        <button class="toggleMode" data-theme="green"> Green </button>
+        <button class="toggleMode" data-theme="blue"> Blue </button>
+        <button class="toggleMode" data-theme="purple"> Purple </button>
+        <button class="toggleMode" data-theme="light"> Light </button>
+        <button class="toggleMode" data-theme="dark"> Dark </button>
+      </div>
     </div>
 
     <div class="game-pet-selection">

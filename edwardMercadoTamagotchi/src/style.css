@@ -739,6 +739,16 @@ body {
   font-weight: 600;
 }
 
+.theme-button__title-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+#theme-title {
+  width: 60vw;
+}
+
 @keyframes rotateTitle {
   0% {
     transform: rotate(0.25deg);
