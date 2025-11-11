@@ -74,6 +74,9 @@
           <button class="care-button" id="hit-button" data-menuTarget="#game-hit-menu">
             HIT
           </button>
+          <button class="care-button" id="stats-button" data-menuTarget="#game-statsView-menu">
+            STATS
+          </button>
           <button class="care-button" id="shop-button" data-menuTarget="#game-shop-menu">
             SHOP
           </button>
@@ -91,6 +94,14 @@
         <div class="horizontal-line"></div>
       </div>
       <button class="close-menu-button" data-menuTarget="#game-feed-menu"> CLOSE MENU </button>
+    </div>
+    <div class="game-care-menu" id="no-buses-menu">
+      <div>
+        <h2 class="game-care-subtitle"> YOU HAVE NO BUSES! </h2>
+        <div class="horizontal-line"></div>
+        <h2 class="game-care-subtitle no-buses-text"> Adopt a bus to play the game! </h2>
+      </div>
+      <button class="close-menu-button" data-menuTarget="#no-buses-menu"> OKAY! </button>
     </div>
 
     <div class="game-care-menu" id="game-petPlay-menu">
@@ -117,19 +128,23 @@
       <button class="close-menu-button" data-menuTarget="#game-hit-menu"> CLOSE MENU </button>
     </div>
 
+    <div class="game-care-menu" id="game-statsView-menu">
+      <div>
+        <h2 class="game-care-subtitle" id="statsView-title"> VIEW (placeholder's) STATS </h2>
+        <div class="horizontal-line"></div>
+      </div>
+      <div class="statsView-container">
+        
+      </div>
+      <button class="close-menu-button" data-menuTarget="#game-statsView-menu"> CLOSE MENU </button>
+    </div>
+
     <div class="game-care-menu" id="game-shop-menu">
       <div>
         <h2 class="game-care-subtitle"> SHOPPING </h2>
         <div class="horizontal-line"></div>
       </div>
       <button class="close-menu-button" data-menuTarget="#game-shop-menu"> CLOSE MENU </button>
-    </div>
-
-    <div id="game-save-alert">
-      <div>
-        <h3 class="game-save-alert-subtitle"> YOUR GAME HAS BEEN SAVED! </h3>
-      </div>
-      <button class="close-menu-button" data-menuTarget="#game-save-alert"> C L O S E --- M E N U </button>
     </div>
 
     <div class="game-care-menu" id="adoption-menu">
@@ -149,7 +164,7 @@
         <h2 class="game-care-subtitle" id="new-adoption-menu-title"> YOU JUST ADOPTED A (placeholder) </h2>
         <div class="horizontal-line"></div>
         <div class="adoption-menu-display">
-        
+
         </div>
       </div>
       <button class="close-menu-button" data-menuTarget="#new-adoption-menu"> COOL! (PROCEED) </button>

@@ -237,9 +237,9 @@ body {
   border: 0px solid;
   border-radius: 8px;
   color: var(--regular-text-color);
-  margin: 0.5%;
+  margin: 0.8%;
   padding: 1%;
-  width: 12%;
+  width: 12.5%;
   min-width: 100px;
   height: 80%;
   transition: transform .1s ease-in-out;
@@ -353,8 +353,8 @@ body {
 
 .care-button {
   width: 100%;
-  min-width: 3.5em;
-  height: 18%;
+  min-width: 3.2em;
+  height: 15%;
   margin: 1%;
   background-color: var(--button-color-2);
   border: var(--game-border-color) 5px solid;
@@ -482,32 +482,6 @@ body {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 800;
   color: var(--additional-text-color-2)
-}
-
-#game-save-alert {
-  display: none;
-  flex-flow: column nowrap;
-  justify-content: space-around;
-  padding-left: 5%;
-  padding-right: 5%;
-
-  width: 50%;
-  height: 10%;
-  position: fixed;
-  left: 5%;
-  top: 85%;
-  background-color: var(--background-color);
-  border: var(--game-border-color) 3px solid;
-  border-radius: 30px;
-
-  animation: rotateSaveAlert 2s ease-in-out infinite alternate;
-}
-
-.game-save-alert-subtitle {
-  text-align: center;
-  color: var(--additional-text-color-2);
-  font-family: "Momo Trust Display", sans-serif;
-  font-size: 2em;
 }
 
 .bus-adopt__container {
@@ -729,11 +703,11 @@ body {
 .adoption-menu-display {
   display: flex;
   flex-flow: column nowrap;
-  padding: 3%;
 }
 
 .adoption-menu__attribute {
   width: 100%;
+  margin: 0.8%;
 }
 
 .adoption-menu-subtitle {
@@ -758,12 +732,42 @@ body {
   text-align: left;
 }
 
+.stats-bar__container {
+  width: 100%;
+  height: 5vh;
+  border: var(--border-color-2) 10px solid;
+  border-radius: 30px;
+  background-color: var(--glass-color);
+  display: block;
+}
+
+.stats-bar__fill {
+  width: 100%;
+  height: 100%;
+  background-color: var(--additional-text-color-2);
+  transition: width 0.4s ease-in-out;
+  display: block;
+  border-radius: 30px;;
+  position: relative;
+}
+
+#no-buses-menu {
+  padding: 5%;
+}
+
+.no-buses-text {
+  margin: 10%;
+  font-size: 6em;
+  font-style: italic;
+  font-weight: 500;
+}
+
 @keyframes rotateTitle {
   0% {
-    transform: rotate(0.25deg);
+    transform: rotate(0.75deg);
   }
   100% {
-    transform: rotate(-0.25deg);
+    transform: rotate(-0.75deg);
   }
 }
 

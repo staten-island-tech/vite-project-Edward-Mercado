@@ -38,7 +38,12 @@ function openWindow() {
       let busClass_bus = new Bus(bus.name, bus.species);
       let fixedBus = busClass_bus.reconstructor(bus);
       buses.push(fixedBus);
-    })
+
+    }
+  )
+    if (!buses.find((bus) => {bus.selected === true})) {
+      buses[0].selected = true;
+    }
 
     return (buses);
   }
@@ -59,6 +64,56 @@ function openMenu(menuID) {
   menu.style.display = "flex";
   menu.classList.add("game-care-menu-open");
 
+  if (menuID === "#game-statsView-menu") {
+    const statsViewTitle = document.getElementById("statsView-title");
+    let selectedBus = buses[0];
+    buses.forEach((bus) => {
+      if (bus.selected) {
+        statsViewTitle.textContent = `${bus.name}'s STATS`
+        selectedBus = bus;
+      }
+    })
+    const statsViewMenu = document.querySelector(".statsView-container");
+    statsViewMenu.innerHTML = '';
+    statsViewMenu.insertAdjacentHTML("afterbegin", `
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> NAME: ${ selectedBus.name } </h2>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> SPECIES: ${ selectedBus.species } </h2>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> FULLNESS: ${ selectedBus.fullness }</h2>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="view-fullness"></div>
+            </div>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> HEALTH: ${ selectedBus.physical_health }</h2>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="view-physical_health"></div>
+            </div>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> SPEED: ${ selectedBus.speed }</h2>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="view-speed"></div>
+            </div>
+          </div>
+          <div class="adoption-menu__attribute">
+            <h2 class="adoption-menu-subtitle"> HAPPINESS: ${ selectedBus.happiness }</h2>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="view-happiness"></div>
+            </div>
+          </div>
+        </div>
+      `)
+      updateStatsBar("view-fullness", selectedBus.fullness, 100);
+      updateStatsBar("view-physical_health", selectedBus.physical_health, 100);
+      updateStatsBar("view-speed", selectedBus.speed, 150);
+      updateStatsBar("view-happiness", selectedBus.happiness, 100);
+    }
+
   menu.addEventListener(
     "animationend", // waits for the animation to finish
     () => {
@@ -73,6 +128,7 @@ function openMenu(menuID) {
 
 function closeMenu(menuID) {
   const menu = document.querySelector(menuID);
+
   menu.classList.add("game-care-menu-close");
   menu.addEventListener(
     "animationend",
@@ -102,23 +158,44 @@ function newAdoptionScreen(adoptedBus) { // after you adopt something, shows wha
   const adoptionMenuDisplay = document.querySelector(".adoption-menu-display");
   adoptionMenuDisplay.innerHTML = ''
   adoptionMenuDisplay.insertAdjacentHTML("afterbegin", `<div class="adoption-menu__attribute">
-            <h2 class="adoption-menu-subtitle"> NAME: ${ adoptedBus.name } </h2>
+          <h2 class="adoption-menu-subtitle"> NAME: ${ adoptedBus.name } </h2>
           </div>
           <div class="adoption-menu__attribute">
             <h2 class="adoption-menu-subtitle"> FULLNESS: ${ adoptedBus.fullness }</h2>
-            <div class="stat_bar"></div>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="adoption-fullness"></div>
+            </div>
           </div>
           <div class="adoption-menu__attribute">
             <h2 class="adoption-menu-subtitle"> HEALTH: ${ adoptedBus.physical_health }</h2>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="adoption-physical_health"></div>
+            </div>
           </div>
           <div class="adoption-menu__attribute">
             <h2 class="adoption-menu-subtitle"> SPEED: ${ adoptedBus.speed }</h2>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="adoption-speed"></div>
+            </div>
           </div>
           <div class="adoption-menu__attribute">
             <h2 class="adoption-menu-subtitle"> HAPPINESS: ${ adoptedBus.happiness }</h2>
+            <div class="stats-bar__container">
+              <div class="stats-bar__fill" id="adoption-happiness"></div>
+            </div>
           </div>
         </div>`)
   
+  updateStatsBar("adoption-fullness", adoptedBus.fullness, 100);
+  updateStatsBar("adoption-physical_health", adoptedBus.physical_health, 100);
+  updateStatsBar("adoption-speed", adoptedBus.speed, 150);
+  updateStatsBar("adoption-happiness", adoptedBus.happiness, 100);
+
+  if(!buses.find((bus) => {bus.selected === true})) {
+    adoptedBus.selected = true;
+    console.log(buses.find((bus) => {bus.selected === true}))
+  }
+
   openMenu("#new-adoption-menu");
 }
 
@@ -246,6 +323,13 @@ function injectBuses(buses) {
   saveGame();
 }
 
+function updateStatsBar(barId, value, maxValue) {
+  let percentage = Math.floor((value/maxValue) * 100);
+  const healthBar = document.getElementById(barId);
+  healthBar.style.width = `${percentage}%`;
+  console.log(healthBar);
+}
+
 const themeButtons = document.querySelectorAll(".toggleMode");
 
 themeButtons.forEach((button) => {
@@ -263,7 +347,12 @@ saveGameButton.addEventListener("click", () => {
 const careButtons = document.querySelectorAll(".care-button");
 careButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    openMenu(button.getAttribute("data-menuTarget"));
+    if(buses.length === 0) {
+      openMenu("#no-buses-menu");
+    }
+    else {
+      openMenu(button.getAttribute("data-menuTarget"));
+    }
   })
 })
 
@@ -294,7 +383,6 @@ const hideDataButtons = document.querySelectorAll(".game-pet-selection__button")
 hideDataButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const targetContainer = document.querySelector(button.getAttribute("data-target"));
-    console.log(button.getAttribute("data-target"));
     if (button.textContent === "HIDE") {
       button.textContent = "SHOW";
       targetContainer.style.display = "none";
