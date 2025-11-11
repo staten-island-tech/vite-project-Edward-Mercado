@@ -45,7 +45,7 @@
   --glass-color: rgba(215, 150, 70, 0.203);
 }
 
-.theme-p-yellow { /* this theme was requested by izzy, but I don't like yellow */
+.theme-yellow { /* this theme was requested by izzy, but I don't like yellow */
   --background-color: rgb(255, 233, 145);
   --background-color-2: rgb(238, 231, 91);
   --game-border-color: rgb(224, 179, 0);
@@ -62,11 +62,6 @@
   --additional-text-color-2: rgb(75, 69, 18);
   --additional-text-color-3: rgb(37, 30, 6);
   --glass-color: rgba(164, 90, 0, 0.203);
-}
-
-#wider-button {
-  width: 80vw;
-  margin-bottom: 2%;
 }
 
 .theme-green {

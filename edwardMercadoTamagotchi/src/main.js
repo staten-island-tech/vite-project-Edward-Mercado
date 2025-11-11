@@ -12,7 +12,7 @@ function randomInt(max) {
 }
 
 function switchWebThemes(theme) {
-  const themes = ["red", "orange", "p-yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
+  const themes = ["red", "orange", "yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
 
   themes.forEach((theme) => {
     document.body.classList.remove('theme-' + theme);
