@@ -301,7 +301,7 @@ hideDataButtons.forEach((button) => {
     }
     else {
       button.textContent = "HIDE";
-      targetContainer.style.display = "block";
+      targetContainer.style.display = "";
     }
   })
 })

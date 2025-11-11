@@ -11,11 +11,11 @@
 
     <div class="theme-button__container">
       <div class="theme-button__title-container">
-        <h2 class="game-subtitle" id="theme-title"> THEME SELECTION </h2>
+        <h2 class="game-subtitle" id="settings-title"> THEME SELECTION </h2>
       <button class="game-pet-selection__button" data-target=".theme-button__theme-list">HIDE</button>
       </div>
-      <div class="horizontal-line"></div>
       <div class="theme-button__theme-list">
+        <div class="horizontal-line"></div>
         <button class="toggleMode" data-theme="red"> Red </button>
         <button class="toggleMode" data-theme="orange"> Orange </button>
         <button class="toggleMode" data-theme="green"> Green </button>
@@ -27,24 +27,31 @@
     </div>
 
     <div class="game-pet-selection">
-      <h2 class="game-subtitle">SELECT/ADOPT BUS</h2>
-      <div class="horizontal-line"></div>
-      <div class="game-pet-selection__container">
-        <h3 class="game-pet_selection-subtitle">YOUR BUSES</h3>
-        <button class="game-pet-selection__button" data-target=".current-buses__container">HIDE</button>
+      <div class="theme-button__title-container">
+        <h2 class="game-subtitle" id="settings-title">SELECT/ADOPT BUS</h2>
+      <button class="game-pet-selection__button" data-target=".select-adopt-bus__container">HIDE</button>
       </div>
+      <div class="select-adopt-bus__container">
+        <div class="horizontal-line"></div>
+        <div class="game-pet-selection__container">
+          <h3 class="game-pet_selection-subtitle">YOUR BUSES</h3>
+          <button class="game-pet-selection__button" data-target=".current-buses__container">HIDE</button>
+        </div>
 
-      <div class="current-buses__container">
-        
-      </div>
-      <div class="horizontal-line"></div>
-      <div class="game-pet-selection__container">
-        <h3 class="game-pet_selection-subtitle">ADOPT NEW BUSES</h3>
-        <button class="game-pet-selection__button" data-target=".bus-adopt__container">HIDE</button>
-      </div>
-      <div class="bus-adopt__container">
+        <div class="current-buses__container">
+          
+        </div>
+        <div class="horizontal-line"></div>
 
+        <div class="game-pet-selection__container">
+          <h3 class="game-pet_selection-subtitle">ADOPT NEW BUSES</h3>
+          <button class="game-pet-selection__button" data-target=".bus-adopt__container">HIDE</button>
+        </div>
+        <div class="bus-adopt__container">
+
+        </div>
       </div>
+      
     </div>
 
     <div class="game-window-wrap">

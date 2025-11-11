@@ -237,8 +237,8 @@ body {
   border: 0px solid;
   border-radius: 8px;
   color: var(--regular-text-color);
-  margin: 8px;
-  padding: 8px;
+  margin: 0.5%;
+  padding: 1%;
   width: 12%;
   min-width: 100px;
   height: 80%;
@@ -257,6 +257,12 @@ body {
 
 .toggleMode:active {
   animation: clickToggle 0.2s ease;
+}
+
+.theme-button__theme-list {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
 }
 
 .horizontal-line {
@@ -506,7 +512,7 @@ body {
 
 .bus-adopt__container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-flow: row wrap;
 }
 
@@ -559,13 +565,13 @@ body {
   border: var(--game-border-color) 6px solid;
   border-radius: 20px;
   padding: 10px;
-  font-size: 13px;
+  font-size: 1.65em;
   font-family: "Momo Trust Display" sans-serif;
   background-color: var(--background-color);
   color: var(--additional-text-color-1);
   font-weight: 900;
   font-style: none;
-  width: 50%;
+  width: 60%;
   
   background-color: var(--glass-color);
   margin: auto;
@@ -628,9 +634,9 @@ body {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  border: var(--game-border-color) 6px solid;
+  border: var(--game-border-color) 3px solid;
   border-radius: 12px;
-  padding: 1%;
+  padding: 2%;
   width: 100%;
   margin: 1%;
   margin-left: 0;
@@ -645,7 +651,7 @@ body {
 
 .owned-bus-display__button-container {
   display: flex;
-  width: 60%;
+  width: 45%;
   flex-flow: column nowrap;
   justify-content: space-around;
 }
@@ -742,11 +748,14 @@ body {
 .theme-button__title-container {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-#theme-title {
+#settings-title {
   width: 60vw;
+  text-align: left;
 }
 
 @keyframes rotateTitle {
