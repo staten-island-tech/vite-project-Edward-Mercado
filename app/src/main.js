@@ -3,6 +3,11 @@ import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
 import { busData } from './data.js'
 
+function randomInt(min, max) {
+  let difference = max - min;
+  return Math.floor((Math.random()*difference))+min
+}
+
 function switchWebThemes(theme) {
   const themes = ["red", "orange", "yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
 
@@ -23,14 +28,15 @@ function openWindow() {
   const localStorageBuses = localStorage.getItem('buses') || "[]";
   
   if (localStorageBuses != "[]") {
-    let object_buses = JSON.parse(localStorageBuses);
+    let objectBuses = JSON.parse(localStorageBuses);
+    console.log(objectBuses)
     buses = [];
-    object_buses.forEach((bus) => {
+    objectBuses.forEach((bus) => {
 
       let busClass_bus = new Bus(bus.name, bus.species);
       let fixedBus = busClass_bus.reconstructor(bus);
       buses.push(fixedBus);
-
+      console.log(fixedBus);
     }
   )
     if (!buses.find((bus) => {bus.selected === true})) {
@@ -185,7 +191,6 @@ function newAdoptionScreen(adoptedBus) { // after you adopt something, shows wha
 
   if(!buses.find((bus) => {bus.selected === true})) {
     adoptedBus.selected = true;
-    console.log(buses.find((bus) => {bus.selected === true}))
   }
 
   openMenu("#new-adoption-menu");
@@ -319,7 +324,34 @@ function updateStatsBar(barId, value, maxValue) {
   let percentage = Math.floor((value/maxValue) * 100);
   const healthBar = document.getElementById(barId);
   healthBar.style.width = `${percentage}%`;
-  console.log(healthBar);
+}
+
+function lightHit() {
+  let selectedBus = ""
+  buses.forEach((bus) => {
+    if (bus.selected) {
+      selectedBus = bus;
+    }
+  })
+  selectedBus.physical_health -= randomInt(10, 25);
+  
+  closeMenu("#game-hit-menu");
+  openMenu("#light-hit");
+  saveGame();
+}
+
+function strongHit() {
+  let selectedBus = ""
+  buses.forEach((bus) => {
+    if (bus.selected) {
+      selectedBus = bus;
+    }
+  })
+  selectedBus.physical_health -= randomInt(35, 45);
+  selectedBus.statsHandler();
+  closeMenu("#game-hit-menu");
+  openMenu("#strong-hit");
+  saveGame();
 }
 
 const themeButtons = document.querySelectorAll(".toggleMode");
@@ -384,6 +416,16 @@ hideDataButtons.forEach((button) => {
       targetContainer.style.display = "";
     }
   })
+})
+
+const lightHitButton = document.getElementById("light-hit-button");
+lightHitButton.addEventListener("click", () => {
+  lightHit();
+})
+
+const strongHitButton = document.getElementById("strong-hit-button");
+strongHitButton.addEventListener("click", () => {
+  strongHit();
 })
 
 const buses = openWindow(); // opens the window and gets the user's save data

@@ -26,6 +26,7 @@ export class Bus {
         bus.name = inputBus.name;
         bus.species = inputBus.species;
         bus.fullness = inputBus.fullness;
+        bus.physical_health = inputBus.physical_health
         bus.speed = inputBus.speed;
         bus.alive = inputBus.alive;
         bus.selected = inputBus.selected;
@@ -34,13 +35,18 @@ export class Bus {
     }
 
     statsHandler() {
-        handler = (value, minimum, maximum) => Math.min((Math.max(value, minimum), maximum));
-
-        this.fullness = handler(this.fullness, 0, 100);
-        this.physical_health = handler(this.physical_health, 0, 100);
-        this.happiness = handler(this.happiness, 0, 100);
-        this.speed = handler(this.speed, 5, 150);
-
+        if(this.fullness>100) {
+            this.fullness = 100;
+        }
+        if(this.physical_health>100) {
+            this.physical_health = 100;
+        }
+        if(this.happiness>100) {
+            this.happiness = 100;
+        }
+        if(this.speed>150) {
+            this.speed = 150;
+        }
         let killable_stats = [this.fullness, this.physical_health, this.happiness, this.speed]
 
         if (killable_stats.some((value) => value === 0)) {
