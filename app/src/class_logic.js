@@ -53,35 +53,6 @@ export class Bus {
             this.alive = false
         }
     }
-
-    feed(food) {
-        if(this.alive) {
-            this.fullness += food.nutrition;
-            this.statsHandler()
-        }
-    }
-
-    hit() {
-        if(Math.floor(Math.random() * 20) === 20) { // critical hit
-            this.physical_health -= 35;
-            if (this.physical_health <= 0) {
-                this.alive = false;
-            }
-        }
-        else {
-            this.physical_health -= Math.ceil(Math.random() * 20);
-            if (this.physical_health <= 0) {
-                this.alive = false;
-            }
-        }
-    }
-}
-
-class BusChild extends Bus { // save the syntax if necessary later
-    constructor(name, species, example) {
-        super(name, species);
-        this.example = example;
-    }
 }
 
 export class Food {
@@ -96,6 +67,15 @@ export class Toy {
     constructor(name, happiness, imageURL, preferences) {
         this.name = name;
         this.happiness = happiness;
+        this.imageURL = imageURL;
+        this.preferences = preferences;
+    }
+}
+
+export class Medicine {
+    constructor(name, heal, imageURL) {
+        this.name = name;
+        this.heal = heal;
         this.imageURL = imageURL;
         this.preferences = preferences;
     }
