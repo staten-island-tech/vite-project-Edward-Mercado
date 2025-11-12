@@ -1,15 +1,7 @@
 import './style.css'
 import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
-
-const busData = [
-  "s44", "s57", "s59", "s62", "s79", "b1"
-]
-
-function randomInt(max) {
-  let output = Math.floor(Math.random() * max);
-  return output;
-}
+import { busData } from './data.js'
 
 function switchWebThemes(theme) {
   const themes = ["red", "orange", "yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
