@@ -1,54 +1,9 @@
 import './style.css'
 import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
-import { Toy } from './class_logic.js'
 
 const busData = [
   "s44", "s57", "s59", "s62", "s79", "b1"
-]
-
-const shopItems = [
-  { 
-    class: Food,
-    name: "JUICE",
-    nutrition: 5,
-    imageURL: "",
-  },
-  { 
-    class: Food,
-    name: "GASOLINE",
-    nutrition: 10,
-    imageURL: "",
-  },
-  { 
-    class: Food,
-    name: "JET-FUEL",
-    nutrition: 15,
-    imageURL: "",
-  },
-  { 
-    class: Toy,
-    name: "TIRE",
-    happiness: 5,
-    imageURL: "",
-    preferences: ["a", "b", "c"],
-  },
-  ,
-  { 
-    class: Toy,
-    name: "TOY-CAR",
-    happiness: 10,
-    imageURL: "",
-    preferences: [],
-  },
-  ,
-  { 
-    class: Toy,
-    name: "OBSTACLE-COURSE",
-    happiness: 25,
-    imageURL: "",
-    preferences: [],
-  },
 ]
 
 function randomInt(max) {
@@ -173,7 +128,7 @@ function openMenu(menuID) {
 
 function closeMenu(menuID) {
   const menu = document.querySelector(menuID);
-  console.log(menu);
+
   menu.classList.add("game-care-menu-close");
   menu.addEventListener(
     "animationend",
@@ -375,51 +330,6 @@ function updateStatsBar(barId, value, maxValue) {
   console.log(healthBar);
 }
 
-function loadShop() {
-  const shopMenu = document.querySelector(".shop-items__container");
-  const body = document.querySelector("body")
-  shopItems.forEach((shopItem) => {
-  shopMenu.insertAdjacentHTML("beforeend", `
-      <div class="shop-item__button">${shopItem.name}</div>
-  `)
-    if (shopItem.class === Food) {
-      body.insertAdjacentHTML("beforeend", `
-        <div class="game-care-menu shop-item-menu" id="${ shopItem.name }">
-          <div>
-            <h2 class="game-care-subtitle"> BUY ${shopItem.name} </h2>
-            <div class="horizontal-line" id="shop-item-line"></div>
-            <h2 class="game-care-subtitle" id="shop-item-text"> NUTRITION: </h2>
-            <h2 class="game-care-subtitle" id="shop-item-text"> ${shopItem.nutrition} </h2>
-          <button class="close-menu-button" id="shop-item-button" data-menuTarget="#${shopItem.name}"> CLOSE MENU </button>
-        </div>
-        `)
-
-    }
-    else if (shopItem.class === Toy) {
-      body.insertAdjacentHTML("beforeend", `
-        <div class="game-care-menu shop-item-menu" id="${ shopItem.name }">
-          <div>
-            <h2 class="game-care-subtitle"> BUY ${shopItem.name} </h2>
-            <div class="horizontal-line" id="shop-item-line"></div>
-            <h2 class="game-care-subtitle" id="shop-item-text"> HAPPINESS BOOST: </h2>
-            <h2 class="game-care-subtitle" id="shop-item-text"> ${shopItem.happiness} </h2>
-            <h2 class="game-care-subtitle" id="shop-item-text"> PREFERENCES: </h2>
-            <h2 class="game-care-subtitle" id="shop-item-text"> ${shopItem.preferences.toString().replace("[]", "").replaceAll(",", ", ")} </h2>
-          <button class="close-menu-button" id="shop-item-button" data-menuTarget="#${shopItem.name}"> CLOSE MENU </button>
-        </div>
-        `)
-    }
-  })
-
-  const shopItemButtons = document.querySelectorAll(".shop-item__button");
-  shopItemButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      closeMenu("#game-shop-menu");
-      openMenu("#" + button.textContent);
-    });
-  })
-}
-
 const themeButtons = document.querySelectorAll(".toggleMode");
 
 themeButtons.forEach((button) => {
@@ -445,7 +355,6 @@ careButtons.forEach((button) => {
     }
   })
 })
-loadShop();
 
 const closeMenuButtons = document.querySelectorAll(".close-menu-button");
 

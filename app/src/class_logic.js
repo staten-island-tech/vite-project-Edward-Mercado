@@ -85,12 +85,3 @@ export class Food {
         this.imageURL = imageURL;
     }
 }
-
-export class Toy {
-    constructor(name, happiness, imageURL, preferences) {
-        this.name = name;
-        this.happiness = happiness;
-        this.imageURL = imageURL;
-        this.preferences = preferences;
-    }
-}
