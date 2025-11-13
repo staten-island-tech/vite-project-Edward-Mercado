@@ -794,6 +794,10 @@ body {
   font-weight: 500;
 }
 
+#light-hit-button, #strong-hit-button {
+  height: 35%;
+}
+
 @keyframes rotateTitle {
   0% {
     transform: rotate(0.75deg);
