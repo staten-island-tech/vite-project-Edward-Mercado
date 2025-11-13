@@ -336,7 +336,7 @@ function lightHit() {
   })
   let old_health = selectedBus.physical_health;
   let old_happiness = selectedBus.happiness;
-  selectedBus.happiness -= randomInt(5, 12)
+  selectedBus.happiness -= randomInt(5, 12);
   selectedBus.physical_health -= randomInt(10, 25);
   selectedBus = selectedBus.statsHandler();
   if (!selectedBus.alive) {
@@ -348,9 +348,10 @@ function lightHit() {
   else {
     closeMenu("#game-hit-menu");
     const lightHitData = document.getElementById("light-hit-data-container");
+    lightHitData.innerHTML = "";
     lightHitData.insertAdjacentHTML("beforeend", `
       <h2 class="game-care-subtitle"> HEALTH: ${old_health} -> ${selectedBus.physical_health} </h2>
-      <h2 class="game-care-subtitle"> HEALTH: ${old_happiness} -> ${selectedBus.happiness} </h2>
+      <h2 class="game-care-subtitle"> HAPPINESS: ${old_happiness} -> ${selectedBus.happiness} </h2>
       `)
     openMenu("#light-hit");
   }
@@ -378,6 +379,7 @@ function strongHit() {
   else {
     closeMenu("#game-hit-menu");
     const strongHitData = document.getElementById("strong-hit-data-container");
+    strongHitData.innerHTML = "";
     strongHitData.insertAdjacentHTML("beforeend", `
       <h2 class="game-care-subtitle"> HEALTH: ${old_health} -> ${selectedBus.physical_health} </h2>
       <h2 class="game-care-subtitle"> HEALTH: ${old_happiness} -> ${selectedBus.happiness} </h2>
