@@ -49,9 +49,12 @@ export class Bus {
         }
         let killable_stats = [this.fullness, this.physical_health, this.happiness, this.speed]
 
-        if (killable_stats.some((value) => value === 0)) {
-            this.alive = false
-        }
+        killable_stats.forEach((stat) => {
+            if (stat <= 0) {
+                this.alive = false;
+            }
+        })
+        return this;
     }
 }
 

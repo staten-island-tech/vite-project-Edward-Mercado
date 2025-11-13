@@ -334,7 +334,11 @@ function lightHit() {
     }
   })
   selectedBus.physical_health -= randomInt(10, 25);
-  
+  selectedBus = selectedBus.statsHandler();
+  if (!selectedBus.alive) {
+    buses.remove(selectedBus);
+    injectBuses(buses);
+  }
   closeMenu("#game-hit-menu");
   openMenu("#light-hit");
   saveGame();
@@ -348,7 +352,12 @@ function strongHit() {
     }
   })
   selectedBus.physical_health -= randomInt(35, 45);
-  selectedBus.statsHandler();
+  selectedBus = selectedBus.statsHandler();
+  if (!selectedBus.alive) {
+    buses.splice(buses.indexOf(selectedBus), 1);
+    injectBuses(buses);
+  }
+
   closeMenu("#game-hit-menu");
   openMenu("#strong-hit");
   saveGame();
