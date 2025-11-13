@@ -2,6 +2,7 @@ import './style.css'
 import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
 import { busData } from './data.js'
+import { shopItems } from './data.js'
 
 function randomInt(min, max) {
   let difference = max - min;
@@ -338,9 +339,13 @@ function lightHit() {
   if (!selectedBus.alive) {
     buses.remove(selectedBus);
     injectBuses(buses);
+    closeMenu("#game-hit-menu");
+    openMenu("#death-screen");
   }
-  closeMenu("#game-hit-menu");
-  openMenu("#light-hit");
+  else {
+    closeMenu("#game-hit-menu");
+    openMenu("#light-hit");
+  }
   saveGame();
 }
 
@@ -356,10 +361,14 @@ function strongHit() {
   if (!selectedBus.alive) {
     buses.splice(buses.indexOf(selectedBus), 1);
     injectBuses(buses);
+    closeMenu("#game-hit-menu");
+    openMenu("#death-screen");
   }
-
-  closeMenu("#game-hit-menu");
-  openMenu("#strong-hit");
+  else {
+    closeMenu("#game-hit-menu");
+    openMenu("#strong-hit");
+  }
+  
   saveGame();
 }
 
@@ -435,6 +444,39 @@ lightHitButton.addEventListener("click", () => {
 const strongHitButton = document.getElementById("strong-hit-button");
 strongHitButton.addEventListener("click", () => {
   strongHit();
+})
+
+const shopItemsContainer = document.querySelector(".shop-items-container");
+const body = document.querySelector("body");
+shopItems.forEach((shopItem) => {
+  console.log(shopItem.name)
+  shopItemsContainer.insertAdjacentHTML("beforeend", `
+    <button class="shop-item-button" id="${shopItem.name.replaceAll(" ", "-")}__button"> ${shopItem.name} </button>
+    `)
+  body.insertAdjacentHTML("beforeend", 
+    `
+    <div class="game-care-menu" id="${shopItem.name.replaceAll(" ", "-")}__menu">
+      <div>
+        <h2 class="game-care-subtitle"> Buy ${shopItem.name} </h2>
+        <div class="horizontal-line"></div>
+        <div id="${shopItem.name.replaceAll(" ", "-")}__data-container">
+          
+        </div>
+      </div>
+      <button class="close-menu-button" id="${shopItem.name.replaceAll(" ", "-")}__close-button" data-menuTarget="#${shopItem.name.replaceAll(" ", "-")}__menu"> RETURN HOME </button>
+    </div>
+    `
+  )
+  const shopItemButton = document.getElementById(shopItem.name.replaceAll(" ", "-") + "__button");
+  shopItemButton.addEventListener("click", () => {
+    closeMenu("#game-shop-menu");
+    openMenu(`#${shopItem.name.replaceAll(" ", "-")}__menu`);
+  })
+
+  const shopItemClose = document.getElementById(shopItem.name.replaceAll(" ", "-") + "__close-button");
+  shopItemClose.addEventListener("click", () => {
+    closeMenu(`#${shopItem.name.replaceAll(" ", "-")}__menu`);
+  })
 })
 
 const buses = openWindow(); // opens the window and gets the user's save data

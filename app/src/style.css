@@ -227,7 +227,7 @@ body {
   animation: rotateTitle 1s ease-in-out infinite alternate;
 }
 
-.toggleMode, .game-care-menu__button {
+.toggleMode, .game-care-menu__button, .shop-item-button {
   background-color: var(--button-color-1);
   border: 0px solid;
   border-radius: 8px;
@@ -243,26 +243,46 @@ body {
   font-family: "Momo Trust Display", sans-serif;
 }
 
-.toggleMode:hover, .game-care-menu__button:hover {
+.toggleMode:hover, .game-care-menu__button:hover, .shop-item-button:hover {
   cursor: pointer;
   transform: translateY(-5%);
   box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
   background-color: var(--button-color-1-hover);
 }
 
-.toggleMode:active, .game-care-menu__button:active {
+.toggleMode:active, .game-care-menu__button:active, .shop-item-button:active {
   animation: clickToggle 0.2s ease;
+}
+
+.shop-items-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.shop-item-button {
+  width: 30%;
+  min-width: 300px;
+  height: 40%;
 }
 
 .game-care-menu__button {
   width: 96%;
-  height: 35%;
+  height: 100%;
   margin: 2%;
 }
 
 .game-care-menu__button-container {
   flex-flow: column nowrap;
   width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.shop-items-container {
+  width: 100%;
+  height: 50%;
+  max-height: 200px;
 }
 
 .sad-face {
