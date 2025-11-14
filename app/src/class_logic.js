@@ -60,6 +60,7 @@ export class Bus {
 
 export class Food {
     constructor(name, nutrition, imageURL) {
+        this.class = Food;
         this.name = name;
         this.nutrition = nutrition;
         this.imageURL = imageURL;
@@ -68,6 +69,7 @@ export class Food {
 
 export class Toy {
     constructor(name, happiness, imageURL, preferences) {
+        this.class = Toy;
         this.name = name;
         this.happiness = happiness;
         this.imageURL = imageURL;
@@ -77,6 +79,7 @@ export class Toy {
 
 export class Medicine {
     constructor(name, heal, imageURL) {
+        this.class = Medicine;
         this.name = name;
         this.heal = heal;
         this.imageURL = imageURL;

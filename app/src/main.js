@@ -1,6 +1,8 @@
 import './style.css'
 import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
+import { Toy } from './class_logic.js'
+import { Medicine } from './class_logic.js'
 import { busData } from './data.js'
 import { shopItems } from './data.js'
 
@@ -25,19 +27,33 @@ function openWindow() {
   switchWebThemes(savedTheme);
 
   let buses = [];
-  
+
+  let localStorageFoods = JSON.parse(localStorage.getItem("foods")) || [];
+  localStorageFoods.forEach((food) => {
+    foods.push(new Food(food.name, food.nutrition, food.imageURL));
+  })
+  updateFoods();
+
+  let localStorageToys = JSON.parse(localStorage.getItem("toys")) || [];
+  localStorageToys.forEach((toy) => {
+    foods.push(new Toy(toy.name, toy.happiness, toy.imageURL, toy.preferences));
+  })
+
+  let localStorageMedicines = JSON.parse(localStorage.getItem("medicines")) || [];
+  localStorageMedicines.forEach((medicine) => {
+    foods.push(new Medicine(medicine.name, medicine.heal, medicine.imageURL));
+  })
+
   const localStorageBuses = localStorage.getItem('buses') || "[]";
   
   if (localStorageBuses != "[]") {
     let objectBuses = JSON.parse(localStorageBuses);
-    console.log(objectBuses)
     buses = [];
     objectBuses.forEach((bus) => {
 
       let busClass_bus = new Bus(bus.name, bus.species);
       let fixedBus = busClass_bus.reconstructor(bus);
       buses.push(fixedBus);
-      console.log(fixedBus);
     }
   )
     if (!buses.find((bus) => {bus.selected === true})) {
@@ -56,6 +72,9 @@ function openWindow() {
 
 function saveGame() {
   localStorage.setItem('buses', JSON.stringify(buses));
+  localStorage.setItem('foods', JSON.stringify(foods));
+  localStorage.setItem('medicines', JSON.stringify(medicines));
+  localStorage.setItem('toys', JSON.stringify(toys));
 }
 
 function openMenu(menuID) {
@@ -390,6 +409,32 @@ function strongHit() {
   saveGame();
 }
 
+function updateFoods() {
+  const foodsContainer = document.getElementById("foods__container");
+  foodsContainer.innerHTML = '';
+  foods.forEach((food) => {
+    foodsContainer.insertAdjacentHTML("beforeend", `
+      <button class="shop-item-button"> ${food.name} </button>
+      `)
+  })
+}
+
+function buyItem(shopItem) {
+  let itemClass = shopItem.class;
+
+  if (itemClass === Food) {
+    foods.push(new Food(shopItem.name, shopItem.nutrition, shopItem.imageURL));
+    updateFoods();
+  }
+  else if (itemClass === Toy) {
+    toys.push(new Toy(shopItem.name, shopItem.happiness, shopItem.imageURl, shopItem.preferences));
+  }
+  else if (itemClass === Medicine) {
+    medicines.push(new Medicine(shopItem.name, shopItem.happiness, shopItem.imageURl, shopItem.preferences));
+  }
+  saveGame()
+}
+
 const themeButtons = document.querySelectorAll(".toggleMode");
 
 themeButtons.forEach((button) => {
@@ -467,7 +512,6 @@ strongHitButton.addEventListener("click", () => {
 const shopItemsContainer = document.querySelector(".shop-items-container");
 const body = document.querySelector("body");
 shopItems.forEach((shopItem) => {
-  console.log(shopItem.name)
   shopItemsContainer.insertAdjacentHTML("beforeend", `
     <button class="shop-item-button" id="${shopItem.name.replaceAll(" ", "-")}__button"> ${shopItem.name} </button>
     `)
@@ -481,6 +525,12 @@ shopItems.forEach((shopItem) => {
           
         </div>
       </div>
+
+      <div id="${shopItem.name.replaceAll(" ", "-")}__data-container"> 
+      
+      </div>
+
+      <button class="buy-item-button" id="${shopItem.name.replaceAll(" ", "-")}__buy-button" data-menuTarget="#${shopItem.name.replaceAll(" ", "-")}__menu"> Buy ${shopItem.name} </button>
       <button class="close-menu-button" id="${shopItem.name.replaceAll(" ", "-")}__close-button" data-menuTarget="#${shopItem.name.replaceAll(" ", "-")}__menu"> RETURN HOME </button>
     </div>
     `
@@ -495,8 +545,16 @@ shopItems.forEach((shopItem) => {
   shopItemClose.addEventListener("click", () => {
     closeMenu(`#${shopItem.name.replaceAll(" ", "-")}__menu`);
   })
+
+  const shopItemBuy = document.getElementById(shopItem.name.replaceAll(" ", "-") + "__buy-button");
+  shopItemBuy.addEventListener("click", () => {
+    buyItem(shopItem);
+  })
 })
 
+const foods = [];
+const toys = [];
+const medicines = [];
 const buses = openWindow(); // opens the window and gets the user's save data
 
 injectBuses(buses);

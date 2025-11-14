@@ -52,16 +52,16 @@
   --header-text-color: rgb(187, 147, 0);
   --regular-text-color: rgb(30, 25, 0);
 
-  --button-color-1: rgb(255, 233, 145);
+  --button-color-1: rgb(255, 203, 60);
   --button-color-1-hover: rgb(239, 184, 19);
 
   --button-color-2: rgb(239, 220, 143);
   --button-color-2-hover: rgb(255, 233, 88);
 
-  --additional-text-color-1: rgb(38, 27, 0);
-  --additional-text-color-2: rgb(75, 69, 18);
+  --additional-text-color-1: rgb(78, 57, 3);
+  --additional-text-color-2: rgb(101, 71, 0);
   --additional-text-color-3: rgb(37, 30, 6);
-  --glass-color: rgba(164, 90, 0, 0.203);
+  --glass-color: rgba(252, 207, 152, 0.203);
 }
 
 .theme-green {
@@ -125,8 +125,8 @@
 }
 
 .theme-light {
-  --background-color: rgb(228, 238, 243);
-  --background-color-2: rgb(169, 193, 209);
+  --background-color: rgb(211, 230, 239);
+  --background-color-2: rgb(148, 182, 205);
   --game-border-color: rgb(87, 118, 124);
   --header-text-color: rgb(30, 32, 35);
   --regular-text-color: rgb(0, 0, 0);
@@ -227,7 +227,7 @@ body {
   animation: rotateTitle 1s ease-in-out infinite alternate;
 }
 
-.toggleMode, .game-care-menu__button, .shop-item-button {
+.toggleMode, .game-care-menu__button, .shop-item-button, .buy-item-button {
   background-color: var(--button-color-1);
   border: 0px solid;
   border-radius: 8px;
@@ -243,15 +243,23 @@ body {
   font-family: "Momo Trust Display", sans-serif;
 }
 
-.toggleMode:hover, .game-care-menu__button:hover, .shop-item-button:hover {
+.toggleMode:hover, .game-care-menu__button:hover, .shop-item-button:hover, .buy-item-button:hover {
   cursor: pointer;
   transform: translateY(-5%);
   box-shadow:rgba(17, 19, 23, 0.4) 0px 2px 2px;
   background-color: var(--button-color-1-hover);
 }
 
-.toggleMode:active, .game-care-menu__button:active, .shop-item-button:active {
+.toggleMode:active, .game-care-menu__button:active, .shop-item-button:active, .buy-item-button:active {
   animation: clickToggle 0.2s ease;
+}
+
+.buy-item-button {
+  max-height: 10vh;
+  height: 16%;
+  width: 100%;
+  padding: auto;
+  font-size: 1.2em;
 }
 
 .shop-items-container {
@@ -264,6 +272,7 @@ body {
   width: 30%;
   min-width: 300px;
   height: 40%;
+  max-height: 10vh;
 }
 
 .game-care-menu__button {
@@ -322,7 +331,7 @@ body {
   border: var(--game-border-color) 8px solid;
   border-radius: 16px;
   padding: 1%;
-  margin-bottom: 1%;
+  margin-bottom: 5%;
   width: 80%;
 }
 
@@ -424,7 +433,8 @@ body {
   display: none;
   flex-flow: column nowrap;
   padding: 3%;
-  justify-content: space-between;
+  padding-bottom: 6%;
+  justify-content: space-around;
 
   font-family: "Bitcount Grid Single", sans-serif;
   font-size: 3em;
@@ -438,6 +448,7 @@ body {
   background-color: var(--background-color);
   border: var(--game-border-color) 12px solid;
   border-radius: 30px;
+  overflow: hidden;
 }
 
 .game-care-menu-open {
@@ -468,6 +479,8 @@ body {
   padding: 1%;
 
   background-color: var(--button-color-2);
+  position: absolute;
+  bottom: 2%;
 }
 
 .close-menu-button:hover {
@@ -796,6 +809,12 @@ body {
 
 #light-hit-button, #strong-hit-button {
   height: 35%;
+}
+
+#foods__container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 @keyframes rotateTitle {
