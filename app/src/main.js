@@ -557,4 +557,5 @@ const toys = [];
 const medicines = [];
 const buses = openWindow(); // opens the window and gets the user's save data
 
+
 injectBuses(buses);

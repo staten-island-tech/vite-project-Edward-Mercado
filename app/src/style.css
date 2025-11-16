@@ -433,7 +433,8 @@ body {
   display: none;
   flex-flow: column nowrap;
   padding: 3%;
-  padding-bottom: 6%;
+  padding-top: 0;
+  padding-bottom: 12%;
   justify-content: space-around;
 
   font-family: "Bitcount Grid Single", sans-serif;
@@ -815,6 +816,10 @@ body {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+}
+
+.game-feed-menu__head-menu {
+  margin-bottom: 0;
 }
 
 @keyframes rotateTitle {
