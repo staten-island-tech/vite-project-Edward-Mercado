@@ -3,9 +3,9 @@ import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
 import { Toy } from './class_logic.js'
 import { Medicine } from './class_logic.js'
-import { TrainingItem } from './class_logic.js'
 import { busData } from './data.js'
 import { shopItems } from './data.js'
+import { trainingMethods } from './data.js'
 
 function randomInt(min, max) {
   let difference = max - min;
@@ -446,17 +446,6 @@ function updateMedicine() {
   })
 }
 
-function updateTrainingItems() {
-  const trainingItemsContainer = document.getElementById("training-items__container");
-  trainingItemsContainer.innerHTML = ``;
-  preventOverflow(trainingItems);
-  trainingItems.forEach((item) => {
-    trainingItemsContainer.insertAdjacentHTML("beforeend", `
-      <button class="shop-item-button"> ${item.name} </button>
-      `)
-  })
-}
-
 function preventOverflow(list) {
   if(list.length > 12) {
     list.length = 12;
@@ -477,10 +466,6 @@ function buyItem(shopItem) {
   else if (itemClass === Medicine) {
     medicines.push(new Medicine(shopItem.name, shopItem.heal, shopItem.imageURL));
     updateMedicine();
-  }
-  else if (itemClass === TrainingItem) {
-    trainingItems.push(new TrainingItem(shopItem.name, shopItem.speed, shopItem.range, shopItem.imageURL));
-    updateTrainingItems();
   }
 
   preventOverflow(lists);
@@ -618,9 +603,8 @@ shopItems.forEach((shopItem) => {
 const foods = [];
 const toys = [];
 const medicines = [];
-const trainingItems = [];
 
-const lists = [foods, toys, medicines, trainingItems];
+const lists = [foods, toys, medicines];
 // lists.forEach((list) => {
 //   list.length = 0;
 // })
