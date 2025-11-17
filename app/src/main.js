@@ -71,11 +71,14 @@ function openWindow() {
   return (buses);
 }
 
-function saveGame() {
+function saveGame(button_click) {
   localStorage.setItem('buses', JSON.stringify(buses));
   localStorage.setItem('foods', JSON.stringify(foods));
   localStorage.setItem('medicines', JSON.stringify(medicines));
   localStorage.setItem('toys', JSON.stringify(toys));
+  if(button_click) {
+    showSaveAlert();
+  }
 }
 
 function openMenu(menuID) {
@@ -338,7 +341,7 @@ function injectBuses(buses) {
     })
   })
 
-  saveGame();
+  saveGame(false);
 }
 
 function updateStatsBar(barId, value, maxValue) {
@@ -375,7 +378,7 @@ function lightHit() {
       `)
     openMenu("#light-hit");
   }
-  saveGame();
+  saveGame(false);
 }
 
 function strongHit() {
@@ -407,7 +410,7 @@ function strongHit() {
     openMenu("#strong-hit");
   }
   
-  saveGame();
+  saveGame(false);
 }
 
 function updateFoods() {
@@ -482,7 +485,17 @@ function buyItem(shopItem) {
 
   preventOverflow(lists);
 
-  saveGame()
+  saveGame(false)
+}
+
+function showSaveAlert() {
+  const saveMenu = document.getElementById("save-alert");
+  saveMenu.style.display = "flex";
+  saveMenu.classList.add("save-alert__open-animation");
+  saveMenu.addEventListener("animationend", () => {
+    saveMenu.classList.remove("save-alert__open-animation");
+    saveMenu.style.display = "none";
+  })
 }
 
 const themeButtons = document.querySelectorAll(".toggleMode");
@@ -496,7 +509,7 @@ themeButtons.forEach((button) => {
 
 const saveGameButton = document.querySelector(".game-save-button");
 saveGameButton.addEventListener("click", () => {
-  saveGame();
+  saveGame(true);
 })
 
 const careButtons = document.querySelectorAll(".care-button");
