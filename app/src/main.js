@@ -3,6 +3,7 @@ import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
 import { Toy } from './class_logic.js'
 import { Medicine } from './class_logic.js'
+import { TrainingItem } from './class_logic.js'
 import { busData } from './data.js'
 import { shopItems } from './data.js'
 
@@ -412,11 +413,51 @@ function strongHit() {
 function updateFoods() {
   const foodsContainer = document.getElementById("foods__container");
   foodsContainer.innerHTML = '';
+  preventOverflow(foods);
   foods.forEach((food) => {
     foodsContainer.insertAdjacentHTML("beforeend", `
       <button class="shop-item-button"> ${food.name} </button>
       `)
   })
+}
+
+function updateToys() {
+  const toysContainer = document.getElementById("toys__container");
+  toysContainer.innerHTML = '';
+  preventOverflow(toys);
+  toys.forEach((toy) => {
+    toysContainer.insertAdjacentHTML("beforeend", `
+      <button class="shop-item-button"> ${toy.name} </button>
+      `)
+  })
+}
+
+function updateMedicine() {
+  const medsContainer = document.getElementById("meds__container");
+  medsContainer.innerHTML = '';
+  preventOverflow(medicines);
+  medicines.forEach((med) => {
+    medsContainer.insertAdjacentHTML("beforeend", `
+      <button class="shop-item-button"> ${med.name} </button>
+      `)
+  })
+}
+
+function updateTrainingItems() {
+  const trainingItemsContainer = document.getElementById("training-items__container");
+  trainingItemsContainer.innerHTML = ``;
+  preventOverflow(trainingItems);
+  trainingItems.forEach((item) => {
+    trainingItemsContainer.insertAdjacentHTML("beforeend", `
+      <button class="shop-item-button"> ${item.name} </button>
+      `)
+  })
+}
+
+function preventOverflow(list) {
+  if(list.length > 12) {
+    list.length = 12;
+  }
 }
 
 function buyItem(shopItem) {
@@ -427,11 +468,20 @@ function buyItem(shopItem) {
     updateFoods();
   }
   else if (itemClass === Toy) {
-    toys.push(new Toy(shopItem.name, shopItem.happiness, shopItem.imageURl, shopItem.preferences));
+    toys.push(new Toy(shopItem.name, shopItem.happiness, shopItem.imageURL, shopItem.preferences));
+    updateToys();
   }
   else if (itemClass === Medicine) {
-    medicines.push(new Medicine(shopItem.name, shopItem.happiness, shopItem.imageURl, shopItem.preferences));
+    medicines.push(new Medicine(shopItem.name, shopItem.heal, shopItem.imageURL));
+    updateMedicine();
   }
+  else if (itemClass === TrainingItem) {
+    trainingItems.push(new TrainingItem(shopItem.name, shopItem.speed, shopItem.range, shopItem.imageURL));
+    updateTrainingItems();
+  }
+
+  preventOverflow(lists);
+
   saveGame()
 }
 
@@ -555,7 +605,13 @@ shopItems.forEach((shopItem) => {
 const foods = [];
 const toys = [];
 const medicines = [];
-const buses = openWindow(); // opens the window and gets the user's save data
+const trainingItems = [];
 
+const lists = [foods, toys, medicines, trainingItems];
+// lists.forEach((list) => {
+//   list.length = 0;
+// })
+
+const buses = openWindow(); // opens the window and gets the user's save data
 
 injectBuses(buses);

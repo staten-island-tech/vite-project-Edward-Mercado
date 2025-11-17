@@ -83,6 +83,15 @@ export class Medicine {
         this.name = name;
         this.heal = heal;
         this.imageURL = imageURL;
-        this.preferences = preferences;
+    }
+}
+
+export class TrainingItem {
+    constructor(name, speed, range, imageURL) {
+        this.class = TrainingItem;
+        this.name = name;
+        this.speed = speed;
+        this.range = range;
+        this.imageURL = imageURL;
     }
 }
