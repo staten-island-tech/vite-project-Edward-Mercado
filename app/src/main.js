@@ -28,7 +28,7 @@ function openWindow() {
   switchWebThemes(savedTheme);
 
   let buses = [];
-
+  
   let localStorageFoods = JSON.parse(localStorage.getItem("foods")) || [];
   localStorageFoods.forEach((food) => {
     foods.push(new Food(food.name, food.nutrition, food.imageURL));
@@ -413,14 +413,51 @@ function strongHit() {
   saveGame(false);
 }
 
+function feedBus(foodName) {
+  let selectedBus = null;
+  buses.forEach((bus) => {
+    if(bus.selected) {
+      selectedBus = bus;
+    }
+  })
+  let oldFullness = 0;
+  for(let i=0;i<foods.length;i++) {
+    if (foods[i].name === foodName) {
+      oldFullness = selectedBus.fullness;
+      selectedBus.fullness += foods[i].nutrition;
+      selectedBus.statsHandler();
+      foods.splice(foods[i], 1);
+      i+= foods.length;
+    }
+  }
+  updateFoods();
+  closeMenu("#game-feed-menu");
+
+  const feedResultContainer = document.querySelector("#feed-result__data-container");
+  feedResultContainer.innerHTML = '';
+  feedResultContainer.insertAdjacentHTML("beforeend", `
+      <h2 class="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
+      <h2 class="game-care-subtitle"> FULLNESS: ${oldFullness} -> ${selectedBus.fullness}! </h2>
+    `)
+
+  openMenu("#feed-result");
+  saveGame();
+}
+
 function updateFoods() {
   const foodsContainer = document.getElementById("foods__container");
   foodsContainer.innerHTML = '';
   preventOverflow(foods);
   foods.forEach((food) => {
     foodsContainer.insertAdjacentHTML("beforeend", `
-      <button class="shop-item-button"> ${food.name} </button>
+      <button class="shop-item-button" id="food-inventory-button">${food.name}</button>
       `)
+  })
+  const foodButtons = document.querySelectorAll("#food-inventory-button");
+  foodButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      feedBus(button.textContent);
+    })
   })
 }
 

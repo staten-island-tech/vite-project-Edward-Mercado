@@ -436,6 +436,7 @@ body {
   padding-top: 0;
   padding-bottom: 12%;
   justify-content: space-around;
+  margin-top: min(5%, 20px);
 
   font-family: "Bitcount Grid Single", sans-serif;
   font-size: 3em;
@@ -815,7 +816,9 @@ body {
 #foods__container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+  min-height: 40%;
+  margin-top: -10%;
 }
 
 .game-feed-menu__head-menu {
@@ -844,6 +847,26 @@ body {
 
 .save-alert__open-animation {
   animation: save-alert__open-animation 5s ease-in-out 1 forwards;
+}
+
+#toys__container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  min-height: 40%;
+  margin-top: -10%;
+}
+
+#game-hit-menu, #game-statsView-menu {
+  align-items: normal;
+}
+
+#statsView-title {
+  margin-top: min(5%, 20px);
+}
+
+.padded {
+  height: 20%;
 }
 
 @keyframes rotateTitle {
