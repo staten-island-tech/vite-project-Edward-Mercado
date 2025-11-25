@@ -59,6 +59,7 @@ function openWindow() {
 
       let busClass_bus = new Bus(busObject.name, busObject.species);
       let fixedBus = busClass_bus.reconstructor(busObject);
+      buses.push(fixedBus);
     }
   )
     if (!objectBuses.find((bus) => bus.selected === true)) {
@@ -361,11 +362,14 @@ function lightHit() {
   })
   let old_health = selectedBus.physical_health;
   let old_happiness = selectedBus.happiness;
-  selectedBus.happiness = randomInt(5, 12);
+
+  selectedBus.happiness -= randomInt(5, 12);
   selectedBus.physical_health -= randomInt(10, 25);
+
   selectedBus = selectedBus.statsHandler();
+
   if (!selectedBus.alive) {
-    buses.remove(selectedBus);
+    buses.splice(buses.indexOf(selectedBus), 1);
     injectBuses(buses);
     closeMenu("#game-hit-menu");
     openMenu("#death-screen");
@@ -389,12 +393,16 @@ function strongHit() {
     if (bus.selected) {
       selectedBus = bus;
     }
-  })
-  let old_health = selectedBus.physical_health;
-  let old_happiness = selectedBus.happiness;
-  selectedBus.happiness = randomInt(5, 12)
+  });
+
+  let oldHealth = selectedBus.physical_health;
+  let oldHappiness = selectedBus.happiness;
+
+  selectedBus.happiness -= randomInt(12, 20);
   selectedBus.physical_health -= randomInt(35, 45);
+  console.log(selectedBus.happiness);
   selectedBus = selectedBus.statsHandler();
+
   if (!selectedBus.alive) {
     buses.splice(buses.indexOf(selectedBus), 1);
     injectBuses(buses);
@@ -406,8 +414,8 @@ function strongHit() {
     const strongHitData = document.getElementById("strong-hit-data-container");
     strongHitData.innerHTML = "";
     strongHitData.insertAdjacentHTML("beforeend", `
-      <h2 class="game-care-subtitle"> HEALTH: ${old_heallth} -> ${selectedBus.physical_health} </h2>
-      <h2 class="game-care-subtitle"> HEALTH: ${old_happiness} -> ${selectedBus.happiness} </h2>
+      <h2 class="game-care-subtitle"> HEALTH: ${oldHealth} -> ${selectedBus.physical_health} </h2>
+      <h2 class="game-care-subtitle"> HAPPINESS: ${oldHappiness} -> ${selectedBus.happiness} </h2>
       `)
     openMenu("#strong-hit");
   }
@@ -488,10 +496,7 @@ function updateToys() {
 }
 
 function giveToy(toyName) {
-  let selectedBus = null;
-  selectedBus = buses.find((bus) => bus.selected === true);
-  console.log(toys);
-  toyName.split("").forEach((letter) => {console.log(letter)});
+  let selectedBus = buses.find((bus) => bus.selected === true);
   let toy = toys.find((toy) => toy.name === toyName);
   
   let oldHappiness = selectedBus.happiness;
@@ -519,9 +524,39 @@ function updateMedicine() {
   preventOverflow(medicines);
   medicines.forEach((med) => {
     medsContainer.insertAdjacentHTML("beforeend", `
-      <button class="shop-item-button" id="med-inventory-button"> ${med.name} </button>
+      <button class="shop-item-button" id="med-inventory-button">${med.name}</button>
       `)
   })
+
+  const medsButtons = document.querySelectorAll("#med-inventory-button");
+  medsButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      healBus(button.textContent);
+    })
+  })
+}
+
+function healBus(medName) {
+  let selectedBus = buses.find((bus) => bus.selected === true);
+  let med = medicines.find((med) => med.name === medName);
+
+  let oldHealth = selectedBus.health;
+  selectedBus.physical_health += med.heal;
+  selectedBus.statsHandler();
+  medicines.splice(medicines.indexOf(med), 1);
+
+  updateMedicine();
+  closeMenu("#game-heal-menu");
+
+  const healResultContainer = document.querySelector("#heal-result__data-container");
+  healResultContainer.innerHTML = '';
+  healResultContainer.insertAdjacentHTML("beforeend", `
+      <h2 class="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
+      <h2 class="game-care-subtitle"> HEALTH: ${oldHealth} -> ${selectedBus.physical_health}! </h2>
+    `);
+  openMenu("#heal-result");
+
+  saveGame();
 }
 
 function preventOverflow(list) {
