@@ -23,6 +23,9 @@ function switchWebThemes(theme) {
   localStorage.setItem('theme', theme);
 }
 
+// fix the bug where when your inventory is loaded then it gets your stuff all in one category (foods)
+
+
 function openWindow() {
   const savedTheme = localStorage.getItem('theme') || 'light'; // returns light theme if we don't have one
   switchWebThemes(savedTheme);
@@ -37,13 +40,15 @@ function openWindow() {
 
   let localStorageToys = JSON.parse(localStorage.getItem("toys")) || [];
   localStorageToys.forEach((toy) => {
-    foods.push(new Toy(toy.name, toy.happiness, toy.imageURL, toy.preferences));
+    toys.push(new Toy(toy.name, toy.happiness, toy.imageURL, toy.preferences));
   })
+  updateToys();
 
   let localStorageMedicines = JSON.parse(localStorage.getItem("medicines")) || [];
   localStorageMedicines.forEach((medicine) => {
-    foods.push(new Medicine(medicine.name, medicine.heal, medicine.imageURL));
+    medicines.push(new Medicine(medicine.name, medicine.heal, medicine.imageURL));
   })
+  updateMedicine();
 
   const localStorageBuses = localStorage.getItem('buses') || "[]";
   
@@ -341,7 +346,7 @@ function injectBuses(buses) {
     })
   })
 
-  saveGame(false);
+ gdterdfhcjiluoytrfhgjkliuyotfjdhfcngjvm
 }
 
 function updateStatsBar(barId, value, maxValue) {
@@ -359,7 +364,7 @@ function lightHit() {
   })
   let old_health = selectedBus.physical_health;
   let old_happiness = selectedBus.happiness;
-  selectedBus.happiness -= randomInt(5, 12);
+  selectedBus.happiness = randomInt(5, 12);
   selectedBus.physical_health -= randomInt(10, 25);
   selectedBus = selectedBus.statsHandler();
   if (!selectedBus.alive) {
@@ -390,7 +395,7 @@ function strongHit() {
   })
   let old_health = selectedBus.physical_health;
   let old_happiness = selectedBus.happiness;
-  selectedBus.happiness -= randomInt(5, 12)
+  selectedBus.happiness = randomInt(5, 12)
   selectedBus.physical_health -= randomInt(35, 45);
   selectedBus = selectedBus.statsHandler();
   if (!selectedBus.alive) {
@@ -404,7 +409,7 @@ function strongHit() {
     const strongHitData = document.getElementById("strong-hit-data-container");
     strongHitData.innerHTML = "";
     strongHitData.insertAdjacentHTML("beforeend", `
-      <h2 class="game-care-subtitle"> HEALTH: ${old_health} -> ${selectedBus.physical_health} </h2>
+      <h2 class="game-care-subtitle"> HEALTH: ${old_heallth} -> ${selectedBus.physical_health} </h2>
       <h2 class="game-care-subtitle"> HEALTH: ${old_happiness} -> ${selectedBus.happiness} </h2>
       `)
     openMenu("#strong-hit");
@@ -436,7 +441,7 @@ function feedBus(foodName) {
   const feedResultContainer = document.querySelector("#feed-result__data-container");
   feedResultContainer.innerHTML = '';
   feedResultContainer.insertAdjacentHTML("beforeend", `
-      <h2 class="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
+      <h2 classs="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
       <h2 class="game-care-subtitle"> FULLNESS: ${oldFullness} -> ${selectedBus.fullness}! </h2>
     `)
 
@@ -467,9 +472,20 @@ function updateToys() {
   preventOverflow(toys);
   toys.forEach((toy) => {
     toysContainer.insertAdjacentHTML("beforeend", `
-      <button class="shop-item-button"> ${toy.name} </button>
+      <button class="shop-item-button" id="toy-inventory-button"> ${toy.name} </button>
       `)
   })
+
+  const toysButtons = document.querySelectorAll("#toy-inventory-button");
+  toysButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      giveToy(button.textContent);
+    })
+  })
+}
+
+function giveToy(toy) {
+
 }
 
 function updateMedicine() {
@@ -478,7 +494,7 @@ function updateMedicine() {
   preventOverflow(medicines);
   medicines.forEach((med) => {
     medsContainer.insertAdjacentHTML("beforeend", `
-      <button class="shop-item-button"> ${med.name} </button>
+      <button class="shop-item-button" id="med-inventory-button"> ${med.name} </button>
       `)
   })
 }

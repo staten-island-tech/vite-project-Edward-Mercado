@@ -821,6 +821,22 @@ body {
   margin-top: -10%;
 }
 
+#toys__container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  min-height: 40%;
+  margin-top: -10%;
+}
+
+#meds__container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  min-height: 40%;
+  margin-top: -10%;
+}
+
 .game-feed-menu__head-menu {
   margin-bottom: 0;
 }
