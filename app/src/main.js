@@ -55,14 +55,13 @@ function openWindow() {
   if (localStorageBuses != "[]") {
     let objectBuses = JSON.parse(localStorageBuses);
     buses = [];
-    objectBuses.forEach((bus) => {
+    objectBuses.forEach((busObject) => {
 
-      let busClass_bus = new Bus(bus.name, bus.species);
-      let fixedBus = busClass_bus.reconstructor(bus);
-      buses.push(fixedBus);
+      let busClass_bus = new Bus(busObject.name, busObject.species);
+      let fixedBus = busClass_bus.reconstructor(busObject);
     }
   )
-    if (!buses.find((bus) => {bus.selected === true})) {
+    if (!objectBuses.find((bus) => bus.selected === true)) {
       buses[0].selected = true;
     }
 
@@ -345,8 +344,6 @@ function injectBuses(buses) {
       globalThis.selectedBus = targetBus;
     })
   })
-
- gdterdfhcjiluoytrfhgjkliuyotfjdhfcngjvm
 }
 
 function updateStatsBar(barId, value, maxValue) {
@@ -419,12 +416,18 @@ function strongHit() {
 }
 
 function feedBus(foodName) {
+  /* could i be using .find a little more here?
+  of course,
+  why didn't i?
+  im lazy
+  i also didnt want to google how to do the syntax
+  giveToy is basically the same function as this but with .find a little more
+  yeah
+  :D
+  */
+
   let selectedBus = null;
-  buses.forEach((bus) => {
-    if(bus.selected) {
-      selectedBus = bus;
-    }
-  })
+  selectedBus = buses.find((bus) => bus.selected === true);
   let oldFullness = 0;
   for(let i=0;i<foods.length;i++) {
     if (foods[i].name === foodName) {
@@ -441,9 +444,9 @@ function feedBus(foodName) {
   const feedResultContainer = document.querySelector("#feed-result__data-container");
   feedResultContainer.innerHTML = '';
   feedResultContainer.insertAdjacentHTML("beforeend", `
-      <h2 classs="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
+      <h2 class="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
       <h2 class="game-care-subtitle"> FULLNESS: ${oldFullness} -> ${selectedBus.fullness}! </h2>
-    `)
+    `);
 
   openMenu("#feed-result");
   saveGame();
@@ -472,7 +475,7 @@ function updateToys() {
   preventOverflow(toys);
   toys.forEach((toy) => {
     toysContainer.insertAdjacentHTML("beforeend", `
-      <button class="shop-item-button" id="toy-inventory-button"> ${toy.name} </button>
+      <button class="shop-item-button" id="toy-inventory-button">${toy.name}</button>
       `)
   })
 
@@ -484,8 +487,30 @@ function updateToys() {
   })
 }
 
-function giveToy(toy) {
+function giveToy(toyName) {
+  let selectedBus = null;
+  selectedBus = buses.find((bus) => bus.selected === true);
+  console.log(toys);
+  toyName.split("").forEach((letter) => {console.log(letter)});
+  let toy = toys.find((toy) => toy.name === toyName);
+  
+  let oldHappiness = selectedBus.happiness;
+  selectedBus.happiness += toy.happiness;
+  selectedBus.statsHandler();
+  toys.splice(toys.indexOf(toy), 1);
 
+  updateToys();
+  closeMenu("#game-petPlay-menu")
+
+  const feedResultContainer = document.querySelector("#petPlay-result__data-container");
+  feedResultContainer.innerHTML = '';
+  feedResultContainer.insertAdjacentHTML("beforeend", `
+      <h2 class="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
+      <h2 class="game-care-subtitle"> HAPPINESS: ${oldHappiness} -> ${selectedBus.happiness}! </h2>
+    `);
+
+  openMenu("#petPlay-result");
+  saveGame();
 }
 
 function updateMedicine() {
@@ -663,5 +688,4 @@ const lists = [foods, toys, medicines];
 // })
 
 const buses = openWindow(); // opens the window and gets the user's save data
-
 injectBuses(buses);
