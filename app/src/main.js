@@ -498,9 +498,17 @@ function updateToys() {
 function giveToy(toyName) {
   let selectedBus = buses.find((bus) => bus.selected === true);
   let toy = toys.find((toy) => toy.name === toyName);
-  
+  let review = "Your bus enjoyed playing."
+
   let oldHappiness = selectedBus.happiness;
   selectedBus.happiness += toy.happiness;
+
+  toy.preferences.forEach((preference) => { // .find() wasn't working and im lazy
+    if (preference === selectedBus.species) {
+      selectedBus.happiness += toy.happiness;
+      review = "Your bus REALLY enjoyed playing!"
+    }
+  })
   selectedBus.statsHandler();
   toys.splice(toys.indexOf(toy), 1);
 
@@ -512,6 +520,7 @@ function giveToy(toyName) {
   feedResultContainer.insertAdjacentHTML("beforeend", `
       <h2 class="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
       <h2 class="game-care-subtitle"> HAPPINESS: ${oldHappiness} -> ${selectedBus.happiness}! </h2>
+      <h2 class="game-care-subtitle"> ${review} </h2>
     `);
 
   openMenu("#petPlay-result");
@@ -540,7 +549,7 @@ function healBus(medName) {
   let selectedBus = buses.find((bus) => bus.selected === true);
   let med = medicines.find((med) => med.name === medName);
 
-  let oldHealth = selectedBus.health;
+  let oldHealth = selectedBus.physical_health;
   selectedBus.physical_health += med.heal;
   selectedBus.statsHandler();
   medicines.splice(medicines.indexOf(med), 1);
@@ -594,6 +603,42 @@ function showSaveAlert() {
     saveMenu.classList.remove("save-alert__open-animation");
     saveMenu.style.display = "none";
   })
+}
+
+function insertItemData(shopItemContainer, shopItem) {
+  if(shopItem.class === Food) {
+    shopItemContainer.insertAdjacentHTML("beforeend", `
+      <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
+      <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
+      <h2 class="shop-menu-subtitle"> PROVIDES ${ shopItem.nutrition } FULLNESS </h2>
+      `)
+  }
+  else if(shopItem.class === Medicine) {
+    shopItemContainer.insertAdjacentHTML("beforeend", `
+      <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
+      <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
+      <h2 class="shop-menu-subtitle"> HEALS ${ shopItem.heal } HEALTH </h2>
+      `)
+  }
+  else if(shopItem.class === Toy) {
+    let preferenceString = ""
+    shopItem.preferences.forEach((preference) => {
+      if(shopItem.preferences.indexOf(preference) !== 0) {
+        preferenceString = preferenceString + ", " + preference
+      }
+      else {
+        preferenceString = preferenceString + preference
+      }
+    })
+
+    shopItemContainer.insertAdjacentHTML("beforeend", `
+      <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
+      <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
+      <h2 class="shop-menu-subtitle"> BOOSTS HAPPINESS BY ${ shopItem.happiness } POINTS </h2>
+      <h2 class="shop-menu-subtitle"> ESPECIALLY LIKED BY: </h2>
+      <h2 class="shop-menu-subtitle"> ${preferenceString} </h2>
+      `)
+  }
 }
 
 const themeButtons = document.querySelectorAll(".toggleMode");
@@ -711,6 +756,9 @@ shopItems.forEach((shopItem) => {
   shopItemBuy.addEventListener("click", () => {
     buyItem(shopItem);
   })
+
+  const shopItemContainer = document.getElementById(`${shopItem.name.replaceAll(" ", "-")}__data-container`)
+  insertItemData(shopItemContainer, shopItem);
 })
 
 const foods = [];
