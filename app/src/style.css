@@ -46,17 +46,17 @@
 }
 
 .theme-yellow { /* this theme was requested by izzy, but I don't like yellow */
-  --background-color: rgb(255, 233, 145);
-  --background-color-2: rgb(238, 231, 91);
-  --game-border-color: rgb(224, 179, 0);
-  --header-text-color: rgb(187, 147, 0);
+  --background-color: rgb(255, 245, 207);
+  --background-color-2: rgb(255, 251, 178);
+  --game-border-color: rgb(240, 178, 6);
+  --header-text-color: rgb(223, 153, 23);
   --regular-text-color: rgb(30, 25, 0);
 
   --button-color-1: rgb(255, 203, 60);
-  --button-color-1-hover: rgb(239, 184, 19);
+  --button-color-1-hover: rgb(239, 147, 19);
 
-  --button-color-2: rgb(239, 220, 143);
-  --button-color-2-hover: rgb(255, 233, 88);
+  --button-color-2: rgb(255, 228, 119);
+  --button-color-2-hover: rgb(246, 194, 62);
 
   --additional-text-color-1: rgb(78, 57, 3);
   --additional-text-color-2: rgb(101, 71, 0);
@@ -132,10 +132,10 @@
   --regular-text-color: rgb(0, 0, 0);
 
   --button-color-1: rgb(239, 246, 251);
-  --button-color-1-hover: rgb(183, 206, 212);
+  --button-color-1-hover: rgb(183, 231, 243);
 
   --button-color-2: rgb(229, 240, 240);
-  --button-color-2-hover: rgb(205, 226, 240);
+  --button-color-2-hover: rgb(182, 224, 252);
 
   --additional-text-color-1: rgb(15, 40, 54);
   --additional-text-color-2: rgb(24, 24, 25);
@@ -152,10 +152,10 @@
   --regular-text-color: rgb(255, 255, 255);
 
   --button-color-1: rgb(60, 61, 69);
-  --button-color-1-hover: rgb(39, 38, 41);
+  --button-color-1-hover: rgb(50, 41, 73);
 
-  --button-color-2: rgb(52, 37, 49);
-  --button-color-2-hover: rgb(21, 16, 20);
+  --button-color-2: rgb(79, 63, 85);
+  --button-color-2-hover: rgb(42, 19, 44);
 
   --border-color-2: rgb(100, 92, 123);
 
