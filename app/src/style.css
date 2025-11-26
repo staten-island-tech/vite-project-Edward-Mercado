@@ -496,6 +496,10 @@ body {
   animation: clickToggle 0.2s ease;
 }
 
+#delete-bus-menu {
+  padding-top: 2%;
+}
+
 .delete-bus-menu__confirmation {
   font-family: "Bitcount Grid Single", sans-serif;
   font-size: 1.2em;
