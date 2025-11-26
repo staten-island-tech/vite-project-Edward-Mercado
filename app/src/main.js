@@ -223,6 +223,7 @@ function newAdoptionScreen(adoptedBus) { // after you adopt something, shows wha
   }
 
   openMenu("#new-adoption-menu");
+  saveGame(false)
 }
 
 function adoptMenu(species) {
@@ -276,6 +277,7 @@ function deleteBus(confirmDeleteButton, busIndex) {
   buses.splice(busIndex, 1);
   injectBuses(buses);
   confirmDeleteButton.removeEventListener("click", () => deleteBus(confirmDeleteButton, busIndex), { once: true });
+  saveGame(false);
 }
 
 function deleteBusMenu(busIndex) {
