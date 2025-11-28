@@ -609,14 +609,14 @@ function showSaveAlert() {
 
 function insertItemData(shopItemContainer, shopItem) {
   if(shopItem.class === Food) {
-    shopItemContainer.insertAdjacentHTML("beforeend", `
+    shopItemContainer.insertAdjacentHTML("afterbegin", `
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
       <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
       <h2 class="shop-menu-subtitle"> PROVIDES ${ shopItem.nutrition } FULLNESS </h2>
       `)
   }
   else if(shopItem.class === Medicine) {
-    shopItemContainer.insertAdjacentHTML("beforeend", `
+    shopItemContainer.insertAdjacentHTML("afterbegin", `
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
       <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
       <h2 class="shop-menu-subtitle"> HEALS ${ shopItem.heal } HEALTH </h2>
@@ -633,7 +633,7 @@ function insertItemData(shopItemContainer, shopItem) {
       }
     })
 
-    shopItemContainer.insertAdjacentHTML("beforeend", `
+    shopItemContainer.insertAdjacentHTML("afterbegin", `
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
       <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
       <h2 class="shop-menu-subtitle"> BOOSTS HAPPINESS BY ${ shopItem.happiness } POINTS </h2>
@@ -725,7 +725,7 @@ shopItems.forEach((shopItem) => {
     `)
   body.insertAdjacentHTML("beforeend", 
     `
-    <div class="game-care-menu" id="${shopItem.name.replaceAll(" ", "-")}__menu">
+    <div class="shop-item__data-container game-care-menu" id="${shopItem.name.replaceAll(" ", "-")}__menu">
       <div>
         <h2 class="game-care-subtitle"> Buy ${shopItem.name} </h2>
         <div class="horizontal-line"></div>
@@ -734,7 +734,7 @@ shopItems.forEach((shopItem) => {
         </div>
       </div>
 
-      <div id="${shopItem.name.replaceAll(" ", "-")}__data-container"> 
+      <div class="shop-item__data-container" id="${shopItem.name.replaceAll(" ", "-")}__data-container"> 
       
       </div>
 

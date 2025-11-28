@@ -3,7 +3,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
 :root {
-  --placer-holder-color: rgb(200, 200, 200);
+  --background-color: rgb(211, 230, 239);
+  --background-color-2: rgb(148, 182, 205);
+  --game-border-color: rgb(87, 118, 124);
+  --header-text-color: rgb(30, 32, 35);
+  --regular-text-color: rgb(0, 0, 0);
+
+  --button-color-1: rgb(239, 246, 251);
+  --button-color-1-hover: rgb(183, 231, 243);
+
+  --button-color-2: rgb(229, 240, 240);
+  --button-color-2-hover: rgb(182, 224, 252);
+
+  --additional-text-color-1: rgb(15, 40, 54);
+  --additional-text-color-2: rgb(24, 24, 25);
+  --additional-text-color-3: rgb(8, 40, 49);
+
+  --glass-color: rgba(93, 106, 110, 0.203);
 }
 
 .theme-red {
@@ -14,7 +30,7 @@
   --regular-text-color: rgb(30, 0, 0);
 
   --button-color-1: rgb(213, 41, 41);
-  --button-color-1-hover: rgb(181, 31, 31);
+  --button-color-1-hover: rgb(168, 19, 42);
 
   --button-color-2: rgb(239, 152, 143);
   --button-color-2-hover: rgb(255, 107, 88);
@@ -891,6 +907,12 @@ body {
 
 .padded {
   height: 20%;
+}
+
+.shop-item__data-container {
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: space-between;
 }
 
 @keyframes rotateTitle {
