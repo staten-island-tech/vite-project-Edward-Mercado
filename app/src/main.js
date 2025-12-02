@@ -734,6 +734,7 @@ function insertItemData(shopItemContainer, shopItem) {
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
       <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
       <h2 class="shop-menu-subtitle"> PROVIDES ${ shopItem.nutrition } FULLNESS </h2>
+      <img src="${shopItem.imageURL}" class="shop-item__image"/>
       `)
   }
   else if(shopItem.class === Medicine) {

@@ -922,6 +922,12 @@ body {
  margin: auto;
 }
 
+.shop-item__image {
+  height: 50%;
+  max-width: 100%;
+  margin: auto;
+ }
+
 @keyframes rotateTitle {
   0% {
     transform: rotate(0.75deg);
