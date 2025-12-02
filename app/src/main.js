@@ -10,8 +10,16 @@ import { shopItems } from './data.js'
 function updateGameWindow(selectedBus) {
   if(selectedBus) {
     let selectedBusStats = [selectedBus.happiness, selectedBus.physical_health, selectedBus.fullness];
-  let resultantImageURL = ""
-  if(selectedBusStats.find((stat) => stat < 20)) {
+    let resultantImageURL = ""
+    let existingImage = document.querySelector(".game-window__image");
+    let existingImageURL = ""
+    if(existingImage) {
+      existingImageURL = existingImage.getAttribute("src");
+    }
+  if (selectedBusStats.find((stat) => stat <= 0)) {
+    resultantImageURL = `/images/dead.png`
+  }
+  else if(selectedBusStats.find((stat) => stat < 20)) {
     resultantImageURL = `/images/${selectedBus.species}_sad.png`
   }
   else if(selectedBusStats.find((stat) => stat < 70)) {
@@ -22,16 +30,21 @@ function updateGameWindow(selectedBus) {
   }
 
   let gameWindow = document.querySelector(".game-window");
-  gameWindow.innerHTML = ""
-  gameWindow.insertAdjacentHTML("afterbegin", `
-    <img class="game-window__image" src="${resultantImageURL}"/>
-    `);
-  let selectedBusLabel = document.getElementById("selected-bus-label"); 
-  selectedBusLabel.innerHTML = `SELECTED BUS: ${ selectedBus.name } (${selectedBus.species})`
+  if (existingImageURL !== resultantImageURL) {
+    gameWindow.innerHTML = ""
+    gameWindow.insertAdjacentHTML("afterbegin", `
+      <img class="game-window__image" src="${resultantImageURL}"/>
+      `);
+    let selectedBusLabel = document.getElementById("selected-bus-label"); 
+    selectedBusLabel.innerHTML = `SELECTED BUS: ${ selectedBus.name } (${selectedBus.species})`
   }
+  }
+
+
+
   else {
     let gameWindow = document.querySelector(".game-window");
-  gameWindow.innerHTML = ""
+    gameWindow.innerHTML = ""
     gameWindow.insertAdjacentHTML("afterbegin", `
       <img class="game-window__image" src="/images/dead.png"/>
       `);
@@ -42,7 +55,12 @@ function updateGameWindow(selectedBus) {
 
 function randomInt(min, max) {
   let difference = max - min;
-  return Math.floor((Math.random()*difference))+min
+  if (Math.floor((Math.random()*difference))+min !== NaN) {
+    return Math.floor((Math.random()*difference))+min;
+  }
+  else {
+    return 0;
+  }
 }
 
 function switchWebThemes(theme) {
@@ -221,7 +239,7 @@ function newAdoptionScreen(adoptedBus) { // after you adopt something, shows wha
   let nOrNot = ""
   if (adoptedBus.species[0] === "s") {
     nOrNot = "N"
-  }
+  } // grammar rules!
   newAdoptionMenuTitle.textContent = `YOU JUST ADOPTED A${nOrNot} ${adoptedBus.species}!`
 
   const adoptionMenuDisplay = document.querySelector(".adoption-menu-display");
@@ -647,6 +665,7 @@ function trainBus(trainingItemName) {
   let trainingItem = trainingItems.find((trainingItem) => trainingItem.name === trainingItemName);
 
   let oldSpeed = selectedBus.speed;
+  console.log(randomInt((trainingItem.speed - trainingItem.range), (trainingItem.speed + trainingItem.range)));
   selectedBus.speed += randomInt((trainingItem.speed - trainingItem.range), (trainingItem.speed + trainingItem.range));
   selectedBus.statsHandler();
   trainingItems.splice(trainingItems.indexOf(trainingItem), 1);
@@ -754,6 +773,33 @@ function insertItemData(shopItemContainer, shopItem) {
       `)
   }
 }
+
+function petWither() {
+  let selectedBus = buses.find((bus) => bus.selected === true);
+
+  if(selectedBus) {
+    let stats = [ selectedBus.happiness, selectedBus.fullness, selectedBus.physical_health ];
+    selectedBus.happiness -= randomInt(1, 4);
+    selectedBus.fullness -= randomInt(2, 7);
+    selectedBus.physical_health -= randomInt(1, 4);
+    updateGameWindow(selectedBus);
+  
+    if (stats.find((stat) => stat <= 0)) {
+      openMenu("#death-screen");
+      buses.splice(buses.indexOf(selectedBus), 1);
+      injectBuses(buses);
+      if (buses.length !== 0) {
+        buses[0].selected = true;
+      }
+    }
+  
+    selectedBus.statsHandler();
+    saveGame(false);
+  }
+  
+}
+
+let petWitherTime = setInterval(petWither, 2000);
 
 const themeButtons = document.querySelectorAll(".toggleMode");
 
@@ -886,4 +932,5 @@ const lists = [foods, toys, medicines, trainingItems];
 // })
 
 const buses = openWindow(); // opens the window and gets the user's save data
+
 injectBuses(buses);
