@@ -7,8 +7,6 @@ import { TrainingItem } from './class_logic.js'
 import { busData } from './data.js'
 import { shopItems } from './data.js'
 
-const running = false; // pmo
-
 function updateGameWindow(selectedBus) {
   if(selectedBus) {
     let selectedBusStats = [selectedBus.happiness, selectedBus.physical_health, selectedBus.fullness];
@@ -667,7 +665,6 @@ function trainBus(trainingItemName) {
   let trainingItem = trainingItems.find((trainingItem) => trainingItem.name === trainingItemName);
 
   let oldSpeed = selectedBus.speed;
-  console.log(randomInt((trainingItem.speed - trainingItem.range), (trainingItem.speed + trainingItem.range)));
   selectedBus.speed += randomInt((trainingItem.speed - trainingItem.range), (trainingItem.speed + trainingItem.range));
   selectedBus.statsHandler();
   trainingItems.splice(trainingItems.indexOf(trainingItem), 1);
@@ -729,7 +726,6 @@ function showSaveAlert() {
 }
 
 function insertItemData(shopItemContainer, shopItem) {
-  console.log(shopItem.name, shopItem.imageURL)
   if(shopItem.class === Food) {
     shopItemContainer.insertAdjacentHTML("afterbegin", `
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
@@ -806,9 +802,8 @@ function petWither() {
   
 }
 
-if (running) {
-  let petWitherTime = setInterval(petWither, 2000);
-}
+let petWitherTime = setInterval(petWither, 2000);
+
 
 const themeButtons = document.querySelectorAll(".toggleMode");
 
