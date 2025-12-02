@@ -7,6 +7,8 @@ import { TrainingItem } from './class_logic.js'
 import { busData } from './data.js'
 import { shopItems } from './data.js'
 
+const running = false; // pmo
+
 function updateGameWindow(selectedBus) {
   if(selectedBus) {
     let selectedBusStats = [selectedBus.happiness, selectedBus.physical_health, selectedBus.fullness];
@@ -799,7 +801,9 @@ function petWither() {
   
 }
 
-let petWitherTime = setInterval(petWither, 2000);
+if (running) {
+  let petWitherTime = setInterval(petWither, 2000);
+}
 
 const themeButtons = document.querySelectorAll(".toggleMode");
 
