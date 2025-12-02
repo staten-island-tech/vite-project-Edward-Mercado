@@ -3,7 +3,7 @@ import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
 import { Toy } from  './class_logic.js'
 import { Medicine } from  './class_logic.js'
-import { jumpGame } from './training_functions.js'
+import { TrainingItem } from  './class_logic.js'
 
 export const busData = [
     "s44", "s57", "s59", "s62", "s79", "b1"
@@ -74,12 +74,29 @@ export const shopItems = [
         heal: 25,
         imageURL: "",
         className: "Medicine",
+    },
+    {
+        class: TrainingItem,
+        name: "Treadmill",
+        speed: 25,
+        range: 10,
+        imageURL: "",
+        className: "TrainingItem",
+    },
+    {
+        class: TrainingItem,
+        name: "Coffee",
+        speed: 15,
+        range: 15,
+        imageURL: "",
+        className: "TrainingItem",
+    },
+    {
+        class: TrainingItem,
+        name: "Punching Bag",
+        speed: 30,
+        range: 5,
+        imageURL: "",
+        className: "TrainingItem",
     }
-]
-
-export const trainingMethods = [
-   { 
-    name: "Jump Game",
-    functionName: jumpGame(),
-}
 ]

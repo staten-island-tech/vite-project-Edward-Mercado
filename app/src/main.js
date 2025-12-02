@@ -3,9 +3,9 @@ import { Bus } from './class_logic.js'
 import { Food } from './class_logic.js'
 import { Toy } from './class_logic.js'
 import { Medicine } from './class_logic.js'
+import { TrainingItem } from './class_logic.js'
 import { busData } from './data.js'
 import { shopItems } from './data.js'
-import { trainingMethods } from './data.js'
 
 function updateGameWindow(selectedBus) {
   if(selectedBus) {
@@ -26,6 +26,8 @@ function updateGameWindow(selectedBus) {
   gameWindow.insertAdjacentHTML("afterbegin", `
     <img class="game-window__image" src="${resultantImageURL}"/>
     `);
+  let selectedBusLabel = document.getElementById("selected-bus-label"); 
+  selectedBusLabel.innerHTML = `SELECTED BUS: ${ selectedBus.name } (${selectedBus.species})`
   }
   else {
     let gameWindow = document.querySelector(".game-window");
@@ -33,7 +35,8 @@ function updateGameWindow(selectedBus) {
     gameWindow.insertAdjacentHTML("afterbegin", `
       <img class="game-window__image" src="/images/dead.png"/>
       `);
-    
+    let selectedBusLabel = document.getElementById("selected-bus-label"); 
+  selectedBusLabel.innerHTML = `SELECTED BUS: NONE`
   }
 }
 
@@ -80,6 +83,12 @@ function openWindow() {
   })
   updateMedicine();
 
+  let localStorageTrainingItems = JSON.parse(localStorage.getItem("trainingItems")) || [];
+  localStorageTrainingItems.forEach((trainingItem) => {
+    trainingItems.push(new TrainingItem(trainingItem.name, trainingItem.speed, trainingItem.imageURL))
+  })
+  updateTrainingItems();
+
   const localStorageBuses = localStorage.getItem('buses') || "[]";
   
   if (localStorageBuses != "[]") {
@@ -113,6 +122,7 @@ function saveGame(button_click) {
   localStorage.setItem('foods', JSON.stringify(foods));
   localStorage.setItem('medicines', JSON.stringify(medicines));
   localStorage.setItem('toys', JSON.stringify(toys));
+  localStorage.setItem('trainingItems', JSON.stringify(trainingItems));
   if(button_click) {
     showSaveAlert();
   }
@@ -614,6 +624,24 @@ function healBus(medName) {
   updateGameWindow(selectedBus);
 }
 
+function updateTrainingItems() {
+  const trainingItemsContainer = document.getElementById("training-items__container");
+  trainingItemsContainer.innerHTML = '';
+  preventOverflow(trainingItems);
+  trainingItems.forEach((trainingItem) => {
+    trainingItemsContainer.insertAdjacentHTML("beforeend", `
+      <button class="shop-item-button" id="med-inventory-button">${trainingItem.name}</button>
+      `)
+  })
+
+  const medsButtons = document.querySelectorAll("#med-inventory-button");
+  medsButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      healBus(button.textContent);
+    })
+  })
+}
+
 function preventOverflow(list) {
   if(list.length > 12) {
     list.length = 12;
@@ -810,11 +838,13 @@ shopItems.forEach((shopItem) => {
 const foods = [];
 const toys = [];
 const medicines = [];
+const trainingItems = [];
 
-const lists = [foods, toys, medicines];
+const lists = [foods, toys, medicines, trainingItems];
 // lists.forEach((list) => {
 //   list.length = 0;
 // })
 
 const buses = openWindow(); // opens the window and gets the user's save data
 injectBuses(buses);
+console.log(toys);
