@@ -630,16 +630,40 @@ function updateTrainingItems() {
   preventOverflow(trainingItems);
   trainingItems.forEach((trainingItem) => {
     trainingItemsContainer.insertAdjacentHTML("beforeend", `
-      <button class="shop-item-button" id="med-inventory-button">${trainingItem.name}</button>
+      <button class="shop-item-button" id="train-inventory-button">${trainingItem.name}</button>
       `)
   })
 
-  const medsButtons = document.querySelectorAll("#med-inventory-button");
+  const medsButtons = document.querySelectorAll("#train-inventory-button");
   medsButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      healBus(button.textContent);
+      trainBus(button.textContent);
     })
   })
+}
+
+function trainBus(trainingItemName) {
+  let selectedBus = buses.find((bus) => bus.selected === true);
+  let trainingItem = trainingItems.find((trainingItem) => trainingItem.name === trainingItemName);
+
+  let oldSpeed = selectedBus.speed;
+  selectedBus.speed += randomInt((trainingItem.speed - trainingItem.range), (trainingItem.speed + trainingItem.range));
+  selectedBus.statsHandler();
+  trainingItems.splice(trainingItems.indexOf(trainingItem), 1);
+
+  updateTrainingItems();
+  closeMenu("#game-train-menu");
+
+  const trainResultContainer = document.querySelector("#train-result__data-container");
+  trainResultContainer.innerHTML = '';
+  trainResultContainer.insertAdjacentHTML("beforeend", `
+      <h2 class="game-care-subtitle"> BUS NAME: ${selectedBus.name} </h2>
+      <h2 class="game-care-subtitle"> SPEED: ${oldSpeed} -> ${selectedBus.speed}! </h2>
+    `);
+  openMenu("#train-result");
+
+  saveGame();
+  updateGameWindow(selectedBus);
 }
 
 function preventOverflow(list) {
@@ -662,6 +686,10 @@ function buyItem(shopItem) {
   else if (itemClass === Medicine) {
     medicines.push(new Medicine(shopItem.name, shopItem.heal, shopItem.imageURL));
     updateMedicine();
+  }
+  else if (itemClass === TrainingItem) {
+    trainingItems.push(new TrainingItem(shopItem.name, shopItem.speed, shopItem.range, shopItem.imageURL));
+    updateTrainingItems();
   }
 
   preventOverflow(lists);
@@ -692,6 +720,18 @@ function insertItemData(shopItemContainer, shopItem) {
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
       <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
       <h2 class="shop-menu-subtitle"> HEALS ${ shopItem.heal } HEALTH </h2>
+      `)
+  }
+  else if (shopItem.class === TrainingItem) {
+    let rangeString = `INCREASES SPEED BY ${ shopItem.speed - shopItem.range } - ${shopItem.speed + shopItem.range}`
+    if(shopItem.range === 0) {
+      rangeString = `INCREASES SPEED BY ${ shopItem.speed }`
+    }
+
+    shopItemContainer.insertAdjacentHTML("afterbegin", `
+      <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
+      <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
+      <h2 class="shop-menu-subtitle"> ${rangeString} </h2>
       `)
   }
   else if(shopItem.class === Toy) {
@@ -847,4 +887,3 @@ const lists = [foods, toys, medicines, trainingItems];
 
 const buses = openWindow(); // opens the window and gets the user's save data
 injectBuses(buses);
-console.log(toys);
