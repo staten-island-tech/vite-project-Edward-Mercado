@@ -460,10 +460,10 @@ body {
   font-weight: 600;
 
   width: 90%;
-  height: 90%;
+  height: 95%;
   position: fixed;
   left: 5%;
-  top: 5%;
+  top: 0%;
   background-color: var(--background-color);
   border: var(--game-border-color) 12px solid;
   border-radius: 30px;
@@ -923,8 +923,8 @@ body {
 }
 
 .shop-item__image {
-  height: 50%;
-  max-width: 100%;
+  width: 20%;
+  height: auto;
   margin: auto;
  }
 

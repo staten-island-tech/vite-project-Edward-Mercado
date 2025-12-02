@@ -729,6 +729,7 @@ function showSaveAlert() {
 }
 
 function insertItemData(shopItemContainer, shopItem) {
+  console.log(shopItem.name, shopItem.imageURL)
   if(shopItem.class === Food) {
     shopItemContainer.insertAdjacentHTML("afterbegin", `
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
@@ -742,6 +743,7 @@ function insertItemData(shopItemContainer, shopItem) {
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
       <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
       <h2 class="shop-menu-subtitle"> HEALS ${ shopItem.heal } HEALTH </h2>
+      <img src="${shopItem.imageURL}" class="shop-item__image"/>
       `)
   }
   else if (shopItem.class === TrainingItem) {
@@ -754,6 +756,7 @@ function insertItemData(shopItemContainer, shopItem) {
       <h2 class="shop-menu-subtitle"> NAME: ${ shopItem.name } </h2>
       <h2 class="shop-menu-subtitle"> ITEM VARIETY: ${ shopItem.className } </h2>
       <h2 class="shop-menu-subtitle"> ${rangeString} </h2>
+      <img src="${shopItem.imageURL}" class="shop-item__image"/>
       `)
   }
   else if(shopItem.class === Toy) {
@@ -773,6 +776,7 @@ function insertItemData(shopItemContainer, shopItem) {
       <h2 class="shop-menu-subtitle"> BOOSTS HAPPINESS BY ${ shopItem.happiness } POINTS </h2>
       <h2 class="shop-menu-subtitle"> ESPECIALLY LIKED BY: </h2>
       <h2 class="shop-menu-subtitle"> ${preferenceString} </h2>
+      <img src="${shopItem.imageURL}" class="shop-item__image"/>
       `)
   }
 }

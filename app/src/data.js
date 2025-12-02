@@ -27,7 +27,7 @@ export const shopItems = [
         class: Food,
         name: "Premier Gasoline",
         nutrition: 25,
-        imageURL: "/images/premier-gasoline.png",
+        imageURL: "/images/premium-gasoline.png",
         className: "Food",
     },
     {
