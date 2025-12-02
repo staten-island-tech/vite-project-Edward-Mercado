@@ -8,8 +8,8 @@ import { shopItems } from './data.js'
 import { trainingMethods } from './data.js'
 
 function updateGameWindow(selectedBus) {
-  console.log(selectedBus);
-  let selectedBusStats = [selectedBus.happiness, selectedBus.physical_health, selectedBus.fullness];
+  if(selectedBus) {
+    let selectedBusStats = [selectedBus.happiness, selectedBus.physical_health, selectedBus.fullness];
   let resultantImageURL = ""
   if(selectedBusStats.find((stat) => stat < 20)) {
     resultantImageURL = `/images/${selectedBus.species}_sad.png`
@@ -26,6 +26,15 @@ function updateGameWindow(selectedBus) {
   gameWindow.insertAdjacentHTML("afterbegin", `
     <img class="game-window__image" src="${resultantImageURL}"/>
     `);
+  }
+  else {
+    let gameWindow = document.querySelector(".game-window");
+  gameWindow.innerHTML = ""
+    gameWindow.insertAdjacentHTML("afterbegin", `
+      <img class="game-window__image" src="/images/dead.png"/>
+      `);
+    
+  }
 }
 
 function randomInt(min, max) {
@@ -86,7 +95,7 @@ function openWindow() {
     if (!objectBuses.find((bus) => bus.selected === true)) {
       buses[0].selected = true;
     }
-
+    updateGameWindow(buses[0]);
     return (buses);
   }
   else {
@@ -244,6 +253,7 @@ function newAdoptionScreen(adoptedBus) { // after you adopt something, shows wha
   if(!buses.find((bus) => {bus.selected === true})) {
     adoptedBus.selected = true;
   }
+  updateGameWindow(adoptedBus);
 
   openMenu("#new-adoption-menu");
   saveGame(false)
@@ -301,6 +311,13 @@ function deleteBus(confirmDeleteButton, busIndex) {
   injectBuses(buses);
   confirmDeleteButton.removeEventListener("click", () => deleteBus(confirmDeleteButton, busIndex), { once: true });
   saveGame(false);
+  if(buses.length > 0) {
+    buses[0].selected === true;
+    updateGameWindow(buses[0]);
+  }
+  else {
+    updateGameWindow(null);
+  }
 }
 
 function deleteBusMenu(busIndex) {
@@ -368,6 +385,7 @@ function injectBuses(buses) {
       let targetBus = buses[button.getAttribute("data-index")]
       targetBus.selected = true;
       globalThis.selectedBus = targetBus;
+      updateGameWindow(targetBus);
     })
   })
 }
