@@ -22,7 +22,6 @@ export class Bus {
 
     reconstructor(inputBus) { // will reconstruct from localStorage data
         let bus = new Bus(inputBus.name, inputBus.species)
-        console.log(inputBus.happiness)
 
         bus.name = inputBus.name;
         bus.species = inputBus.species;

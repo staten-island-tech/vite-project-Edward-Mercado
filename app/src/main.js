@@ -7,6 +7,27 @@ import { busData } from './data.js'
 import { shopItems } from './data.js'
 import { trainingMethods } from './data.js'
 
+function updateGameWindow(selectedBus) {
+  console.log(selectedBus);
+  let selectedBusStats = [selectedBus.happiness, selectedBus.physical_health, selectedBus.fullness];
+  let resultantImageURL = ""
+  if(selectedBusStats.find((stat) => stat < 20)) {
+    resultantImageURL = `/images/${selectedBus.species}_sad.png`
+  }
+  else if(selectedBusStats.find((stat) => stat < 70)) {
+    resultantImageURL = `/images/${selectedBus.species}_meh.png`
+  }
+  else {
+    resultantImageURL = `/images/${selectedBus.species}_happy.png`
+  }
+
+  let gameWindow = document.querySelector(".game-window");
+  gameWindow.innerHTML = ""
+  gameWindow.insertAdjacentHTML("afterbegin", `
+    <img class="game-window__image" src="${resultantImageURL}"/>
+    `);
+}
+
 function randomInt(min, max) {
   let difference = max - min;
   return Math.floor((Math.random()*difference))+min
@@ -72,6 +93,8 @@ function openWindow() {
     buses = [];
     localStorage.setItem('buses', JSON.stringify(buses));
   }
+
+  updateGameWindow(buses[0]);
 
   return (buses);
 }
@@ -387,6 +410,7 @@ function lightHit() {
     openMenu("#light-hit");
   }
   saveGame(false);
+  updateGameWindow(selectedBus);
 }
 
 function strongHit() {
@@ -402,7 +426,6 @@ function strongHit() {
 
   selectedBus.happiness -= randomInt(12, 20);
   selectedBus.physical_health -= randomInt(35, 45);
-  console.log(selectedBus.happiness);
   selectedBus = selectedBus.statsHandler();
 
   if (!selectedBus.alive) {
@@ -423,6 +446,7 @@ function strongHit() {
   }
   
   saveGame(false);
+  updateGameWindow(selectedBus);
 }
 
 function feedBus(foodName) {
@@ -460,6 +484,7 @@ function feedBus(foodName) {
 
   openMenu("#feed-result");
   saveGame();
+  updateGameWindow(selectedBus);
 }
 
 function updateFoods() {
@@ -568,6 +593,7 @@ function healBus(medName) {
   openMenu("#heal-result");
 
   saveGame();
+  updateGameWindow(selectedBus);
 }
 
 function preventOverflow(list) {
