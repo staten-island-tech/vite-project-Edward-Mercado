@@ -368,6 +368,7 @@ body {
   height: 80vh;
   margin: 1%;
   display: flex;
+  padding: 3% auto;
 }
 
 .game-save-button {
@@ -913,6 +914,10 @@ body {
   display: none;
   flex-flow: column nowrap;
   justify-content: space-between;
+}
+
+.game-window__image {
+  height: 100%;
 }
 
 @keyframes rotateTitle {
