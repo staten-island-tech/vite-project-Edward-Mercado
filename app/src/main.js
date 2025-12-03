@@ -442,6 +442,8 @@ function lightHit() {
   if (!selectedBus.alive) {
     buses.splice(buses.indexOf(selectedBus), 1);
     injectBuses(buses);
+    let selectedBusLabel = document.getElementById("selected-bus-label"); 
+    selectedBusLabel.innerHTML = `SELECTED BUS: NONE`;
     closeMenu("#game-hit-menu");
     openMenu("#death-screen");
   }
@@ -476,6 +478,8 @@ function strongHit() {
 
   if (!selectedBus.alive) {
     buses.splice(buses.indexOf(selectedBus), 1);
+    let selectedBusLabel = document.getElementById("selected-bus-label"); 
+    selectedBusLabel.innerHTML = `SELECTED BUS: NONE`
     injectBuses(buses);
     closeMenu("#game-hit-menu");
     openMenu("#death-screen");
@@ -790,6 +794,8 @@ function petWither() {
     if (stats.find((stat) => stat <= 0)) {
       openMenu("#death-screen");
       buses.splice(buses.indexOf(selectedBus), 1);
+      let selectedBusLabel = document.getElementById("selected-bus-label"); 
+      selectedBusLabel.innerHTML = `SELECTED BUS: NONE`;
       injectBuses(buses);
       if (buses.length !== 0) {
         buses[0].selected = true;
