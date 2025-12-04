@@ -500,16 +500,6 @@ function strongHit() {
 }
 
 function feedBus(foodName) {
-  /* could i be using .find a little more here?
-  of course,
-  why didn't i?
-  im lazy
-  i also didnt want to google how to do the syntax
-  giveToy is basically the same function as this but with .find a little more
-  yeah
-  :D
-  */
-
   let selectedBus = null;
   selectedBus = buses.find((bus) => bus.selected === true);
   let oldFullness = 0;
