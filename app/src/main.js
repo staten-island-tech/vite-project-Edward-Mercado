@@ -30,30 +30,28 @@ function updateGameWindow(selectedBus) {
   }
 
   let gameWindow = document.querySelector(".game-window");
-  if (existingImageURL !== resultantImageURL) {
+  if (existingImageURL !== resultantImageURL) { // i dont want to make it flicker every time, so if we need to change it we will
     gameWindow.innerHTML = ""
     gameWindow.insertAdjacentHTML("afterbegin", `
       <img class="game-window__image" src="${resultantImageURL}"/>
-      `);
+      `); // replace the image
     let selectedBusLabel = document.getElementById("selected-bus-label"); 
-    selectedBusLabel.innerHTML = `SELECTED BUS: ${ selectedBus.name } (${selectedBus.species})`
+    selectedBusLabel.innerHTML = `SELECTED BUS: ${ selectedBus.name } (${selectedBus.species})` // resets the label
   }
   }
-
-
 
   else {
     let gameWindow = document.querySelector(".game-window");
     gameWindow.innerHTML = ""
     gameWindow.insertAdjacentHTML("afterbegin", `
       <img class="game-window__image" src="/images/dead.png"/>
-      `);
+      `); // replaces the bus witha  dead one
     let selectedBusLabel = document.getElementById("selected-bus-label"); 
   selectedBusLabel.innerHTML = `SELECTED BUS: NONE`
   }
 }
 
-function randomInt(min, max) {
+function randomInt(min, max) { // simpler syntax for the random
   let difference = max - min;
   if (Math.floor((Math.random()*difference))+min !== NaN) {
     return Math.floor((Math.random()*difference))+min;
@@ -63,7 +61,7 @@ function randomInt(min, max) {
   }
 }
 
-function switchWebThemes(theme) {
+function switchWebThemes(theme) { 
   const themes = ["red", "orange", "yellow", "green", "blue", "purple", "light", "dark"]; // yellow is not a color
 
   themes.forEach((theme) => {
@@ -71,17 +69,17 @@ function switchWebThemes(theme) {
   });
 
   document.body.classList.add('theme-' + theme);
-  localStorage.setItem('theme', theme);
+  localStorage.setItem('theme', theme); // also saves the theme for refreshes
 }
 
 // fix the bug where when your inventory is loaded then it gets your stuff all in one category (foods)
 
 
-function openWindow() {
+function openWindow() {  
   const savedTheme = localStorage.getItem('theme') || 'light'; // returns light theme if we don't have one
   switchWebThemes(savedTheme);
 
-  let buses = [];
+  let buses = []; // sets buses to an empty list to start
   
   let localStorageFoods = JSON.parse(localStorage.getItem("foods")) || [];
   localStorageFoods.forEach((food) => {
@@ -105,24 +103,28 @@ function openWindow() {
   localStorageTrainingItems.forEach((trainingItem) => {
     trainingItems.push(new TrainingItem(trainingItem.name, trainingItem.speed, trainingItem.imageURL))
   })
-  updateTrainingItems();
+  updateTrainingItems(); 
+  // updates all the inventory for the player
 
   const localStorageBuses = localStorage.getItem('buses') || "[]";
   
-  if (localStorageBuses != "[]") {
+  if (localStorageBuses != "[]") { // if our result isnt an empty list
     let objectBuses = JSON.parse(localStorageBuses);
     buses = [];
-    objectBuses.forEach((busObject) => {
+    objectBuses.forEach((busObject) => { 
 
       let busClass_bus = new Bus(busObject.name, busObject.species);
       let fixedBus = busClass_bus.reconstructor(busObject);
       buses.push(fixedBus);
-    }
+    } // creates the bus
   )
     if (!objectBuses.find((bus) => bus.selected === true)) {
       buses[0].selected = true;
+      updateGameWindow(buses[0]); // updates 
+    } // if there is no bus selected, select the first one
+    else {
+      updateGameWindow(buses.find((bus) => bus.selected === true))
     }
-    updateGameWindow(buses[0]);
     return (buses);
   }
   else {
@@ -135,19 +137,19 @@ function openWindow() {
   return (buses);
 }
 
-function saveGame(button_click) {
+function saveGame(button_click) { // puts all the stuff down
   localStorage.setItem('buses', JSON.stringify(buses));
   localStorage.setItem('foods', JSON.stringify(foods));
   localStorage.setItem('medicines', JSON.stringify(medicines));
   localStorage.setItem('toys', JSON.stringify(toys));
   localStorage.setItem('trainingItems', JSON.stringify(trainingItems));
-  if(button_click) {
+  if(button_click) { // i want autosave but i dont want the alert to show every time i save
     showSaveAlert();
   }
 }
 
-function openMenu(menuID) {
-  const menu = document.querySelector(menuID);
+function openMenu(menuID) { // shush i know i could be using getElementById but i considered that too late into the process
+  const menu = document.querySelector(menuID); // so every input with this has the leading #
   menu.style.display = "flex";
   menu.classList.add("game-care-menu-open");
 
@@ -198,7 +200,7 @@ function openMenu(menuID) {
       updateStatsBar("view-fullness", selectedBus.fullness, 100);
       updateStatsBar("view-physical_health", selectedBus.physical_health, 100);
       updateStatsBar("view-speed", selectedBus.speed, 150);
-      updateStatsBar("view-happiness", selectedBus.happiness, 100);
+      updateStatsBar("view-happiness", selectedBus.happiness, 100); // updates all the stats bar with the decreased stuff
     }
 
   menu.addEventListener(
@@ -207,14 +209,14 @@ function openMenu(menuID) {
       menu.classList.remove("game-care-menu-open"); // removes the class that creates the animation
     },
     { once: true } // prevents maximum call stack size exceeded error
-  );
+  ); // the game-care-menu-open class triggers the animation, and i want to run it multiple times, so we gotta remove it
 
   const shadow = document.querySelector(".menu-shadow");
-  shadow.style.display = "block";
+  shadow.style.display = "block"; // puts a shadow behind the stuff
 }
 
 function closeMenu(menuID) {
-  const menu = document.querySelector(menuID);
+  const menu = document.querySelector(menuID); // shhhh
 
   menu.classList.add("game-care-menu-close");
   menu.addEventListener(
@@ -224,14 +226,14 @@ function closeMenu(menuID) {
       menu.classList.remove("game-care-menu-close");
     },
     { once: true }
-  );
+  ); // same explanation as earlier
 
   const shadow = document.querySelector(".menu-shadow");
-  shadow.style.display = "none";
+  shadow.style.display = "none"; // removes the shadow
 
   const deleteBusButton = document.querySelector(".delete-bus-menu__confirmation")
   
-  deleteBusButton.removeEventListener("click", () => deleteBusMenu(deleteBusButton.getAttribute("data-index")));
+  deleteBusButton.removeEventListener("click", () => deleteBusMenu(deleteBusButton.getAttribute("data-index"))); // so we can replace the bus deletion
 }
 
 function newAdoptionScreen(adoptedBus) { // after you adopt something, shows what you just did
@@ -239,7 +241,8 @@ function newAdoptionScreen(adoptedBus) { // after you adopt something, shows wha
   let nOrNot = ""
   if (adoptedBus.species[0] === "s") {
     nOrNot = "N"
-  } // grammar rules!
+  } // grammar rules! if the noun starts with a vowel sound (like s being pronounced like ess...), you need to use "an" instead of "a!"
+
   newAdoptionMenuTitle.textContent = `YOU JUST ADOPTED A${nOrNot} ${adoptedBus.species}!`
 
   const adoptionMenuDisplay = document.querySelector(".adoption-menu-display");
@@ -281,9 +284,10 @@ function newAdoptionScreen(adoptedBus) { // after you adopt something, shows wha
   if(!buses.find((bus) => {bus.selected === true})) {
     adoptedBus.selected = true;
   }
-  updateGameWindow(adoptedBus);
+  updateGameWindow(buses.find((bus) => {bus.selected === true}));
+  // all of this is to update the stuff
 
-  openMenu("#new-adoption-menu");
+  openMenu("#new-adoption-menu"); // then we open the menu for the player
   saveGame(false)
 }
 
@@ -306,42 +310,42 @@ function adoptMenu(species) {
       <input class="name-input__button" type="submit" value="ADOPT!"/>
       </div>
     </form>
-    `);
+    `); 
   
   const nameForm = document.querySelector(".name-input");
   nameForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  let nameInput = document.getElementById("name-input").value;
+  event.preventDefault(); // prevents refreshing the page
+  let nameInput = document.getElementById("name-input").value; // gets the value of the name-input
 
   if (!nameInput) {
     nameInput = "Unnamed Bus"
   }
   const busSpecies = document.getElementById("species-input").value.replaceAll(" ", "");
 
-  let adoptedBus = new Bus(nameInput, busSpecies);
+  let adoptedBus = new Bus(nameInput, busSpecies); // makes a new bus
   buses.push(adoptedBus);
   injectBuses(buses);
   const adoptionMenu = document.getElementById("adoption-menu");
-  adoptionMenu.addEventListener("animationend", newAdoptionScreen(adoptedBus));
+  adoptionMenu.addEventListener("animationend", newAdoptionScreen(adoptedBus)); // after we close this menu we will open the new one
   closeMenu("#adoption-menu");
-  adoptionMenu.removeEventListener("animationend", newAdoptionScreen(adoptedBus));
+  adoptionMenu.removeEventListener("animationend", newAdoptionScreen(adoptedBus)); // 
 })
 
   const speciesInput = document.querySelector("#species-input");
-  speciesInput.value = species;
+  speciesInput.value = species; // i probably coded this like 2 weeks ago and forgot mb guys
 
   injectBuses(buses);
 }
 
 function deleteBus(confirmDeleteButton, busIndex) {
   closeMenu("#delete-bus-menu");
-  buses.splice(busIndex, 1);
+  buses.splice(busIndex, 1); // removes the bus at the target index
   injectBuses(buses);
-  confirmDeleteButton.removeEventListener("click", () => deleteBus(confirmDeleteButton, busIndex), { once: true });
+  confirmDeleteButton.removeEventListener("click", () => deleteBus(confirmDeleteButton, busIndex), { once: true }); // deactivates our stuff
   saveGame(false);
   if(buses.length > 0) {
     buses[0].selected === true;
-    updateGameWindow(buses[0]);
+    updateGameWindow(buses[0]); // it will autoselect the first bus
   }
   else {
     updateGameWindow(null);
@@ -372,7 +376,7 @@ function deleteBusMenu(busIndex) {
         <div class="adoption-menu__attribute">
           <h2 class="adoption-menu-subtitle"> HAPPINESS: ${targetBus.happiness} </h2>
         </div>`
-  )
+  ) // shows our stats when we delete the bus
 }
 
 function injectBuses(buses) {
@@ -397,7 +401,7 @@ function injectBuses(buses) {
           </div>
         </div>
       `)
-  })
+  }) // puts a bus into the list of our bus inventory at the top
 
   const deleteBusButtons = document.querySelectorAll("#delete-bus-button");
   deleteBusButtons.forEach((button) => {
@@ -414,7 +418,7 @@ function injectBuses(buses) {
       targetBus.selected = true;
       globalThis.selectedBus = targetBus;
       updateGameWindow(targetBus);
-    })
+    }) // updates all of our stuff
   })
 }
 
@@ -424,15 +428,15 @@ function updateStatsBar(barId, value, maxValue) {
   healthBar.style.width = `${percentage}%`;
 }
 
-function lightHit() {
+function lightHit() { // hits em light
   let selectedBus = ""
   buses.forEach((bus) => {
     if (bus.selected) {
       selectedBus = bus;
-    }
-  })
+    } // gotta find which one we hitting
+  }) 
   let old_health = selectedBus.physical_health;
-  let old_happiness = selectedBus.happiness;
+  let old_happiness = selectedBus.happiness; 
 
   selectedBus.happiness -= randomInt(5, 12);
   selectedBus.physical_health -= randomInt(10, 25);
@@ -454,14 +458,14 @@ function lightHit() {
     lightHitData.insertAdjacentHTML("beforeend", `
       <h2 class="game-care-subtitle"> HEALTH: ${old_health} -> ${selectedBus.physical_health} </h2>
       <h2 class="game-care-subtitle"> HAPPINESS: ${old_happiness} -> ${selectedBus.happiness} </h2>
-      `)
+      `) 
     openMenu("#light-hit");
   }
   saveGame(false);
   updateGameWindow(selectedBus);
 }
 
-function strongHit() {
+function strongHit() { // hits em strong
   let selectedBus = ""
   buses.forEach((bus) => {
     if (bus.selected) {
@@ -499,7 +503,7 @@ function strongHit() {
   updateGameWindow(selectedBus);
 }
 
-function feedBus(foodName) {
+function feedBus(foodName) { // feeds em good
   let selectedBus = null;
   selectedBus = buses.find((bus) => bus.selected === true);
   let oldFullness = 0;
@@ -530,7 +534,7 @@ function feedBus(foodName) {
 function updateFoods() {
   const foodsContainer = document.getElementById("foods__container");
   foodsContainer.innerHTML = '';
-  preventOverflow(foods);
+  preventOverflow(foods); 
   foods.forEach((food) => {
     foodsContainer.insertAdjacentHTML("beforeend", `
       <button class="shop-item-button" id="food-inventory-button">${food.name}</button>
